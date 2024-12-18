@@ -30,12 +30,6 @@
     position: absolute;
     z-index: 1;
     transition: 200ms;
-
-    &:hover {
-        transition: 200ms;
-        background-color: #ff6969;
-    }
-
 }
 
 .header img {
