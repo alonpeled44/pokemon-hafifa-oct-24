@@ -1,4 +1,4 @@
-import css from '../../css/general.module.css'
+import css from '../css/general.module.css'
 
 export default function Header() {
     let showDate = "";
@@ -8,7 +8,6 @@ export default function Header() {
     else {
         showDate = new Date().toLocaleDateString('en-gb', { day: "numeric", month: "numeric", year: "2-digit" });
     }
-    {console.log(showDate)}
     return (
         <header className={css.header}>
             <div>
