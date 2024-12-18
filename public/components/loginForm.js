@@ -1,4 +1,4 @@
-import css from '../../css/login.module.css';
+import css from '../css/login.module.css';
 export default function LoginForm() {
     return (
         <main className={css.main}>

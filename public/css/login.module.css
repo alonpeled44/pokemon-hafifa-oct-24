@@ -1,6 +1,6 @@
 @font-face {
     font-family: poke-font;
-    src: url("./ITC\ Kabel\ Ultra\ Regular.otf");
+    src: url('../ITC\ Kabel\ Ultra\ Regular.otf');
 }
 
 .main {
