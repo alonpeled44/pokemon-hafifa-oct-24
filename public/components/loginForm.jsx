@@ -12,8 +12,8 @@ export default function LoginForm() {
                         <p></p>
                     </section>
                     <section className={css.buttons}>
-                        <button className={css.button} id="login-btn" type="button">Login</button>
-                        <button className={css.button} id="join-as-guest-btn" type="button">Join As Guest</button>
+                        <button id="login-btn" type="button">Login</button>
+                        <button id="join-as-guest-btn" type="button">Join As Guest</button>
                     </section>
                 </form>
             </div>

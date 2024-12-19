@@ -9,27 +9,24 @@
     width: 100%;
     position: absolute;
     z-index: 0;
+
+    & img {
+        width: 50px;
+        aspect-ratio: 1;
+        filter: brightness(0) saturate(100%) invert(99%) sepia(60%) saturate(0%) hue-rotate(261deg) brightness(116%) contrast(100%);
+    }
+    &>* {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding-inline: 10px;
+    }
+    
+    & h1 {
+        font-size: 42px;
+    }
 }
 
-.header> {
-    padding-inline: 10px;
-}
-
-.header img {
-    width: 50px;
-    aspect-ratio: 1;
-    filter: brightness(0) saturate(100%) invert(99%) sepia(60%) saturate(0%) hue-rotate(261deg) brightness(116%) contrast(100%);
-}
-
-.header div {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.header h1 {
-    font-size: 42px;
-}
 
 @media only screen and (max-width: 1200px) {
     .header {
