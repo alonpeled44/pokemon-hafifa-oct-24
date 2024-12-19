@@ -1,22 +1,15 @@
-import css from '../css/general.module.css'
+import css from '../css/header.module.css'
 
 export default function Header() {
-    let showDate = "";
-    if (400 > 375) {
-        showDate = new Date().toLocaleDateString('en-gb', { day: "numeric", month: "numeric", year: "numeric" });
-    }
-    else {
-        showDate = new Date().toLocaleDateString('en-gb', { day: "numeric", month: "numeric", year: "2-digit" });
-    }
+    const currentDate = new Date().toLocaleDateString('en-gb', { day: "numeric", month: "numeric", year: "numeric" });
+    const title = "Pokèmon";
     return (
         <header className={css.header}>
             <div>
                 <img src="https://cdn-icons-png.flaticon.com/128/868/868596.png" alt="pokeball" />
-                <h1>Pokèmon</h1>
+                <h1>{title}</h1>
             </div>
-            <div>
-                <h1>{showDate}</h1>
-            </div>
+            <h1>{currentDate}</h1>
         </header>
     )
 }
