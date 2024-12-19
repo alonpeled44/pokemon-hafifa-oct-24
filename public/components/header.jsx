@@ -1,13 +1,7 @@
 import css from '../css/general.module.css'
 
 export default function Header() {
-    let showDate = "";
-    if (400 > 375) {
-        showDate = new Date().toLocaleDateString('en-gb', { day: "numeric", month: "numeric", year: "numeric" });
-    }
-    else {
-        showDate = new Date().toLocaleDateString('en-gb', { day: "numeric", month: "numeric", year: "2-digit" });
-    }
+    const currentDate = new Date().toLocaleDateString('en-gb', { day: "numeric", month: "numeric", year: "numeric" });
     return (
         <header className={css.header}>
             <div>
@@ -15,7 +9,7 @@ export default function Header() {
                 <h1>Pokèmon</h1>
             </div>
             <div>
-                <h1>{showDate}</h1>
+                <h1>{currentDate}</h1>
             </div>
         </header>
     )

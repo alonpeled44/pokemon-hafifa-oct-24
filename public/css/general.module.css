@@ -30,16 +30,10 @@
     position: absolute;
     z-index: 1;
     transition: 200ms;
-
-    &:hover {
-        transition: 200ms;
-        background-color: #ff6969;
-    }
-
 }
 
 .header img {
-    width: 100px;
+    width: 60px;
     aspect-ratio: 1;
     filter: brightness(0) saturate(100%) invert(99%) sepia(60%) saturate(0%) hue-rotate(261deg) brightness(116%) contrast(100%);
 }
@@ -58,7 +52,7 @@
     font-size: 42px;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1200px) {
     .header {
         position: absolute;
         z-index: 2;
