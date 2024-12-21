@@ -1,4 +1,6 @@
 import css from "../css/header.module.css";
+import { useUser } from "../context/userContext";
+import UserGreeting from "./userGreeting";
 
 export default function Header() {
   const currentDate = new Date().toLocaleDateString("en-gb", {
@@ -6,7 +8,16 @@ export default function Header() {
     month: "numeric",
     year: "numeric",
   });
+
   const title = "Pokèmon";
+
+  const { user, setUser } = useUser();
+  const showGreeting = () => {
+    if (user !== "") {
+      return <UserGreeting user={user} />;
+    }
+    return;
+  };
   return (
     <header className={css.header}>
       <div>
@@ -15,10 +26,10 @@ export default function Header() {
           alt="pokeball"
         />
         <h1>{title}</h1>
+        {showGreeting()}
       </div>
       <div>
         <h1>{currentDate}</h1>
-        <h1></h1>
       </div>
     </header>
   );
