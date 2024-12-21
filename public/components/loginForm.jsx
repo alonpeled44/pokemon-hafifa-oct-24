@@ -1,11 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import css from "../css/login.module.css";
+import { useRouter } from "next/navigation";
+import { useUser } from "../context/userContext";
 import users from "../users";
+import css from "../css/login.module.css";
 
 export default function LoginForm() {
+  const Router = useRouter();
   const _users = [...users];
+  const { user, setUser } = useUser();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -31,12 +35,12 @@ export default function LoginForm() {
 
     _users.forEach((user) => {
       if (username === user.username && password === user.password) {
-        // setShowUsername(username); fix sending user data to parent > Header.
-        // router.push("/"); fix going to home page
+        setUser(username); //save gloably the username;
+        isValid = true;
         setError("");
+        Router.push("/");
       }
     });
-
     if (!isValid) {
       setError("Username or password are incorrect.");
     }

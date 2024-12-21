@@ -18,7 +18,7 @@ export default function Header() {
       </div>
       <div>
         <h1>{currentDate}</h1>
-        {/* <h1></h1> */} {/* needs fixing, getting user data. */}
+        <h1></h1>
       </div>
     </header>
   );

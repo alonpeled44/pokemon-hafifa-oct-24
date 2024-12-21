@@ -1,4 +1,4 @@
-import css from '../css/index.module.css'
+import css from '../css/pokedex.module.css'
 
 export default function Pokedex(){
     return (
