@@ -11,7 +11,7 @@ export default function Header() {
 
   const title = "Pokèmon";
 
-  const { user, setUser } = useUser();
+  const { user } = useUser();
   const showGreeting = () => {
     if (user !== "") {
       return <UserGreeting user={user} />;
