@@ -1,10 +1,14 @@
-"use client"
+"use client";
 
-import { redirect } from "next/navigation";
-import Pokedex from "../public/components/pokedex";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import Pokedex from "../public/components/pokedex";
 
 export default function Index() {
-  useEffect(() => { if (typeof window !== 'undefined' && localStorage.getItem("user") === null) redirect("/login"); }, [])
+  const router = useRouter();
+  useEffect(() => {
+    if (typeof window !== "undefined" && localStorage.getItem("user") === null)
+      router.replace("/login");
+  }, []);
   return <Pokedex />;
 }

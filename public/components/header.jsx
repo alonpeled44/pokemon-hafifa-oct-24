@@ -11,6 +11,13 @@ export default function Header() {
 
   const title = "Pokèmon";
 
+  const [user, setUser] = useState();
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedUser = localStorage.getItem("user");
+      setUser(storedUser);
+    }
+  });
   return (
     <header className={css.header}>
       <div>
@@ -19,9 +26,7 @@ export default function Header() {
           alt="pokeball"
         />
         <h1>{title}</h1>
-        {typeof localStorage !== undefined && localStorage.getItem("user") && (
-          <UserGreeting user={localStorage.getItem("user")} />
-        )}
+        {user && <UserGreeting user={user} />}
       </div>
       <div>
         <h1>{currentDate}</h1>

@@ -32,7 +32,7 @@ export default function LoginForm() {
     localStorage.setItem("user", "Guest");
     router.replace("/");
     router.refresh();
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,7 +42,6 @@ export default function LoginForm() {
     _users.forEach((user) => {
       if (username === user.username && password === user.password) {
         localStorage.setItem("user", username);
-        console.log(localStorage.getItem("user"));
         isValid = true;
         setError("");
         router.replace("/");
