@@ -1,16 +1,16 @@
 import { useRouter } from "next/navigation";
-import { useUser } from "../context/userContext";
 
 export default function LogOut() {
-  const Router = useRouter();
-  const { user, setUser } = useUser();
-  const handleLogOut = () => {
-    setUser("");
-    Router.push("./login");
+  const router = useRouter();
+  const handleClick = () => {
+    localStorage.removeItem("user");
+    router.replace("/login");
+    router.refresh();
   };
+
   return (
-    <button type="button" onClick={handleLogOut}>
-      Log out
+    <button type="button" onClick={handleClick}>
+      {localStorage.getItem("user") !== "Guest" ? "Log out" : "Log In"}
     </button>
   );
 }

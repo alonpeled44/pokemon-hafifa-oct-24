@@ -1,5 +1,5 @@
+import { useEffect, useState } from "react";
 import css from "../css/header.module.css";
-import { useUser } from "../context/userContext";
 import UserGreeting from "./userGreeting";
 
 export default function Header() {
@@ -11,13 +11,6 @@ export default function Header() {
 
   const title = "Pokèmon";
 
-  const { user } = useUser();
-  const showGreeting = () => {
-    if (user !== "") {
-      return <UserGreeting user={user} />;
-    }
-    return;
-  };
   return (
     <header className={css.header}>
       <div>
@@ -26,7 +19,9 @@ export default function Header() {
           alt="pokeball"
         />
         <h1>{title}</h1>
-        {showGreeting()}
+        {typeof localStorage !== undefined && localStorage.getItem("user") && (
+          <UserGreeting user={localStorage.getItem("user")} />
+        )}
       </div>
       <div>
         <h1>{currentDate}</h1>

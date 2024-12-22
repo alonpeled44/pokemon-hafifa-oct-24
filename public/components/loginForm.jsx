@@ -2,14 +2,12 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useUser } from "../context/userContext";
 import users from "../users";
 import css from "../css/login.module.css";
 
 export default function LoginForm() {
   const router = useRouter();
   const _users = [...users];
-  const { setUser } = useUser();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -28,6 +26,14 @@ export default function LoginForm() {
     }
   };
 
+  const handleGuset = (e) => {
+    e.preventDefault();
+
+    localStorage.setItem("user", "Guest");
+    router.replace("/");
+    router.refresh();
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -35,10 +41,12 @@ export default function LoginForm() {
 
     _users.forEach((user) => {
       if (username === user.username && password === user.password) {
-        setUser(username);
+        localStorage.setItem("user", username);
+        console.log(localStorage.getItem("user"));
         isValid = true;
         setError("");
-        router.push("/");
+        router.replace("/");
+        router.refresh();
       }
     });
     if (!isValid) {
@@ -81,7 +89,7 @@ export default function LoginForm() {
             <button id="login-btn" type="submit">
               Login
             </button>
-            <button id="join-as-guest-btn" type="button">
+            <button id="join-as-guest-btn" type="button" onClick={handleGuset}>
               Join As Guest
             </button>
           </section>

@@ -4,20 +4,27 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin-top: 10px;
 
   & button {
     font-size: 20px;
     border: none;
     transition: 100ms;
+    background-color: rgba(255, 255, 255, 0);
+    color: #fff;
+    font-family: poke-font;
 
     &:hover {
-      background-color: rgba(255, 255, 255, 0);
-      border: none;
-      color: #fff;
       transform: scale(1.1);
-      text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+      text-shadow: 2px 5px rgba(0, 0, 0, 0.5);
       transition: 100ms;
+      color: #fff;
+      background-color: rgba(255, 255, 255, 0);
     }
   }
+}
+
+.verticalDivider {
+  border-left: 2px solid #fff;
+  height: 50px;
+  border-radius: 50px;
 }
