@@ -83,10 +83,14 @@
       color: rgba(255, 255, 255, 0.3);
     }
 
-    &:focus {
-      outline: 0;
+        &:focus {
+            outline: 0;
+        }
+
+        &[type=password]::-ms-reveal {
+            display: none; 
+        } /*removes the eye from the password input field*/
     }
-  }
 
   & p {
     margin: 0;
@@ -104,18 +108,17 @@
   margin-block: 50px;
 }
 
-& button {
-  width: fit-content;
-  height: 50px;
-  font-size: 26px;
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0);
-  color: #fff;
-  border: 4px solid #fff;
-  user-select: none;
-  cursor: pointer;
-  transition: 300ms;
-  font-family: poke-font;
+    & button {
+        height: 50px;
+        font-size: 26px;
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0);
+        color: #fff;
+        border: 4px solid #fff;
+        user-select: none;
+        cursor: pointer;
+        transition: 300ms;
+        font-family: poke-font;
 
   &:hover {
     background-color: #fff;
