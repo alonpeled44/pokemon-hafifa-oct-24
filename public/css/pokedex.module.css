@@ -1,0 +1,10 @@
+.background{
+    background: url("https://i.pinimg.com/originals/b9/a9/3a/b9a93abf855cc040caf2d00705b1a029.png");
+    background-repeat:no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    filter: blur(5px);
+    position: absolute;
+    z-index: -1;
+}
