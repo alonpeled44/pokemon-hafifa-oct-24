@@ -2,12 +2,14 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useUser } from "../context/userContext";
 import users from "../users";
 import css from "../css/login.module.css";
 
 export default function LoginForm() {
   const router = useRouter();
   const _users = [...users];
+  const { setUser } = useUser();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -33,6 +35,7 @@ export default function LoginForm() {
 
     _users.forEach((user) => {
       if (username === user.username && password === user.password) {
+        setUser(username);
         isValid = true;
         setError("");
         router.push("/");
