@@ -6,7 +6,7 @@ import users from "../users";
 import css from "../css/login.module.css";
 
 export default function LoginForm() {
-  const Router = useRouter();
+  const router = useRouter();
   const _users = [...users];
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -35,7 +35,7 @@ export default function LoginForm() {
       if (username === user.username && password === user.password) {
         isValid = true;
         setError("");
-        Router.push("/");
+        router.push("/");
       }
     });
     if (!isValid) {
