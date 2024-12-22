@@ -2,14 +2,12 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useUser } from "../context/userContext";
 import users from "../users";
 import css from "../css/login.module.css";
 
 export default function LoginForm() {
-  const Router = useRouter();
+  const router = useRouter();
   const _users = [...users];
-  const { user, setUser } = useUser();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -35,10 +33,9 @@ export default function LoginForm() {
 
     _users.forEach((user) => {
       if (username === user.username && password === user.password) {
-        setUser(username); //save gloably the username;
         isValid = true;
         setError("");
-        Router.push("/");
+        router.push("/");
       }
     });
     if (!isValid) {
@@ -48,7 +45,7 @@ export default function LoginForm() {
 
   return (
     <div className={css.componentWrapper}>
-      <div className={css.blurryBackground}></div>
+      <div className={css.blurryBackground} />
       <div className={css.formWrapper}>
         <form onSubmit={handleSubmit}>
           <h1>
