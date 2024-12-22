@@ -45,7 +45,7 @@ export default function LoginForm() {
 
   return (
     <div className={css.componentWrapper}>
-      <div className={css.blurryBackground}></div>
+      <div className={css.blurryBackground} />
       <div className={css.formWrapper}>
         <form onSubmit={handleSubmit}>
           <h1>
