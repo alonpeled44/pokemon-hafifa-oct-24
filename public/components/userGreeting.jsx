@@ -1,4 +1,4 @@
-import LogOut from "./logout";
+import LogOut from "./LogOut";
 import css from "../css/userGretting.module.css";
 
 export default function UserGreeting({ user }) {

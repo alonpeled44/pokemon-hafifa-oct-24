@@ -1,19 +1,19 @@
 .html {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 }
 
 @font-face {
-    font-family: poke-font;
-    src: url('../ITC\ Kabel\ Ultra\ Regular.otf');
+  font-family: poke-font;
+  src: url("../ITC\ Kabel\ Ultra\ Regular.otf");
 }
 
 .body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-    font-family: poke-font;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  font-family: poke-font;
 }

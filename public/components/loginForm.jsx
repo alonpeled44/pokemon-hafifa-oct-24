@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import users from "../users";
 import css from "../css/login.module.css";
@@ -85,10 +85,8 @@ export default function LoginForm() {
             <p>{error}</p>
           </section>
           <section className={css.buttons}>
-            <button id="login-btn" type="submit">
-              Login
-            </button>
-            <button id="join-as-guest-btn" type="button" onClick={handleGuset}>
+            <button type="submit">Login</button>
+            <button type="button" onClick={handleGuset}>
               Join As Guest
             </button>
           </section>
