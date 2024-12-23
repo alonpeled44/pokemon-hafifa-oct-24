@@ -1,0 +1,22 @@
+.burgerMenu {
+  display: none;
+  width: 60px;
+  aspect-ratio: 1 / 1;
+  filter: invert(100%);
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  transition: 200ms;
+
+  &:active {
+    transition: 200ms;
+    transform: scale(0.8);
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .burgerMenu {
+    display: block;
+  }
+}

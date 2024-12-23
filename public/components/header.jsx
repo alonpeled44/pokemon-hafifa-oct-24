@@ -1,4 +1,6 @@
 import css from "../css/header.module.css";
+// import UserGreeting from "./userGreeting";
+import HeaderLinks from "./headerLinks";
 
 export default function Header() {
   const currentDate = new Date().toLocaleDateString("en-gb", {
@@ -9,16 +11,18 @@ export default function Header() {
   const title = "Pokèmon";
   return (
     <header className={css.header}>
-      <div>
-        <img
-          src="https://cdn-icons-png.flaticon.com/128/868/868596.png"
-          alt="pokeball"
-        />
-        <h1>{title}</h1>
-      </div>
-      <div>
-        <h1>{currentDate}</h1>
-      </div>
+      <section>
+        <div>
+          <img
+            src="https://cdn-icons-png.flaticon.com/128/868/868596.png"
+            alt="pokeball"
+          />
+          <h1>{title}</h1>
+        </div>
+        {/* {user && <UserGreeting user={user} />} */}
+        {<HeaderLinks />}
+      </section>
+      <h1>{currentDate}</h1>
     </header>
   );
 }
