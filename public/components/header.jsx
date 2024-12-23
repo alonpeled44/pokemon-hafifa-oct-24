@@ -21,11 +21,13 @@ export default function Header() {
   return (
     <header className={css.header}>
       <div>
-        <img
-          src="https://cdn-icons-png.flaticon.com/128/868/868596.png"
-          alt="pokeball"
-        />
-        <h1>{title}</h1>
+        <div>
+          <img
+            src="https://cdn-icons-png.flaticon.com/128/868/868596.png"
+            alt="pokeball"
+          />
+          <h1>{title}</h1>
+        </div>
         {user && <UserGreeting user={user} />}
       </div>
       <div>

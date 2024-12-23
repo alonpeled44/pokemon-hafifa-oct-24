@@ -3,17 +3,17 @@
   justify-content: space-between;
   align-items: center;
   color: #fff;
-  background-color: rgba(255, 105, 105, 0.5);
+  background-color: rgba(255, 105, 105, 0.6);
   padding: 0;
   padding-block: 10px;
   width: 100%;
+  position: absolute;
   user-select: none;
 
   & img {
     width: 50px;
     aspect-ratio: 1;
-    filter: brightness(0) saturate(100%) invert(99%) sepia(60%) saturate(0%)
-      hue-rotate(261deg) brightness(116%) contrast(100%);
+    filter: invert(100%);
   }
 
   & > * {
@@ -31,6 +31,10 @@
     margin: 0;
     font-size: 42px;
   }
+  & > div:first-child > div:first-child {
+    display: flex;
+    gap: 10px;
+  }
 }
 
 @media only screen and (max-width: 1200px) {
@@ -41,11 +45,15 @@
     top: 10%;
     z-index: 1;
 
-    & > h1 {
+    & > div {
+      flex-direction: column;
+    }
+
+    & > div:last-child h1 {
       display: none;
     }
 
-    & div {
+    & > div:first-child > div:first-child {
       flex-direction: row-reverse;
     }
   }

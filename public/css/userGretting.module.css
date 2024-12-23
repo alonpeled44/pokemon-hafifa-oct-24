@@ -28,3 +28,9 @@
   height: 50px;
   border-radius: 50px;
 }
+
+@media only screen and (max-width: 1200px) {
+  .verticalDivider {
+    display: none;
+  }
+}
