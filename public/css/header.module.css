@@ -11,17 +11,21 @@
   color: #fff;
 
   & > h1 {
-    padding-inline: 10px;
+    font-size: 42px;
+    margin: 0 10px;
+  }
+  & h1 {
+    margin-block: 0;
   }
 
   & > section {
     display: flex;
     align-items: center;
+    gap: 10px;
 
     & > div {
       display: flex;
       align-items: center;
-      padding-inline: 10px;
       font-size: 32px;
       gap: 10px;
 
@@ -36,7 +40,13 @@
 
 @media only screen and (max-width: 1200px) {
   .header {
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0);
+    top: 10%;
     & > section {
+      & > *:last-child {
+        display: none;
+      }
       & > div:first-child {
         flex-direction: row-reverse;
       }
@@ -47,8 +57,5 @@
     & > h1 {
       display: none;
     }
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0);
-    top: 10%;
   }
 }
