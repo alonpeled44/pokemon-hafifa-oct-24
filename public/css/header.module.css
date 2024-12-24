@@ -44,7 +44,7 @@
       flex-direction: column;
     }
 
-    & > div:last-child h1 {
+    & > h1 {
       display: none;
     }
 

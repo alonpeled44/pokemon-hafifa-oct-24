@@ -15,7 +15,7 @@ export default function Header() {
       const storedUser = localStorage.getItem("user");
       setUser(storedUser);
     }
-  }, [localStorage.getItem("user")]);
+  });
   return (
     <header className={css.header}>
       <div>
