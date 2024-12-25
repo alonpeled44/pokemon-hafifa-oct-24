@@ -1,4 +1,4 @@
-import css from "../css/headerLinks.module.css";
+import css from "../css/header-links.module.css";
 
 export default function HeaderLinks() {
   return (

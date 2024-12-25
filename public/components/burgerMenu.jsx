@@ -1,35 +1,51 @@
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import HeaderLinks from "./headerLinks";
-import css from "../css/burgerMenu.module.css";
+import css from "../css/burger-menu.module.css";
 
 export default function BurgerMenu() {
   const [openDialog, setOpenDialog] = useState(false);
   const dialogRef = useRef(null);
+  const dialogContainerRef = useRef(null);
 
   const handleClick = () => {
-    setOpenDialog(!openDialog);
-  };
-
-  const handleOutsideClick = (event) => {
-    if (dialogRef.current && !dialogRef.current.contains(event.target)) {
-      setOpenDialog(false);
-    }
+    setOpenDialog((prevState) => {
+      const newState = !prevState;
+      if (dialogRef.current) {
+        if (newState) {
+          dialogRef.current.showModal();
+        } else {
+          dialogRef.current.close();
+        }
+      }
+      return newState;
+    });
   };
 
   const handleClose = () => {
-    dialogRef.current.close();
-    setOpenDialog(!openDialog);
+    setOpenDialog(false);
+    if (dialogRef.current) {
+      dialogRef.current.close();
+    }
   };
 
   useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        dialogContainerRef.current &&
+        !dialogContainerRef.current.contains(event.target)
+      ) {
+        handleClose();
+      }
+    };
+
     if (openDialog) {
-      document.addEventListener("click", handleOutsideClick);
+      document.addEventListener("click", handleClickOutside);
     } else {
-      document.removeEventListener("click", handleOutsideClick);
+      document.removeEventListener("click", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener("click", handleOutsideClick);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, [openDialog]);
 
@@ -41,9 +57,11 @@ export default function BurgerMenu() {
         alt="burger-menu"
         onClick={handleClick}
       />
-      <dialog ref={dialogRef} className={css.dialog} open={openDialog}>
-        <button onClick={handleClose}>&times;</button>
-        <HeaderLinks />
+      <dialog ref={dialogRef} className={css.dialog} autoFocus={false}>
+        <div ref={dialogContainerRef}>
+          <button onClick={handleClose}>&times;</button>
+          <HeaderLinks />
+        </div>
       </dialog>
     </>
   );

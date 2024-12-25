@@ -1,8 +1,7 @@
+import { useEffect, useState } from "react";
 import BurgerMenu from "./burgerMenu";
-// import UserGreeting from "./userGreeting";
 import HeaderLinks from "./headerLinks";
 import css from "../css/header.module.css";
-import { useEffect, useState } from "react";
 
 export default function Header() {
   const [showBurger, setShowBurger] = useState(true);
@@ -28,7 +27,6 @@ export default function Header() {
             />
             <h1>Pokèmon</h1>
           </div>
-          {/* {user && <UserGreeting user={user} />} */}
           {<HeaderLinks />}
         </section>
         <h1>{currentDate}</h1>
