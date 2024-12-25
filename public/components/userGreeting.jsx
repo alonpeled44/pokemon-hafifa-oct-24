@@ -1,5 +1,5 @@
 import LogOut from "./LogOut";
-import css from "../css/userGretting.module.css";
+import css from "../css/user-greeting.module.css";
 
 export default function UserGreeting({ user }) {
   return (

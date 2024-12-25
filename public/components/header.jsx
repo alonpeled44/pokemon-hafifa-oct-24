@@ -16,6 +16,7 @@ export default function Header() {
       setUser(storedUser);
     }
   });
+
   return (
     <header className={css.header}>
       <div>

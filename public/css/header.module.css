@@ -8,6 +8,7 @@
   height: 10%;
   position: absolute;
   user-select: none;
+
   & > * {
     margin-inline: 10px;
   }
@@ -40,14 +41,17 @@
     justify-content: center;
     background-color: rgba(0, 0, 0, 0);
     top: 10%;
+
     & > section {
       & > div:first-child {
         flex-direction: row-reverse;
       }
+
       & > div:last-child {
         display: none;
       }
     }
+
     & > h1 {
       display: none;
     }
