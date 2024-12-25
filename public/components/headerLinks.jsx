@@ -7,12 +7,12 @@ export default function HeaderLinks() {
       <ul className={css.list}>
         <li>
           <a href="/" title="Go to the pokedex!">
-            Pokedex
+            Pokédex
           </a>
         </li>
         <li>
           <a href="/" title="Play and guess the pokemon!">
-            Guess The Pokemon
+            Guess The Pokémon
           </a>
         </li>
       </ul>
