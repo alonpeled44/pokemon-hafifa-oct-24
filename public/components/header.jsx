@@ -1,3 +1,4 @@
+import SettingsMenu from "./settingsMenu";
 import css from "../css/header.module.css";
 
 export default function Header() {
@@ -18,6 +19,7 @@ export default function Header() {
       </div>
       <div>
         <h1>{currentDate}</h1>
+        <SettingsMenu />
       </div>
     </header>
   );

@@ -1,0 +1,161 @@
+/* FIXME:  
+    * Make this entire page more readable.. its agony to understand this css file.
+    * Work on portrait mode for this dialog - check github to see the design. 
+*/
+
+.settingsIcon {
+  cursor: pointer;
+}
+
+.settingsDialog[open] {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  gap: 5%;
+  width: 45%;
+  height: 45%;
+  border: 0;
+  outline: 0;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(100, 100, 100, 0.8);
+  color: #fff;
+  user-select: none;
+
+  &::backdrop {
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  & > button {
+    cursor: pointer;
+    align-self: flex-end;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    font-size: 36px;
+    color: #fff;
+  }
+}
+
+.theme {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  & > div {
+    display: flex;
+    gap: 10px;
+    width: 245px;
+
+    & figure {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0;
+      &:first-of-type {
+        & button {
+          cursor: pointer;
+          background-color: #fff;
+          border: 5px solid #000;
+          border-radius: 10px;
+          width: 75px;
+          aspect-ratio: 1 / 1;
+
+          &:active {
+            border-color: #adff2f;
+          }
+          & img {
+            filter: invert(0);
+          }
+        }
+        & figcaption {
+          width: 50%;
+        }
+      }
+      &:last-of-type {
+        & button {
+          cursor: pointer;
+          background-color: #000;
+          border: 5px solid #fff;
+          border-radius: 10px;
+          width: 75px;
+          aspect-ratio: 1 / 1;
+
+          &:active {
+            border-color: #adff2f;
+          }
+        }
+        & figcaption {
+          width: 50%;
+          color: #000;
+        }
+      }
+    }
+  }
+}
+
+.fontSize {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  & > div {
+    display: flex;
+    gap: 10px;
+
+    & #large {
+      font-size: 19px;
+    }
+
+    & #medium {
+      font-size: 16px;
+    }
+
+    & #small {
+      font-size: 13px;
+    }
+    & figure {
+      margin: 0;
+      margin-top: 10px;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      & button {
+        height: 75px;
+        width: 75px;
+        border: 5px solid #fff;
+        border-radius: 10px;
+        padding: 0;
+        cursor: pointer;
+        font-family: "Times New Roman", Times, serif;
+        background-color: rgba(0, 0, 0, 0);
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &:active {
+          border-color: #adff2f;
+        }
+
+        & p {
+          margin: 0;
+          text-align: center;
+        }
+      }
+    }
+
+    & figcaption {
+      font-family: system-ui;
+      text-align: center;
+    }
+  }
+}
