@@ -23,50 +23,54 @@ export default function SettingsMenu() {
         <button ref={close} onClick={handleClose}>
           &times;
         </button>
-        <div className={css.theme}>
-          <h1>Theme</h1>
-          <div>
-            <figure>
-              <button>
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/606/606795.png"
-                  alt="sun"
-                />
-              </button>
-              <figcaption>Light Mode</figcaption>
-            </figure>
-            <figure>
-              <button>
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/606/606807.png"
-                  alt="moon"
-                />
-              </button>
-              <figcaption>Dark Mode</figcaption>
-            </figure>
+        <div>
+          <div className={css.theme}>
+            <h1>Theme</h1>
+            <div>
+              <figure>
+                <button>
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/128/606/606795.png"
+                    alt="sun"
+                    draggable={false}
+                  />
+                </button>
+                <figcaption>Light Mode</figcaption>
+              </figure>
+              <figure>
+                <button>
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/128/606/606807.png"
+                    alt="moon"
+                    draggable={false}
+                  />
+                </button>
+                <figcaption>Dark Mode</figcaption>
+              </figure>
+            </div>
           </div>
-        </div>
-        <div className={css.fontSize}>
-          <h1>Font Size</h1>
-          <div>
-            <figure>
-              <button>
-                <p id={css.large}>Aa</p>
-              </button>
-              <figcaption>Large</figcaption>
-            </figure>
-            <figure>
-              <button>
-                <p id={css.medium}>Aa</p>
-              </button>
-              <figcaption>Medium</figcaption>
-            </figure>
-            <figure>
-              <button>
-                <p id={css.small}>Aa</p>
-              </button>
-              <figcaption>Small</figcaption>
-            </figure>
+          <div className={css.fontSize}>
+            <h1>Font Size</h1>
+            <div>
+              <figure>
+                <button>
+                  <p id={css.large}>Aa</p>
+                </button>
+                <figcaption>Large</figcaption>
+              </figure>
+              <figure>
+                <button>
+                  <p id={css.medium}>Aa</p>
+                </button>
+                <figcaption>Medium</figcaption>
+              </figure>
+              <figure>
+                <button>
+                  <p id={css.small}>Aa</p>
+                </button>
+                <figcaption>Small</figcaption>
+              </figure>
+            </div>
           </div>
         </div>
       </dialog>
