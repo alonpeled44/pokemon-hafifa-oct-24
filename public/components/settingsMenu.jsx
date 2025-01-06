@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import css from "../css/settings-menu.module.css";
 
 export default function SettingsMenu() {
@@ -9,18 +9,30 @@ export default function SettingsMenu() {
   const small = useRef(null);
   const medium = useRef(null);
   const large = useRef(null);
+  const [toggleFont, setToggleFont] = useState(false);
 
   const handleClick = () => {
-    dialog.current.show();
+    dialog.current.showModal();
   };
   const handleClose = () => {
     dialog.current.close();
   };
 
   const handleTheme = (event) => {
+    const buttonClicked = event.target.closest("button"); //gets the clicked button
+    if (buttonClicked === lightMode.current) {
+      console.log("LIGHT");
+      document.getElementById("modes").style.flexDirection = "row-reverse";
+    } else {
+      console.log("DARK");
+      document.getElementById("modes").style.flexDirection = "row";
+    }
+  };
+
+  const handleFontSize = (event) => {
     const buttonClicked = event.target.closest("button");
-    if (event.target === lightMode.current) {
-      console.log("fas");
+    if (!toggleFont) {
+      document.getElementById("fonts").style.zIndex = "2";
     }
   };
   return (
@@ -38,7 +50,7 @@ export default function SettingsMenu() {
         <div>
           <div className={css.theme}>
             <h1>Theme</h1>
-            <div>
+            <div id={"modes"}>
               <figure>
                 <button ref={lightMode} onClick={handleTheme}>
                   <img
@@ -63,21 +75,21 @@ export default function SettingsMenu() {
           </div>
           <div className={css.fontSize}>
             <h1>Font Size</h1>
-            <div>
+            <div id={"fonts"}>
               <figure>
-                <button ref={large}>
+                <button ref={large} onClick={handleFontSize}>
                   <p id={css.large}>Aa</p>
                 </button>
                 <figcaption>Large</figcaption>
               </figure>
               <figure>
-                <button ref={medium}>
+                <button ref={medium} onClick={handleFontSize}>
                   <p id={css.medium}>Aa</p>
                 </button>
                 <figcaption>Medium</figcaption>
               </figure>
               <figure>
-                <button ref={small}>
+                <button ref={small} onClick={handleFontSize}>
                   <p id={css.small}>Aa</p>
                 </button>
                 <figcaption>Small</figcaption>
