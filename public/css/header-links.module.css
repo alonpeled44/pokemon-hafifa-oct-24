@@ -2,38 +2,37 @@
   display: flex;
   align-items: center;
   gap: 10px;
-}
 
-.verticalDivider {
-  border-left: 2px solid #fff;
-  height: 50px;
-  border-radius: 50px;
-}
+  & > div {
+    border-left: 2px solid #fff;
+    height: 50px;
+    border-radius: 50px;
+  }
+  & > ul {
+    display: flex;
+    gap: 15px;
+    user-select: auto;
+    list-style: none;
+    padding: 0;
 
-.list {
-  display: flex;
-  gap: 15px;
-  user-select: auto;
-  list-style: none;
-  padding: 0;
-
-  & li {
-    font-size: 20px;
-    cursor: pointer;
-    text-decoration: underline;
-    transition: 200ms;
-
-    &:hover {
-      transform: scale(1.1);
+    & li {
+      font-size: 20px;
+      cursor: pointer;
+      text-decoration: underline;
       transition: 200ms;
-    }
-
-    & a {
-      text-decoration: none;
-      color: #fff;
 
       &:hover {
+        transform: scale(1.1);
         transition: 200ms;
+      }
+
+      & a {
+        text-decoration: none;
+        color: #fff;
+
+        &:hover {
+          transition: 200ms;
+        }
       }
     }
   }

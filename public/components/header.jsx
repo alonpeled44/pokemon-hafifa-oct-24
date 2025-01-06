@@ -4,10 +4,10 @@ import HeaderLinks from "./headerLinks";
 import css from "../css/header.module.css";
 
 export default function Header() {
-  const [showBurger, setShowBurger] = useState(true);
+  const [isSignedIn, setIsSignedIn] = useState(true);
   useEffect(() => {
     if (typeof window !== "undefined" && localStorage.getItem("user") === null)
-      setShowBurger(false);
+      setIsSignedIn(false);
   });
 
   const currentDate = new Date().toLocaleDateString("en-gb", {
@@ -17,7 +17,7 @@ export default function Header() {
   });
   return (
     <>
-      {showBurger && <BurgerMenu />}
+      {isSignedIn && <BurgerMenu />}
       <header className={css.header}>
         <section>
           <div>
@@ -27,7 +27,7 @@ export default function Header() {
             />
             <h1>Pokèmon</h1>
           </div>
-          {<HeaderLinks />}
+          <HeaderLinks />
         </section>
         <h1>{currentDate}</h1>
       </header>

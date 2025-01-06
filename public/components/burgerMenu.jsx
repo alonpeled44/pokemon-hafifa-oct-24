@@ -1,53 +1,28 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef } from "react";
 import HeaderLinks from "./headerLinks";
 import css from "../css/burger-menu.module.css";
 
 export default function BurgerMenu() {
-  const [openDialog, setOpenDialog] = useState(false);
   const dialogRef = useRef(null);
   const dialogContainerRef = useRef(null);
 
   const handleClick = () => {
-    setOpenDialog((prevState) => {
-      const newState = !prevState;
-      if (dialogRef.current) {
-        if (newState) {
-          dialogRef.current.showModal();
-        } else {
-          dialogRef.current.close();
-        }
-      }
-      return newState;
-    });
+    if (dialogRef.current) {
+      dialogRef.current.showModal();
+    }
   };
 
   const handleClose = () => {
-    setOpenDialog(false);
     if (dialogRef.current) {
       dialogRef.current.close();
     }
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        dialogContainerRef.current &&
-        !dialogContainerRef.current.contains(event.target)
-      ) {
-        handleClose();
-      }
-    };
-
-    if (openDialog) {
-      document.addEventListener("click", handleClickOutside);
-    } else {
-      document.removeEventListener("click", handleClickOutside);
+  const handleDialogClick = (event) => {
+    if (!dialogContainerRef.current.contains(event.target)) {
+      handleClose(); // Close the dialog if the click is outside the container
     }
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [openDialog]);
+  };
 
   return (
     <>
@@ -57,7 +32,12 @@ export default function BurgerMenu() {
         alt="burger-menu"
         onClick={handleClick}
       />
-      <dialog ref={dialogRef} className={css.dialog} autoFocus={false}>
+      <dialog
+        ref={dialogRef}
+        className={css.dialog}
+        onClick={handleDialogClick}
+        autoFocus={false}
+      >
         <div ref={dialogContainerRef}>
           <button onClick={handleClose}>&times;</button>
           <HeaderLinks />
