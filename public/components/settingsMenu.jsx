@@ -4,12 +4,24 @@ import css from "../css/settings-menu.module.css";
 export default function SettingsMenu() {
   const dialog = useRef(null);
   const close = useRef(null);
+  const lightMode = useRef(null);
+  const darkMode = useRef(null);
+  const small = useRef(null);
+  const medium = useRef(null);
+  const large = useRef(null);
 
   const handleClick = () => {
-    dialog.current.showModal();
+    dialog.current.show();
   };
   const handleClose = () => {
     dialog.current.close();
+  };
+
+  const handleTheme = (event) => {
+    const buttonClicked = event.target.closest("button");
+    if (event.target === lightMode.current) {
+      console.log("fas");
+    }
   };
   return (
     <>
@@ -28,7 +40,7 @@ export default function SettingsMenu() {
             <h1>Theme</h1>
             <div>
               <figure>
-                <button>
+                <button ref={lightMode} onClick={handleTheme}>
                   <img
                     src="https://cdn-icons-png.flaticon.com/128/606/606795.png"
                     alt="sun"
@@ -38,7 +50,7 @@ export default function SettingsMenu() {
                 <figcaption>Light Mode</figcaption>
               </figure>
               <figure>
-                <button>
+                <button ref={darkMode} onClick={handleTheme}>
                   <img
                     src="https://cdn-icons-png.flaticon.com/128/606/606807.png"
                     alt="moon"
@@ -53,19 +65,19 @@ export default function SettingsMenu() {
             <h1>Font Size</h1>
             <div>
               <figure>
-                <button>
+                <button ref={large}>
                   <p id={css.large}>Aa</p>
                 </button>
                 <figcaption>Large</figcaption>
               </figure>
               <figure>
-                <button>
+                <button ref={medium}>
                   <p id={css.medium}>Aa</p>
                 </button>
                 <figcaption>Medium</figcaption>
               </figure>
               <figure>
-                <button>
+                <button ref={small}>
                   <p id={css.small}>Aa</p>
                 </button>
                 <figcaption>Small</figcaption>
