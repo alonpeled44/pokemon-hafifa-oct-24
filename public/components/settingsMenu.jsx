@@ -1,15 +1,39 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import css from "../css/settings-menu.module.css";
 
 export default function SettingsMenu() {
   const dialog = useRef(null);
   const close = useRef(null);
+  const lightMode = useRef(null);
+  const darkMode = useRef(null);
+  const small = useRef(null);
+  const medium = useRef(null);
+  const large = useRef(null);
+  const [toggleFont, setToggleFont] = useState(false);
 
   const handleClick = () => {
     dialog.current.showModal();
   };
   const handleClose = () => {
     dialog.current.close();
+  };
+
+  const handleTheme = (event) => {
+    const buttonClicked = event.target.closest("button"); //gets the clicked button
+    if (buttonClicked === lightMode.current) {
+      console.log("LIGHT");
+      document.getElementById("modes").style.flexDirection = "row-reverse";
+    } else {
+      console.log("DARK");
+      document.getElementById("modes").style.flexDirection = "row";
+    }
+  };
+
+  const handleFontSize = (event) => {
+    const buttonClicked = event.target.closest("button");
+    if (!toggleFont) {
+      document.getElementById("fonts").style.zIndex = "2";
+    }
   };
   return (
     <>
@@ -26,9 +50,9 @@ export default function SettingsMenu() {
         <div>
           <div className={css.theme}>
             <h1>Theme</h1>
-            <div>
+            <div id={"modes"}>
               <figure>
-                <button>
+                <button ref={lightMode} onClick={handleTheme}>
                   <img
                     src="https://cdn-icons-png.flaticon.com/128/606/606795.png"
                     alt="sun"
@@ -38,7 +62,7 @@ export default function SettingsMenu() {
                 <figcaption>Light Mode</figcaption>
               </figure>
               <figure>
-                <button>
+                <button ref={darkMode} onClick={handleTheme}>
                   <img
                     src="https://cdn-icons-png.flaticon.com/128/606/606807.png"
                     alt="moon"
@@ -51,21 +75,21 @@ export default function SettingsMenu() {
           </div>
           <div className={css.fontSize}>
             <h1>Font Size</h1>
-            <div>
+            <div id={"fonts"}>
               <figure>
-                <button>
+                <button ref={large} onClick={handleFontSize}>
                   <p id={css.large}>Aa</p>
                 </button>
                 <figcaption>Large</figcaption>
               </figure>
               <figure>
-                <button>
+                <button ref={medium} onClick={handleFontSize}>
                   <p id={css.medium}>Aa</p>
                 </button>
                 <figcaption>Medium</figcaption>
               </figure>
               <figure>
-                <button>
+                <button ref={small} onClick={handleFontSize}>
                   <p id={css.small}>Aa</p>
                 </button>
                 <figcaption>Small</figcaption>

@@ -12,7 +12,7 @@
   flex-direction: column;
   justify-content: space-around;
   width: 45%;
-  height: 45%;
+  aspect-ratio: 1 / 1;
   border: 0;
   border-radius: 10px;
   outline: 0;
@@ -40,7 +40,7 @@
   & > div {
     display: flex;
     flex-direction: column;
-    gap: 75px;
+    gap: 5em;
     width: 100%;
   }
 }
@@ -61,14 +61,18 @@
       flex-direction: column;
       align-items: center;
       margin: 0;
+
+      & button {
+        cursor: pointer;
+        border-radius: 10px;
+        width: 75px;
+        aspect-ratio: 1 / 1;
+      }
+
       &:first-of-type {
         & button {
-          cursor: pointer;
           background-color: #fff;
           border: 5px solid #000;
-          border-radius: 10px;
-          width: 75px;
-          aspect-ratio: 1 / 1;
 
           &:active {
             border-color: #adff2f;
@@ -77,22 +81,21 @@
                 saturate(526%) hue-rotate(24deg) brightness(100%) contrast(103%);
             }
           }
+
           & img {
             filter: invert(0);
           }
         }
+
         & figcaption {
           font-family: system-ui;
         }
       }
+
       &:last-of-type {
         & button {
-          cursor: pointer;
           background-color: #000;
           border: 5px solid #fff;
-          border-radius: 10px;
-          width: 75px;
-          aspect-ratio: 1 / 1;
 
           &:active {
             border-color: #adff2f;
@@ -102,6 +105,7 @@
             }
           }
         }
+
         & figcaption {
           font-family: system-ui;
         }
@@ -142,8 +146,8 @@
       align-items: center;
 
       & button {
-        height: 75px;
         width: 75px;
+        aspect-ratio: 1 / 1;
         border: 5px solid #fff;
         border-radius: 10px;
         padding: 0;
@@ -179,7 +183,52 @@
 }
 
 @media only screen and (max-width: 1200px) {
+  .settingsIcon {
+    position: absolute;
+    top: -55px;
+    left: 10px;
+    z-index: 1;
+  }
   .settingsDialog[open] {
-    transform: translate(-50%, -50%);
+    width: 50px;
+    aspect-ratio: 1 / 3.5;
+    border-radius: 25px;
+    margin: 0 5px;
+    padding: 50px 5px 5px;
+    justify-content: space-around;
+    overflow: hidden;
+
+    &::backdrop {
+      backdrop-filter: none;
+    }
+
+    & > div {
+      gap: 1em;
+    }
+
+    & > button {
+      display: none;
+    }
+
+    & h1 {
+      display: none;
+    }
+
+    & figcaption {
+      display: none;
+    }
+  }
+
+  .theme button,
+  .fontSize button {
+    width: 50px !important;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .theme img {
+    width: 35px !important;
   }
 }
