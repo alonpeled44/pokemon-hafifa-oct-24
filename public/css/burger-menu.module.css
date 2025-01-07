@@ -1,4 +1,5 @@
 .burger-menu {
+  display: none;
   width: 60px;
   aspect-ratio: 1 / 1;
   filter: invert(100%);
@@ -53,7 +54,7 @@
 }
 
 @media only screen and (max-width: 1200px) {
-  .burgerMenu {
+  .burger-menu {
     display: block;
   }
 }
