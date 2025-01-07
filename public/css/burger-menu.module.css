@@ -1,5 +1,4 @@
-.burgerMenu {
-  display: none;
+.burger-menu {
   width: 60px;
   aspect-ratio: 1 / 1;
   filter: invert(100%);

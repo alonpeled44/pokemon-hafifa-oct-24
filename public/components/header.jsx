@@ -1,23 +1,17 @@
-import { useEffect, useState } from "react";
 import BurgerMenu from "./burgerMenu";
 import HeaderLinks from "./headerLinks";
 import css from "../css/header.module.css";
 
 export default function Header() {
-  const [isSignedIn, setIsSignedIn] = useState(true);
-  useEffect(() => {
-    if (typeof window !== "undefined" && localStorage.getItem("user") === null)
-      setIsSignedIn(false);
-  });
-
   const currentDate = new Date().toLocaleDateString("en-gb", {
     day: "numeric",
     month: "numeric",
     year: "numeric",
   });
+
   return (
     <>
-      {isSignedIn && <BurgerMenu />}
+      <BurgerMenu />
       <header className={css.header}>
         <section>
           <div>

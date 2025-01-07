@@ -27,7 +27,7 @@ export default function BurgerMenu() {
   return (
     <>
       <img
-        className={css.burgerMenu}
+        className={css["burger-menu"]}
         src="https://cdn-icons-png.flaticon.com/128/7216/7216128.png"
         alt="burger-menu"
         onClick={handleClick}
