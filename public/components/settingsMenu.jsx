@@ -32,7 +32,7 @@ export default function SettingsMenu() {
   };
 
   const handleTheme = (event) => {
-    if (screen.width <= 1200) setSwitchTheme(!switchTheme);
+    if (screen.width === 1200) setSwitchTheme(!switchTheme);
     else {
       const clickedButton = event.target.closest("button");
       if (clickedButton === lightMode.current) {
@@ -47,7 +47,7 @@ export default function SettingsMenu() {
     }
   };
   const handleFonts = () => {
-    if (screen.width <= 1200) {
+    if (screen.width === 1200) {
       setShowFonts(!showFonts);
       if (showFonts) {
         setIsMedium(true);
