@@ -19,8 +19,5 @@
   overflow: hidden;
   width: 100%;
   height: 100%;
-
-  & * {
-    font-family: poke-font;
-  }
+  font-family: poke-font;
 }
