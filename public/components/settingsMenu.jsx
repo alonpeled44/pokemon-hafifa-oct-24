@@ -4,12 +4,12 @@ import css from "../css/settings-menu.module.css";
 export default function SettingsMenu() {
   const dialog = useRef(null);
   const close = useRef(null);
-  const lightMode = useRef(null);
-  const darkMode = useRef(null);
-  const small = useRef(null);
-  const medium = useRef(null);
-  const large = useRef(null);
-  const [toggleFont, setToggleFont] = useState(false);
+
+  const [switchTheme, setSwitchTheme] = useState(false);
+  const [showFonts, setShowFonts] = useState(false);
+  const [isLarge, setIsLarge] = useState(true);
+  const [isMedium, setIsMedium] = useState(false);
+  const [isSmall, setIsSmall] = useState(false);
 
   const handleClick = () => {
     dialog.current.showModal();
@@ -18,23 +18,20 @@ export default function SettingsMenu() {
     dialog.current.close();
   };
 
-  const handleTheme = (event) => {
-    const buttonClicked = event.target.closest("button"); //gets the clicked button
-    if (buttonClicked === lightMode.current) {
-      console.log("LIGHT");
-      document.getElementById("modes").style.flexDirection = "row-reverse";
+  const handleTheme = () => {
+    setSwitchTheme(!switchTheme);
+  };
+  const handleFonts = () => {
+    setShowFonts(!showFonts);
+    if (showFonts) {
+      setIsMedium(true);
+      setIsSmall(true);
     } else {
-      console.log("DARK");
-      document.getElementById("modes").style.flexDirection = "row";
+      setIsMedium(false);
+      setIsSmall(false);
     }
   };
 
-  const handleFontSize = (event) => {
-    const buttonClicked = event.target.closest("button");
-    if (!toggleFont) {
-      document.getElementById("fonts").style.zIndex = "2";
-    }
-  };
   return (
     <>
       <img
@@ -50,9 +47,9 @@ export default function SettingsMenu() {
         <div>
           <div className={css.theme}>
             <h1>Theme</h1>
-            <div id={"modes"}>
+            <div data-switch-theme={switchTheme}>
               <figure>
-                <button ref={lightMode} onClick={handleTheme}>
+                <button onClick={handleTheme}>
                   <img
                     src="https://cdn-icons-png.flaticon.com/128/606/606795.png"
                     alt="sun"
@@ -62,7 +59,7 @@ export default function SettingsMenu() {
                 <figcaption>Light Mode</figcaption>
               </figure>
               <figure>
-                <button ref={darkMode} onClick={handleTheme}>
+                <button onClick={handleTheme}>
                   <img
                     src="https://cdn-icons-png.flaticon.com/128/606/606807.png"
                     alt="moon"
@@ -75,21 +72,21 @@ export default function SettingsMenu() {
           </div>
           <div className={css.fontSize}>
             <h1>Font Size</h1>
-            <div id={"fonts"}>
-              <figure>
-                <button ref={large} onClick={handleFontSize}>
+            <div id={"fonts"} data-open-fonts={showFonts}>
+              <figure data-show={isLarge}>
+                <button onClick={handleFonts}>
                   <p id={css.large}>Aa</p>
                 </button>
                 <figcaption>Large</figcaption>
               </figure>
-              <figure>
-                <button ref={medium} onClick={handleFontSize}>
+              <figure data-show={isMedium}>
+                <button onClick={handleFonts}>
                   <p id={css.medium}>Aa</p>
                 </button>
                 <figcaption>Medium</figcaption>
               </figure>
-              <figure>
-                <button ref={small} onClick={handleFontSize}>
+              <figure data-show={isSmall}>
+                <button onClick={handleFonts}>
                   <p id={css.small}>Aa</p>
                 </button>
                 <figcaption>Small</figcaption>
