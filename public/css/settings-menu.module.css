@@ -1,9 +1,9 @@
-.settingsIcon {
+.settings-icon {
   cursor: pointer;
   filter: invert(100%);
 }
 
-.settingsDialog[open] {
+.settings-dialog[open] {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -112,7 +112,7 @@
   }
 }
 
-.fontSize {
+.font-size {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -184,19 +184,22 @@
 }
 
 @media only screen and (max-width: 1200px) {
-  .settingsIcon {
-    position: absolute;
-    top: -55px;
-    left: 5px;
+  .settings-icon {
+    position: fixed;
+    top: 0;
+    left: 0;
     z-index: 1;
     padding: 5px;
+    margin: 5px;
     border-radius: 25px 25px 0 0;
   }
-  .settingsDialog[open] {
+  .settings-dialog[open] {
+    position: fixed;
+    top: 50px;
+    left: 0;
     width: 50px;
-    aspect-ratio: 1 / 1;
     border-radius: 0 0 25px 25px;
-    margin: 90px 5px 0;
+    margin: 5px;
     padding: 15px 5px 5px;
     justify-content: space-around;
 
@@ -218,7 +221,7 @@
   }
 
   .theme button,
-  .fontSize button {
+  .font-size button {
     width: 50px !important;
     height: 50px;
     display: flex;
@@ -226,20 +229,29 @@
     align-items: center;
   }
 
-  .theme img {
-    width: 35px !important;
+  .theme {
+    & div[data-switch-theme="false"] {
+      & > figure:first-of-type {
+        order: 1;
+      }
+      & > figure:last-of-type {
+        order: 2;
+      }
+    }
+    & div[data-switch-theme="true"] {
+      & > figure:first-of-type {
+        order: 2;
+      }
+      & > figure:last-of-type {
+        order: 1;
+      }
+    }
+    & img {
+      width: 35px !important;
+    }
   }
 
-  .theme > div {
-    &[data-switch-theme="false"] {
-      flex-direction: row-reverse;
-    }
-    &[data-switch-theme="true"] {
-      flex-direction: row;
-    }
-  }
-
-  .fontSize {
+  .font-size {
     & figure[data-show="false"] {
       display: none;
     }
