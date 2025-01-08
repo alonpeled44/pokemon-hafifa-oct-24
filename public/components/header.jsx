@@ -34,10 +34,6 @@ export default function Header() {
         <h1>{currentDate}</h1>
         <SettingsMenu />
       </div>
-      <div>
-        <h1>{currentDate}</h1>
-        <SettingsMenu />
-      </div>
     </header>
   );
 }

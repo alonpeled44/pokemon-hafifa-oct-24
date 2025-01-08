@@ -11,27 +11,28 @@
   position: absolute;
   user-select: none;
 
-  & img {
-    width: 50px;
-    aspect-ratio: 1;
-    filter: invert(100%);
-  }
-
+  
   & > div {
     display: flex;
     align-items: center;
     gap: 10px;
     padding-inline: 10px;
   }
-
+  
   & h1 {
     margin-block: 0;
     font-size: 42px;
   }
-
+  
   & > div:first-child > div:first-child {
     display: flex;
     gap: 10px;
+    
+    & img {
+      width: 50px;
+      aspect-ratio: 1;
+      filter: invert(100%);
+    }
   }
 }
 
