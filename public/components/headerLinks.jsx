@@ -10,11 +10,6 @@ export default function HeaderLinks() {
             Pokédex
           </a>
         </li>
-        <li>
-          <a href="/" title="Play and guess the pokemon!">
-            Guess The Pokémon
-          </a>
-        </li>
       </ul>
     </div>
   );
