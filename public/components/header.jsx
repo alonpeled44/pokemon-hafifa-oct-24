@@ -32,7 +32,7 @@ export default function Header() {
       </div>
       <div>
         <h1>{currentDate}</h1>
-        <SettingsMenu />
+        {user && <SettingsMenu />}
       </div>
     </header>
   );
