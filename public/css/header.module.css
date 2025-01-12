@@ -18,23 +18,31 @@
     margin-block: 0;
   }
 
-  & > section {
+  & > div {
     display: flex;
     align-items: center;
     gap: 10px;
 
-    & > div {
-      display: flex;
-      align-items: center;
-      font-size: 32px;
-      gap: 10px;
+  & img {
+    width: 50px;
+    aspect-ratio: 1;
+    filter: invert(100%);
+  }
 
-      & > img {
-        height: 50px;
-        aspect-ratio: 1 / 1;
-        filter: invert(100%);
-      }
-    }
+  & > div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  & h1 {
+    margin-block: 0;
+    font-size: 42px;
+  }
+
+  & > div:first-child > div:first-child {
+    display: flex;
+    gap: 10px;
   }
 }
 
