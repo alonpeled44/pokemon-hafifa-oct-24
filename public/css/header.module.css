@@ -22,47 +22,52 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    padding: 0 10px;
 
-  & img {
-    width: 50px;
-    aspect-ratio: 1;
-    filter: invert(100%);
-  }
+    & img {
+      width: 50px;
+      aspect-ratio: 1;
+      filter: invert(100%);
+    }
 
-  & > div:first-child {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+    & > div:first-child {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-  & h1 {
-    margin-block: 0;
-    font-size: 42px;
-  }
+    & h1 {
+      margin-block: 0;
+      font-size: 42px;
+    }
 
-  & > div:first-child > div:first-child {
-    display: flex;
-    gap: 10px;
+    & > div:first-child > div:first-child {
+      display: flex;
+      gap: 10px;
+    }
   }
 }
-
 @media only screen and (max-width: 1200px) {
   .header {
-    justify-content: center;
     background-color: rgba(0, 0, 0, 0);
-    top: 10%;
-    & > section {
-      & > *:last-child {
-        display: none;
-      }
+    justify-content: center;
+    gap: 0;
+    top: 15%;
+    & > div:first-child {
+      flex-direction: column;
       & > div:first-child {
         flex-direction: row-reverse;
+      }
+      & > div:nth-of-type(2) {
+        & > h2 {
+          margin: 0;
+        }
       }
       & > div:last-child {
         display: none;
       }
     }
-    & > h1 {
+    & > div:last-child > h1 {
       display: none;
     }
   }

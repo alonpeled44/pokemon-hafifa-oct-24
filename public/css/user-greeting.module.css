@@ -31,4 +31,9 @@
   .verticalDivider {
     display: none;
   }
+
+  .greetingWrapper button {
+    border: 2px solid #fff;
+    border-radius: 20px;
+  }
 }

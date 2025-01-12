@@ -32,9 +32,11 @@ export default function Header() {
             <h1>Pokèmon</h1>
           </div>
           {user && <UserGreeting user={user} />}
-          <HeaderLinks />
+          {user && <HeaderLinks />}
         </div>
-        <h1>{currentDate}</h1>
+        <div>
+          <h1>{currentDate}</h1>
+        </div>
       </header>
     </>
   );
