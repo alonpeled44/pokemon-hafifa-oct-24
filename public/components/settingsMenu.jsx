@@ -1,5 +1,12 @@
 import { useEffect, useRef, useState } from "react";
+import FontSizeButton from "./fontSizeButton";
 import css from "../css/settings-menu.module.css";
+
+const fontSizes = Object.entries({
+  large: "19px",
+  medium: "16px",
+  small: "13px",
+});
 
 export default function SettingsMenu() {
   // Get the references of the elements.
@@ -7,15 +14,14 @@ export default function SettingsMenu() {
   const close = useRef(null);
   const lightMode = useRef(null);
   const darkMode = useRef(null);
-  const large = useRef(null);
-  const medium = useRef(null);
-  const small = useRef(null);
+  const head = useRef(null);
+  const extensions = useRef(null);
 
   // States
   const [toggleDialog, setToggleDialog] = useState(false);
   const [switchTheme, setSwitchTheme] = useState(false);
-  const [showFonts, setShowFonts] = useState(false);
-  const [fontSize, setFontSize] = useState("large");
+  const [toggleFonts, setToggleFonts] = useState(true);
+  const [selectedFont, setSelectedFont] = useState(fontSizes[0][0]);
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 0
   );
@@ -25,11 +31,10 @@ export default function SettingsMenu() {
     lightMode.current.classList.remove(css["selected-theme"]);
     darkMode.current.classList.remove(css["selected-theme"]);
   };
-  const removeSelectedFont = () => {
-    large.current.classList.remove(css["selected-font"]);
-    medium.current.classList.remove(css["selected-font"]);
-    small.current.classList.remove(css["selected-font"]);
-  };
+
+  useEffect(() => {
+    handleShowFonts();
+  }, []);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -72,7 +77,6 @@ export default function SettingsMenu() {
 
   const handleClose = () => {
     dialog.current.close();
-    removeSelectedFont();
     removeSelectedTheme();
   };
 
@@ -89,33 +93,17 @@ export default function SettingsMenu() {
     }
   };
 
-  const handleFonts = (event) => {
+  const handleShowFonts = () => {
+    setToggleFonts(!toggleFonts);
+    windowWidth <= 1200 && !toggleFonts
+      ? (extensions.current.style.display = "flex")
+      : (extensions.current.style.display = "none");
+  };
+
+  const handleSelectFont = (event) => {
     const clickedButton = event.target.closest("button");
-    removeSelectedFont();
-    if (windowWidth <= 1200) {
-      if (showFonts) {
-        setFontSize(
-          clickedButton === large.current
-            ? "large"
-            : clickedButton === medium.current
-            ? "medium"
-            : "small"
-        );
-        setShowFonts(false);
-      } else {
-        setShowFonts(true);
-      }
-    } else {
-      if (clickedButton === large.current) {
-        large.current.classList.add(css["selected-font"]);
-        setFontSize("large");
-      } else if (clickedButton === medium.current) {
-        medium.current.classList.add(css["selected-font"]);
-        setFontSize("medium");
-      } else {
-        small.current.classList.add(css["selected-font"]);
-        setFontSize("small");
-      }
+    if (extensions.current === event.target) {
+      setSelectedFont(clickedButton.style.fontSize);
     }
   };
 
@@ -159,25 +147,26 @@ export default function SettingsMenu() {
           </div>
           <div className={css["font-size"]}>
             <h1>Font Size</h1>
-            <div data-open-fonts={showFonts}>
-              <figure data-show={fontSize === "large" || showFonts}>
-                <button onClick={handleFonts} ref={large}>
-                  <p id={css.large}>Aa</p>
-                </button>
-                <figcaption>Large</figcaption>
-              </figure>
-              <figure data-show={fontSize === "medium" || showFonts}>
-                <button onClick={handleFonts} ref={medium}>
-                  <p id={css.medium}>Aa</p>
-                </button>
-                <figcaption>Medium</figcaption>
-              </figure>
-              <figure data-show={fontSize === "small" || showFonts}>
-                <button onClick={handleFonts} ref={small}>
-                  <p id={css.small}>Aa</p>
-                </button>
-                <figcaption>Small</figcaption>
-              </figure>
+            <div>
+              <div ref={head} onClick={handleShowFonts}>
+                {<FontSizeButton fontSize={selectedFont} />}
+              </div>
+              <div ref={extensions} onClick={handleSelectFont}>
+                {
+                  <FontSizeButton
+                    fontSize={
+                      fontSizes.filter((size) => size[0] !== selectedFont)[0][1]
+                    }
+                  />
+                }
+                {
+                  <FontSizeButton
+                    fontSize={
+                      fontSizes.filter((size) => size[0] !== selectedFont)[1][1]
+                    }
+                  />
+                }
+              </div>
             </div>
           </div>
         </div>

@@ -126,60 +126,10 @@
     padding-block: 10px;
     border-radius: 25px;
 
-    & #large {
-      font-size: 19px;
-    }
-
-    & #medium {
-      font-size: 16px;
-    }
-
-    & #small {
-      font-size: 13px;
-    }
-    & figure {
-      margin: 0;
-      width: 100%;
-      aspect-ratio: 1 / 1;
+    & > div {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      & button {
-        width: 75px;
-        aspect-ratio: 1 / 1;
-        border: 5px solid #fff;
-        border-radius: 10px;
-        padding: 0;
-        cursor: pointer;
-        font-family: "Times New Roman", Times, serif;
-        background-color: rgba(0, 0, 0, 0);
-        color: #fff;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        & p {
-          margin: 0;
-          text-align: center;
-        }
-      }
+      gap: 10px;
     }
-
-    & figcaption {
-      font-family: system-ui;
-      text-align: center;
-    }
-  }
-}
-
-.selected-font {
-  border-color: #ffc908 !important;
-
-  & p {
-    color: #ffc908 !important;
   }
 }
 
@@ -214,22 +164,16 @@
     & h1 {
       display: none;
     }
-
-    & figcaption {
-      display: none;
-    }
-  }
-
-  .theme button,
-  .font-size button {
-    width: 50px !important;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   .theme {
+    & button {
+      width: 50px !important;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     & div[data-switch-theme="false"] {
       & > figure:first-of-type {
         order: 1;
@@ -251,11 +195,6 @@
     }
   }
 
-  .font-size {
-    & figure[data-show="false"] {
-      display: none;
-    }
-  }
   .settings-open {
     background-color: #ccc;
   }
