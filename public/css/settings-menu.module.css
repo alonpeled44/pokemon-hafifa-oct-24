@@ -1,0 +1,152 @@
+.settings-icon {
+  cursor: pointer;
+  filter: invert(100%);
+}
+
+.settings-dialog[open] {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 45%;
+  aspect-ratio: 1 / 0.5;
+  border: 0;
+  border-radius: 10px;
+  outline: 0;
+  padding: 20px;
+  color: #fff;
+  background: #333;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(14.9px);
+  -webkit-backdrop-filter: blur(14.9px);
+  user-select: none;
+  overflow: visible;
+
+  &::backdrop {
+    backdrop-filter: blur(5px);
+  }
+
+  & > button {
+    cursor: pointer;
+    align-self: flex-end;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    font-size: 36px;
+    color: #fff;
+  }
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5em;
+    width: 100%;
+  }
+}
+
+.theme {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+
+  & > div {
+    display: flex;
+    gap: 10px;
+    width: 245px;
+  }
+}
+
+.selected-theme {
+  border-color: #ffc908 !important;
+  & img {
+    filter: invert(83%) sepia(52%) saturate(2285%) hue-rotate(350deg)
+      brightness(103%) contrast(105%) !important;
+  }
+}
+
+.font-size {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  & > div {
+    display: flex;
+    gap: 10px;
+    background-color: #333;
+    padding-inline: 0 5px;
+    padding-block: 10px;
+    border-radius: 25px;
+
+    & > div {
+      display: flex;
+      gap: 10px;
+    }
+  }
+}
+
+.selected-font-size {
+  color: #ffc908 !important;
+  border-color: #ffc908 !important;
+}
+
+@media only screen and (max-width: 1200px) {
+  .settings-icon {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 25px 25px 0 0;
+  }
+
+  .settings-dialog[open] {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    width: 50px;
+    border-radius: 0 0 25px 25px;
+    margin: 5px;
+    padding: 15px 5px 5px;
+    justify-content: space-around;
+
+    & > div {
+      gap: 0.5em;
+    }
+
+    & > button {
+      display: none;
+    }
+
+    & h1 {
+      display: none;
+    }
+  }
+
+  .theme {
+    /* when is light mode */
+    & div[data-switch-theme="false"] {
+      & > div:first-of-type {
+        order: 1;
+      }
+      & > div:last-of-type {
+        order: 2;
+      }
+    }
+
+    /* when is dark mode */
+    & div[data-switch-theme="true"] {
+      & > div:first-of-type {
+        order: 2;
+      }
+      & > div:last-of-type {
+        order: 1;
+      }
+    }
+  }
+
+  .settings-open {
+    background-color: #ccc;
+  }
+}

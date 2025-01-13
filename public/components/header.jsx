@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import UserGreeting from "./UserGreeting";
+import SettingsMenu from "./SettingsMenu";
 import css from "../css/header.module.css";
 
 export default function Header() {
@@ -29,7 +30,10 @@ export default function Header() {
         </div>
         {user && <UserGreeting user={user} />}
       </div>
-      <h1>{currentDate}</h1>
+      <div>
+        <h1>{currentDate}</h1>
+        {user && <SettingsMenu />}
+      </div>
     </header>
   );
 }

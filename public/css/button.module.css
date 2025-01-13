@@ -1,0 +1,48 @@
+.figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+
+  & button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75px;
+    height: 75px;
+    background-color: rgba(0, 0, 0, 0);
+    color: #fff;
+    border: 5px solid #fff;
+    border-radius: 10px;
+    cursor: pointer;
+
+    & p {
+      font-size: inherit;
+      pointer-events: none;
+    }
+
+    & img {
+      width: 50px;
+      height: 50px;
+      filter: invert(100%);
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .figure {
+    & button {
+      width: 50px;
+      height: 50px;
+
+      & img {
+        width: 35px;
+        height: 35px;
+      }
+    }
+
+    & figcaption {
+      display: none;
+    }
+  }
+}
