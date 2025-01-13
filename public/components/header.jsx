@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import UserGreeting from "./UserGreeting";
+import BurgerMenu from "./burgerMenu";
+import HeaderLinks from "./headerLinks";
 import css from "../css/header.module.css";
 
 export default function Header() {
@@ -18,18 +20,24 @@ export default function Header() {
   });
 
   return (
-    <header className={css.header}>
-      <div>
+    <>
+      <BurgerMenu />
+      <header className={css.header}>
         <div>
-          <img
-            src="https://cdn-icons-png.flaticon.com/128/868/868596.png"
-            alt="pokeball"
-          />
-          <h1>Pokèmon</h1>
+          <div>
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/868/868596.png"
+              alt="pokeball"
+            />
+            <h1>Pokèmon</h1>
+          </div>
+          {user && <UserGreeting user={user} />}
+          {user && <HeaderLinks />}
         </div>
-        {user && <UserGreeting user={user} />}
-      </div>
-      <h1>{currentDate}</h1>
-    </header>
+        <div>
+          <h1>{currentDate}</h1>
+        </div>
+      </header>
+    </>
   );
 }
