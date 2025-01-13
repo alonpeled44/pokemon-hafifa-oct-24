@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import UserGreeting from "./UserGreeting";
-import SettingsMenu from "./settingsMenu";
+import SettingsMenu from "./SettingsMenu";
 import css from "../css/header.module.css";
 
 export default function Header() {

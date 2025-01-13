@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import FontSizeButton from "./fontSizeButton";
+import Button from "./Button";
 import css from "../css/settings-menu.module.css";
 
 const fontSizes = Object.entries({
@@ -20,16 +20,25 @@ export default function SettingsMenu() {
   // States
   const [toggleDialog, setToggleDialog] = useState(false);
   const [switchTheme, setSwitchTheme] = useState(false);
-  const [toggleFonts, setToggleFonts] = useState(true);
-  const [selectedFont, setSelectedFont] = useState(fontSizes[0][0]);
+  const [toggleFonts, setToggleFonts] = useState(false);
+  const [showSelectedFont, setShowSelectedFont] = useState(fontSizes[0][0]);
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 0
   );
 
   // Remove the selected theme and font size functions
   const removeSelectedTheme = () => {
-    lightMode.current.classList.remove(css["selected-theme"]);
-    darkMode.current.classList.remove(css["selected-theme"]);
+    lightMode.current.children[0].children[0].classList.remove(
+      css["selected-theme"]
+    );
+    darkMode.current.children[0].children[0].classList.remove(
+      css["selected-theme"]
+    );
+  };
+
+  const removeSelectFont = () => {
+    const selected = document.querySelector(`.${css["selected-font-size"]}`);
+    if (selected) selected.classList.remove(css["selected-font-size"]);
   };
 
   useEffect(() => {
@@ -54,6 +63,7 @@ export default function SettingsMenu() {
       if (dialog.current.open) {
         handleClose();
       }
+      handleShowFonts();
       if (windowWidth > 1200) {
         dialog.current.showModal();
       } else {
@@ -78,6 +88,7 @@ export default function SettingsMenu() {
   const handleClose = () => {
     dialog.current.close();
     removeSelectedTheme();
+    removeSelectFont();
   };
 
   const handleTheme = (event) => {
@@ -85,25 +96,34 @@ export default function SettingsMenu() {
     if (windowWidth <= 1200) setSwitchTheme(!switchTheme);
     else {
       const clickedButton = event.target.closest("button");
-      if (clickedButton === lightMode.current) {
-        lightMode.current.classList.add(css["selected-theme"]);
+      if (clickedButton === lightMode.current.children[0].children[0]) {
+        clickedButton.classList.add(css["selected-theme"]);
       } else {
-        darkMode.current.classList.add(css["selected-theme"]);
+        clickedButton.classList.add(css["selected-theme"]);
       }
     }
   };
 
   const handleShowFonts = () => {
     setToggleFonts(!toggleFonts);
-    windowWidth <= 1200 && !toggleFonts
-      ? (extensions.current.style.display = "flex")
-      : (extensions.current.style.display = "none");
+    windowWidth <= 1200
+      ? !toggleFonts
+        ? (extensions.current.style.display = "flex")
+        : (extensions.current.style.display = "none")
+      : (extensions.current.style.display = "flex");
   };
 
-  const handleSelectFont = (event) => {
-    const clickedButton = event.target.closest("button");
-    if (extensions.current === event.target) {
-      setSelectedFont(clickedButton.style.fontSize);
+  const handleSelectFontSize = (event) => {
+    if (windowWidth <= 1200) {
+      setShowSelectedFont(
+        fontSizes.filter(
+          (size) => size[1] === event.target.style.fontSize
+        )[0][0]
+      );
+      handleShowFonts();
+    } else {
+      removeSelectFont();
+      event.target.classList.add(css["selected-font-size"]);
     }
   };
 
@@ -117,53 +137,77 @@ export default function SettingsMenu() {
       />
       <dialog ref={dialog} className={css["settings-dialog"]}>
         <button ref={close} onClick={handleClose}>
-          &times;
+          &times; {/* closing button!! its the times symbol (like in math) */}
         </button>
         <div>
           <div className={css.theme}>
             <h1>Theme</h1>
             <div data-switch-theme={switchTheme}>
-              <figure>
-                <button onClick={handleTheme} ref={lightMode}>
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/128/606/606795.png"
-                    alt="sun"
-                    draggable={false}
-                  />
-                </button>
-                <figcaption>Light Mode</figcaption>
-              </figure>
-              <figure>
-                <button onClick={handleTheme} ref={darkMode}>
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/128/606/606807.png"
-                    alt="moon"
-                    draggable={false}
-                  />
-                </button>
-                <figcaption>Dark Mode</figcaption>
-              </figure>
+              <div ref={lightMode}>
+                <Button
+                  content={
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/128/606/606795.png"
+                      alt="sun"
+                      draggable={false}
+                    />
+                  }
+                  caption={"Light Mode"}
+                  handleThemeSwitch={handleTheme}
+                />
+              </div>
+              <div ref={darkMode}>
+                <Button
+                  content={
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/128/606/606807.png"
+                      alt="moon"
+                      draggable={false}
+                    />
+                  }
+                  caption={"Dark Mode"}
+                  handleThemeSwitch={handleTheme}
+                />
+              </div>
             </div>
           </div>
           <div className={css["font-size"]}>
             <h1>Font Size</h1>
             <div>
               <div ref={head} onClick={handleShowFonts}>
-                {<FontSizeButton fontSize={selectedFont} />}
-              </div>
-              <div ref={extensions} onClick={handleSelectFont}>
                 {
-                  <FontSizeButton
+                  <Button
                     fontSize={
-                      fontSizes.filter((size) => size[0] !== selectedFont)[0][1]
+                      fontSizes.filter(
+                        (size) => size[0] === showSelectedFont
+                      )[0]
                     }
+                    handleSelectFontSize={handleSelectFontSize}
+                    content={<p>Aa</p>}
+                  />
+                }
+              </div>
+              <div ref={extensions}>
+                {
+                  <Button
+                    fontSize={
+                      fontSizes.filter(
+                        (size) => size[0] !== showSelectedFont
+                      )[0]
+                    }
+                    handleSelectFontSize={handleSelectFontSize}
+                    content={<p>Aa</p>}
                   />
                 }
                 {
-                  <FontSizeButton
+                  <Button
                     fontSize={
-                      fontSizes.filter((size) => size[0] !== selectedFont)[1][1]
+                      fontSizes.filter(
+                        (size) => size[0] !== showSelectedFont
+                      )[1]
                     }
+                    handleSelectFontSize={handleSelectFontSize}
+                    content={<p>Aa</p>}
                   />
                 }
               </div>

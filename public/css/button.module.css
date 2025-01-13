@@ -1,4 +1,4 @@
-.font-size-figure {
+.figure {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,14 +15,30 @@
     border: 5px solid #fff;
     border-radius: 10px;
     cursor: pointer;
+
+    & p {
+      font-size: inherit;
+      pointer-events: none;
+    }
+
+    & img {
+      width: 50px;
+      height: 50px;
+      filter: invert(100%);
+    }
   }
 }
 
 @media only screen and (max-width: 1200px) {
-  .font-size-figure {
+  .figure {
     & button {
       width: 50px;
       height: 50px;
+
+      & img {
+        width: 35px;
+        height: 35px;
+      }
     }
 
     & figcaption {

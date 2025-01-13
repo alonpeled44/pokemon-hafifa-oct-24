@@ -53,54 +53,6 @@
     display: flex;
     gap: 10px;
     width: 245px;
-
-    & figure {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 0;
-
-      & button {
-        cursor: pointer;
-        border-radius: 10px;
-        width: 75px;
-        aspect-ratio: 1 / 1;
-      }
-
-      &:first-of-type {
-        & button {
-          background-color: #fff;
-          border: 5px solid #000;
-
-          & img {
-            width: 50px;
-            aspect-ratio: 1 / 1;
-            filter: invert(0);
-          }
-        }
-
-        & figcaption {
-          font-family: system-ui;
-        }
-      }
-
-      &:last-of-type {
-        & button {
-          background-color: #000;
-          border: 5px solid #fff;
-
-          & img {
-            width: 50px;
-            aspect-ratio: 1 / 1;
-            filter: invert(100%);
-          }
-        }
-
-        & figcaption {
-          font-family: system-ui;
-        }
-      }
-    }
   }
 }
 
@@ -133,6 +85,11 @@
   }
 }
 
+.selected-font-size {
+  color: #ffc908 !important;
+  border-color: #ffc908 !important;
+}
+
 @media only screen and (max-width: 1200px) {
   .settings-icon {
     position: fixed;
@@ -143,6 +100,7 @@
     margin: 5px;
     border-radius: 25px 25px 0 0;
   }
+
   .settings-dialog[open] {
     position: fixed;
     top: 50px;
@@ -167,31 +125,24 @@
   }
 
   .theme {
-    & button {
-      width: 50px !important;
-      height: 50px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+    /* when is light mode */
     & div[data-switch-theme="false"] {
-      & > figure:first-of-type {
+      & > div:first-of-type {
         order: 1;
       }
-      & > figure:last-of-type {
+      & > div:last-of-type {
         order: 2;
       }
     }
+
+    /* when is dark mode */
     & div[data-switch-theme="true"] {
-      & > figure:first-of-type {
+      & > div:first-of-type {
         order: 2;
       }
-      & > figure:last-of-type {
+      & > div:last-of-type {
         order: 1;
       }
-    }
-    & img {
-      width: 35px !important;
     }
   }
 
