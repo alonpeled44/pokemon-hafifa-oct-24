@@ -8,23 +8,24 @@
     font-size: 20px;
     border: none;
     transition: 100ms;
-    background-color: rgba(255, 255, 255, 0);
-    color: #fff;
+    background-color: transparent;
+    color: var(--accent-color);
 
     &:hover {
       transform: scale(1.1);
       text-shadow: 2px 5px rgba(0, 0, 0, 0.5);
       transition: 100ms;
-      color: #fff;
-      background-color: rgba(255, 255, 255, 0);
+      color: var(--accent-color);
+      background-color: transparent;
     }
   }
 }
 
 .verticalDivider {
-  border-left: 2px solid #fff;
-  height: 50px;
+  border-left: 2px solid;
+  border-color: var(--accent-color);
   border-radius: 50px;
+  height: 50px;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -37,7 +38,8 @@
       margin: 0;
     }
     & > button {
-      border: 2px solid #fff;
+      border: 2px solid;
+      border-color: var(--accent-color);
       border-radius: 20px;
     }
   }

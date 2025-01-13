@@ -1,15 +1,22 @@
-.html {
-  height: 100%;
-  width: 100%;
-  height: 100%;
-  width: 100%;
-}
-
 @font-face {
   font-family: poke-font;
   src: url("../ITC\ Kabel\ Ultra\ Regular.otf");
-  font-family: poke-font;
-  src: url("../ITC\ Kabel\ Ultra\ Regular.otf");
+}
+
+.html {
+  height: 100%;
+  width: 100%;
+
+  &[data-theme="light"] {
+    --primary-color: #ffcc01;
+    --secondary-color: #386abb;
+    --accent-color: #f4f4f4;
+  }
+  &[data-theme="dark"] {
+    --primary-color: #ffcc01;
+    --secondary-color: #2a5298;
+    --accent-color: #1c1c1c;
+  }
 }
 
 .body {
@@ -19,8 +26,8 @@
   overflow: hidden;
   width: 100%;
   height: 100%;
-  
+
   & * {
-  font-family: poke-font;
+    font-family: poke-font;
   }
 }

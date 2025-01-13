@@ -11,8 +11,8 @@
     width: 75px;
     height: 75px;
     background-color: rgba(0, 0, 0, 0);
-    color: #fff;
-    border: 5px solid #fff;
+    color: var(--accent-color);
+    border: 5px solid var(--accent-color);
     border-radius: 10px;
     cursor: pointer;
 
