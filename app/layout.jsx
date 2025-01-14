@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Header from "../public/components/header";
 import css from "../public/css/general.module.css";
 
