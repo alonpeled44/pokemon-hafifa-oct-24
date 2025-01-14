@@ -1,23 +1,17 @@
 import css from "../css/button.module.css";
 
-export default function Button({
-  caption,
-  fontSize,
-  handleSelectFontSize,
-  handleThemeSwitch,
-  content,
-}) {
+export default function Button({ caption, fontSize, content, isSelected }) {
+  const handleClick = (event) => {
+    if (isSelected) {
+      event.target.classList.add(css["selected-theme"]);
+    }
+  };
   return (
     <figure className={css["figure"]}>
-      <button
-        style={fontSize && { fontSize: fontSize[1] }}
-        onClick={
-          handleSelectFontSize ? handleSelectFontSize : handleThemeSwitch
-        }
-      >
+      <button style={fontSize && { fontSize: fontSize }} onClick={handleClick}>
         {content}
       </button>
-      <figcaption>{fontSize ? fontSize[0] : caption}</figcaption>
+      <figcaption>{caption}</figcaption>
     </figure>
   );
 }

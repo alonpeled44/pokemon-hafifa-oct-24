@@ -2,11 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import Button from "./Button";
 import css from "../css/settings-menu.module.css";
 
-const fontSizes = Object.entries({
+const fontSizes = {
   large: "19px",
   medium: "16px",
   small: "13px",
-});
+};
 
 export default function SettingsMenu() {
   // Get the references of the elements.
@@ -19,9 +19,9 @@ export default function SettingsMenu() {
 
   // States
   const [toggleDialog, setToggleDialog] = useState(false);
-  const [switchTheme, setSwitchTheme] = useState(false);
+  const [theme, setTheme] = useState("light");
   const [toggleFonts, setToggleFonts] = useState(false);
-  const [showSelectedFont, setShowSelectedFont] = useState(fontSizes[0][0]);
+  const [showSelectedFont, setShowSelectedFont] = useState(fontSizes.medium);
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 0
   );
@@ -91,19 +91,6 @@ export default function SettingsMenu() {
     removeSelectFont();
   };
 
-  const handleTheme = (event) => {
-    removeSelectedTheme();
-    if (windowWidth <= 1200) setSwitchTheme(!switchTheme);
-    else {
-      const clickedButton = event.target.closest("button");
-      if (clickedButton === lightMode.current.children[0].children[0]) {
-        clickedButton.classList.add(css["selected-theme"]);
-      } else {
-        clickedButton.classList.add(css["selected-theme"]);
-      }
-    }
-  };
-
   const handleShowFonts = () => {
     setToggleFonts(!toggleFonts);
     windowWidth <= 1200
@@ -111,20 +98,6 @@ export default function SettingsMenu() {
         ? (extensions.current.style.display = "flex")
         : (extensions.current.style.display = "none")
       : (extensions.current.style.display = "flex");
-  };
-
-  const handleSelectFontSize = (event) => {
-    if (windowWidth <= 1200) {
-      setShowSelectedFont(
-        fontSizes.filter(
-          (size) => size[1] === event.target.style.fontSize
-        )[0][0]
-      );
-      handleShowFonts();
-    } else {
-      removeSelectFont();
-      event.target.classList.add(css["selected-font-size"]);
-    }
   };
 
   return (
@@ -142,7 +115,7 @@ export default function SettingsMenu() {
         <div>
           <div className={css.theme}>
             <h1>Theme</h1>
-            <div data-switch-theme={switchTheme}>
+            <div data-switch-theme={theme}>
               <div ref={lightMode}>
                 <Button
                   content={
@@ -152,8 +125,11 @@ export default function SettingsMenu() {
                       draggable={false}
                     />
                   }
+                  handleClick={() => {
+                    setTheme("light");
+                  }}
+                  isSelected={theme === "light"}
                   caption={"Light Mode"}
-                  handleThemeSwitch={handleTheme}
                 />
               </div>
               <div ref={darkMode}>
@@ -165,8 +141,11 @@ export default function SettingsMenu() {
                       draggable={false}
                     />
                   }
+                  handleClick={() => {
+                    setTheme("dark");
+                  }}
+                  isSelected={theme === "dark"}
                   caption={"Dark Mode"}
-                  handleThemeSwitch={handleTheme}
                 />
               </div>
             </div>
@@ -175,41 +154,60 @@ export default function SettingsMenu() {
             <h1>Font Size</h1>
             <div>
               <div ref={head} onClick={handleShowFonts}>
-                {
-                  <Button
-                    fontSize={
-                      fontSizes.filter(
-                        (size) => size[0] === showSelectedFont
-                      )[0]
-                    }
-                    handleSelectFontSize={handleSelectFontSize}
-                    content={<p>Aa</p>}
-                  />
-                }
+                <Button
+                  fontSize={
+                    windowWidth <= 1200 ? showSelectedFont : fontSizes.large
+                  }
+                  handleClick={(event) => {
+                    setShowSelectedFont(
+                      windowWidth <= 1200 ? showSelectedFont : fontSizes.large
+                    );
+                    removeSelectFont();
+                    windowWidth <= 1200
+                      ? handleShowFonts()
+                      : event.target.classList.add(css["selected-font-size"]);
+                  }}
+                  content={<p>Aa</p>}
+                  caption={"large"}
+                />
               </div>
               <div ref={extensions}>
-                {
-                  <Button
-                    fontSize={
-                      fontSizes.filter(
-                        (size) => size[0] !== showSelectedFont
-                      )[0]
+                {windowWidth <= 1200 &&
+                  Object.keys(fontSizes).map((fontSizeKey) => {
+                    if (fontSizes[fontSizeKey] !== showSelectedFont) {
+                      return (
+                        <Button
+                          key={fontSizeKey}
+                          fontSize={fontSizes[fontSizeKey]}
+                          handleClick={() => {
+                            setShowSelectedFont(fontSizes[fontSizeKey]);
+                            handleShowFonts();
+                          }}
+                          content={<p>Aa</p>}
+                        />
+                      );
                     }
-                    handleSelectFontSize={handleSelectFontSize}
-                    content={<p>Aa</p>}
-                  />
-                }
-                {
-                  <Button
-                    fontSize={
-                      fontSizes.filter(
-                        (size) => size[0] !== showSelectedFont
-                      )[1]
+                  })}
+                {windowWidth > 1200 &&
+                  Object.keys(fontSizes).map((fontSizeKey) => {
+                    if (fontSizeKey !== "large") {
+                      return (
+                        <Button
+                          key={fontSizeKey}
+                          fontSize={fontSizes[fontSizeKey]}
+                          handleClick={(event) => {
+                            setShowSelectedFont(fontSizes[fontSizeKey]);
+                            removeSelectFont();
+                            event.target.classList.add(
+                              css["selected-font-size"]
+                            );
+                          }}
+                          content={<p>Aa</p>}
+                          caption={fontSizeKey}
+                        />
+                      );
                     }
-                    handleSelectFontSize={handleSelectFontSize}
-                    content={<p>Aa</p>}
-                  />
-                }
+                  })}
               </div>
             </div>
           </div>

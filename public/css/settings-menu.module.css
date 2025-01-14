@@ -56,14 +56,6 @@
   }
 }
 
-.selected-theme {
-  border-color: #ffc908 !important;
-  & img {
-    filter: invert(83%) sepia(52%) saturate(2285%) hue-rotate(350deg)
-      brightness(103%) contrast(105%) !important;
-  }
-}
-
 .font-size {
   display: flex;
   justify-content: space-between;
@@ -83,11 +75,6 @@
       gap: 10px;
     }
   }
-}
-
-.selected-font-size {
-  color: #ffc908 !important;
-  border-color: #ffc908 !important;
 }
 
 @media only screen and (max-width: 1200px) {
