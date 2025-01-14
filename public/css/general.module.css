@@ -6,16 +6,19 @@
 .html {
   height: 100%;
   width: 100%;
+  --primary-color: #ffcc01;
+  --secondary-color: #386abb;
+  --background-color: #f4f4f4;
 
   &[data-theme="light"] {
     --primary-color: #ffcc01;
     --secondary-color: #386abb;
-    --accent-color: #f4f4f4;
+    --background-color: #f4f4f4;
   }
   &[data-theme="dark"] {
     --primary-color: #ffcc01;
-    --secondary-color: #2a5298;
-    --accent-color: #1c1c1c;
+    --secondary-color: #1e3a6b;
+    --background-color: #28282b;
   }
 }
 

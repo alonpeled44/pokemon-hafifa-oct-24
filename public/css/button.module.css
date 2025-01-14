@@ -9,9 +9,9 @@
     justify-content: center;
     align-items: center;
     width: 75px;
-    height: 75px;
+    aspect-ratio: 1 / 1;
     background-color: rgba(0, 0, 0, 0);
-    color: var(--accent-color);
+    color: var(--priamry-color);
     border: 5px solid var(--accent-color);
     border-radius: 10px;
     cursor: pointer;
@@ -24,7 +24,8 @@
     & img {
       width: 50px;
       height: 50px;
-      filter: invert(100%);
+      filter: invert(92%) sepia(0%) saturate(0%) hue-rotate(343deg)
+        brightness(104%) contrast(101%);
     }
   }
 }
@@ -33,11 +34,11 @@
   .figure {
     & button {
       width: 50px;
-      height: 50px;
+      aspect-ratio: 1 / 1;
 
       & img {
         width: 35px;
-        height: 35px;
+        aspect-ratio: 1 / 1;
       }
     }
 

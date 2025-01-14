@@ -1,11 +1,30 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../public/components/header";
 import css from "../public/css/general.module.css";
 
 export default function RootLayout({ children }) {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState();
+
+  useEffect(() => {
+    setTheme(localStorage.getItem("theme") || "light");
+  }, []);
+
+  useEffect(() => {
+    const handleThemeChange = () => {
+      const updatedTheme = localStorage.getItem("theme");
+      setTheme(updatedTheme || "light");
+    };
+
+    typeof window !== undefined &&
+      window.addEventListener("storage", handleThemeChange);
+
+    return () =>
+      typeof window !== undefined &&
+      window.removeEventListener("storage", handleThemeChange);
+  }, []);
+
   return (
     <html lang="en" className={css.html} data-theme={theme}>
       <head>
