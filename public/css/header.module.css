@@ -79,10 +79,8 @@
       }
     }
 
-    & > div:last-of-type {
-      & > h1 {
-        display: none;
-      }
+    & > div:last-child > h1 {
+      display: none;
     }
   }
 }

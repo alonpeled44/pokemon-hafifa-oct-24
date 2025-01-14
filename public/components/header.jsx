@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import UserGreeting from "./UserGreeting";
-import BurgerMenu from "./burgerMenu";
+import BurgerMenu from "./BurgerMenu";
 import HeaderLinks from "./headerLinks";
 import SettingsMenu from "./SettingsMenu";
 import css from "../css/header.module.css";
@@ -36,9 +36,7 @@ export default function Header() {
           {user && <HeaderLinks />}
         </div>
         <div>
-          <div>
-            <h1>{currentDate}</h1>
-          </div>
+          <h1>{currentDate}</h1>
           {user && <SettingsMenu />}
         </div>
       </header>
