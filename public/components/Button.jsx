@@ -1,23 +1,39 @@
+import { useEffect, useRef } from "react";
 import css from "../css/button.module.css";
 
 export default function Button({
   caption,
   fontSize,
-  handleSelectFontSize,
-  handleThemeSwitch,
   content,
+  isSelected,
+  handleClick,
 }) {
+  const button = useRef(null);
+
+  useEffect(() => {
+    if (fontSize) {
+      if (window.innerWidth > 1200)
+        isSelected
+          ? button.current.classList.add(css["selected-font-size"])
+          : button.current.classList.remove(css["selected-font-size"]);
+    } else {
+      if (window.innerWidth > 1200)
+        isSelected
+          ? button.current.classList.add(css["selected-theme"])
+          : button.current.classList.remove(css["selected-theme"]);
+    }
+  }, [isSelected]);
+
   return (
     <figure className={css["figure"]}>
       <button
-        style={fontSize && { fontSize: fontSize[1] }}
-        onClick={
-          handleSelectFontSize ? handleSelectFontSize : handleThemeSwitch
-        }
+        ref={button}
+        style={fontSize && { fontSize: fontSize }}
+        onClick={handleClick}
       >
         {content}
       </button>
-      <figcaption>{fontSize ? fontSize[0] : caption}</figcaption>
+      <figcaption>{caption}</figcaption>
     </figure>
   );
 }

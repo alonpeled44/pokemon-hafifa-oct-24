@@ -1,4 +1,4 @@
-.greetingWrapper {
+.greeting-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,7 +21,7 @@
   }
 }
 
-.verticalDivider {
+.vertical-divider {
   border-left: 2px solid;
   border-color: var(--accent-color);
   border-radius: 50px;
