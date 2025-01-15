@@ -11,8 +11,9 @@
     width: 75px;
     aspect-ratio: 1 / 1;
     background-color: rgba(0, 0, 0, 0);
-    color: var(--priamry-color);
-    border: 5px solid var(--accent-color);
+    color: var(--font-color);
+    border: 5px solid;
+    border-color: var(--font-color);
     border-radius: 10px;
     cursor: pointer;
 
@@ -24,8 +25,7 @@
     & img {
       width: 50px;
       height: 50px;
-      filter: invert(92%) sepia(0%) saturate(0%) hue-rotate(343deg)
-        brightness(104%) contrast(101%);
+      filter: var(--img-filter);
       pointer-events: none;
     }
   }

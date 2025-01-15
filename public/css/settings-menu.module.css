@@ -1,6 +1,5 @@
 .settings-icon {
   cursor: pointer;
-  filter: invert(100%);
 }
 
 .settings-dialog[open] {
@@ -10,10 +9,10 @@
   width: 45%;
   aspect-ratio: 1 / 0.5;
   border: 0;
-  border-radius: 10px;
+  border-radius: 25px;
   outline: 0;
   padding: 20px;
-  color: var(--accent-color);
+  color: var(--font-color);
   background: var(--secondary-color);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12);
   backdrop-filter: blur(14.9px);
@@ -29,9 +28,9 @@
     cursor: pointer;
     align-self: flex-end;
     background-color: rgba(0, 0, 0, 0);
+    color: inherit;
     border: 0;
     font-size: 36px;
-    color: #fff;
   }
 
   & > div {

@@ -1,18 +1,16 @@
 .header {
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 0;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  user-select: none;
   width: 100%;
   height: 10%;
-  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   position: absolute;
   z-index: 1;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
+  user-select: none;
 
   & > h1 {
     font-size: 42px;
@@ -31,7 +29,7 @@
     & img {
       width: 50px;
       aspect-ratio: 1;
-      filter: invert(100%);
+      filter: var(--img-filter);
     }
 
     & > div:first-child {
@@ -54,12 +52,6 @@
     & > div:first-child > div:first-child {
       display: flex;
       gap: 10px;
-
-      & img {
-        width: 50px;
-        aspect-ratio: 1;
-        filter: invert(100%);
-      }
     }
   }
 }

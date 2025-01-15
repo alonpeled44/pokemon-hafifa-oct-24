@@ -7,18 +7,24 @@
   height: 100%;
   width: 100%;
   --primary-color: #ffcc01;
-  --secondary-color: #386abb;
-  --background-color: #f4f4f4;
+  --secondary-color: #fbfaf5;
+  --font-color: #447acc;
+  --img-filter: invert(48%) sepia(74%) saturate(1628%) hue-rotate(196deg)
+    brightness(83%) contrast(91%);
 
   &[data-theme="light"] {
     --primary-color: #ffcc01;
-    --secondary-color: #386abb;
-    --background-color: #f4f4f4;
+    --secondary-color: #fbfaf5;
+    --font-color: #447acc;
+    --img-filter: invert(48%) sepia(74%) saturate(1628%) hue-rotate(196deg)
+      brightness(83%) contrast(91%);
   }
   &[data-theme="dark"] {
     --primary-color: #ffcc01;
     --secondary-color: #1e3a6b;
-    --background-color: #28282b;
+    --font-color: #f4f4f4;
+    --img-filter: invert(99%) sepia(8%) saturate(221%) hue-rotate(217deg)
+      brightness(116%) contrast(91%);
   }
 }
 
