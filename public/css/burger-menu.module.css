@@ -1,0 +1,60 @@
+.burger-menu {
+  display: none;
+  width: 60px;
+  aspect-ratio: 1 / 1;
+  filter: invert(100%);
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+}
+
+.dialog {
+  z-index: 2;
+  width: 100%;
+  max-width: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  border: none;
+  margin: 0;
+  padding: 0;
+
+  & > * {
+    margin: 10px;
+  }
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+
+    & > div > div {
+      display: none; /* hiding the divider */
+    }
+
+    & ul {
+      flex-direction: column;
+      color: #fff;
+      & a {
+        color: #fff;
+      }
+    }
+
+    & button {
+      font-size: 36px;
+      align-self: flex-end;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0);
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .burger-menu {
+    display: block;
+  }
+}
