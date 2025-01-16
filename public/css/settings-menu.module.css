@@ -115,18 +115,18 @@
     & > div {
       &[data-switch-theme="light"] {
         & > div:first-of-type {
-          order: 1;
+          display: block;
         }
         & > div:last-of-type {
-          order: 2;
+          display: none;
         }
       }
       &[data-switch-theme="dark"] {
         & > div:first-of-type {
-          order: 2;
+          display: none;
         }
         & > div:last-of-type {
-          order: 1;
+          display: block;
         }
       }
     }

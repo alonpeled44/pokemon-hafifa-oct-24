@@ -20,7 +20,7 @@ export default function SettingsMenu() {
   // States
   const [toggleDialog, setToggleDialog] = useState(false);
   const [theme, setTheme] = useState("light");
-  const [toggleFonts, setToggleFonts] = useState(false);
+  const [toggleFonts, setToggleFonts] = useState(true);
   const [selectedFont, setSelectedFont] = useState(fontSizes.medium);
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 0
@@ -32,6 +32,7 @@ export default function SettingsMenu() {
     if (typeof window !== "undefined") {
       const handleResize = () => {
         setWindowWidth(window.innerWidth);
+        setTheme(theme);
       };
 
       window.addEventListener("resize", handleResize);
@@ -75,7 +76,7 @@ export default function SettingsMenu() {
   const handleShowFonts = () => {
     setToggleFonts(!toggleFonts);
     windowWidth <= 1200
-      ? !toggleFonts
+      ? toggleFonts
         ? (extensions.current.style.display = "flex")
         : (extensions.current.style.display = "none")
       : (extensions.current.style.display = "flex");
@@ -107,8 +108,7 @@ export default function SettingsMenu() {
                     />
                   }
                   handleClick={() => {
-                    setTheme("light");
-                    console.log(theme);
+                    setTheme(theme === "light" ? "dark" : "light");
                   }}
                   isSelected={theme === "light"}
                   caption={"Light Mode"}
@@ -124,8 +124,7 @@ export default function SettingsMenu() {
                     />
                   }
                   handleClick={() => {
-                    setTheme("dark");
-                    console.log(theme);
+                    setTheme(theme === "light" ? "dark" : "light");
                   }}
                   isSelected={theme === "dark"}
                   caption={"Dark Mode"}
