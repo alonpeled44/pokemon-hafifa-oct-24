@@ -111,23 +111,22 @@
   }
 
   .theme {
-    /* when is light mode */
-    & div[data-switch-theme="false"] {
-      & > div:first-of-type {
-        order: 1;
+    & > div {
+      &[data-switch-theme="light"] {
+        & > div:first-of-type {
+          display: block;
+        }
+        & > div:last-of-type {
+          display: none;
+        }
       }
-      & > div:last-of-type {
-        order: 2;
-      }
-    }
-
-    /* when is dark mode */
-    & div[data-switch-theme="true"] {
-      & > div:first-of-type {
-        order: 2;
-      }
-      & > div:last-of-type {
-        order: 1;
+      &[data-switch-theme="dark"] {
+        & > div:first-of-type {
+          display: none;
+        }
+        & > div:last-of-type {
+          display: block;
+        }
       }
     }
   }

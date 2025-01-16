@@ -20,37 +20,19 @@ export default function SettingsMenu() {
   // States
   const [toggleDialog, setToggleDialog] = useState(false);
   const [theme, setTheme] = useState("light");
-  const [toggleFonts, setToggleFonts] = useState(false);
+  const [toggleFonts, setToggleFonts] = useState(true);
   const [selectedFont, setSelectedFont] = useState(fontSizes.medium);
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 0
   );
 
-  // Remove the selected theme and font size functions
-  const removeSelectedTheme = () => {
-    const selectedThemeButton = document.querySelector(
-      `${css["selected-theme"]}`
-    );
-    selectedThemeButton &&
-      selectedThemeButton.classList.remove(css["selected-theme"]);
-  };
-
-  const removeSelectFont = () => {
-    const selectedFontButton = document.querySelector(
-      `${css["selected-font-size"]}`
-    );
-    selectedFontButton &&
-      selectedFontButton.classList.remove(css["selected-font-size"]);
-  };
-
   useEffect(() => {
     handleShowFonts();
-  }, []);
 
-  useEffect(() => {
     if (typeof window !== "undefined") {
       const handleResize = () => {
         setWindowWidth(window.innerWidth);
+        setTheme(theme);
       };
 
       window.addEventListener("resize", handleResize);
@@ -94,7 +76,7 @@ export default function SettingsMenu() {
   const handleShowFonts = () => {
     setToggleFonts(!toggleFonts);
     windowWidth <= 1200
-      ? !toggleFonts
+      ? toggleFonts
         ? (extensions.current.style.display = "flex")
         : (extensions.current.style.display = "none")
       : (extensions.current.style.display = "flex");
@@ -126,7 +108,7 @@ export default function SettingsMenu() {
                     />
                   }
                   handleClick={() => {
-                    setTheme("light");
+                    setTheme(theme === "light" ? "dark" : "light");
                   }}
                   isSelected={theme === "light"}
                   caption={"Light Mode"}
@@ -142,7 +124,7 @@ export default function SettingsMenu() {
                     />
                   }
                   handleClick={() => {
-                    setTheme("dark");
+                    setTheme(theme === "light" ? "dark" : "light");
                   }}
                   isSelected={theme === "dark"}
                   caption={"Dark Mode"}
