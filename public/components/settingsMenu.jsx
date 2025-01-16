@@ -26,28 +26,9 @@ export default function SettingsMenu() {
     typeof window !== "undefined" ? window.innerWidth : 0
   );
 
-  // Remove the selected theme and font size functions
-  const removeSelectedTheme = () => {
-    const selectedThemeButton = document.querySelector(
-      `${css["selected-theme"]}`
-    );
-    selectedThemeButton &&
-      selectedThemeButton.classList.remove(css["selected-theme"]);
-  };
-
-  const removeSelectFont = () => {
-    const selectedFontButton = document.querySelector(
-      `${css["selected-font-size"]}`
-    );
-    selectedFontButton &&
-      selectedFontButton.classList.remove(css["selected-font-size"]);
-  };
-
   useEffect(() => {
     handleShowFonts();
-  }, []);
 
-  useEffect(() => {
     if (typeof window !== "undefined") {
       const handleResize = () => {
         setWindowWidth(window.innerWidth);
@@ -127,6 +108,7 @@ export default function SettingsMenu() {
                   }
                   handleClick={() => {
                     setTheme("light");
+                    console.log(theme);
                   }}
                   isSelected={theme === "light"}
                   caption={"Light Mode"}
@@ -143,6 +125,7 @@ export default function SettingsMenu() {
                   }
                   handleClick={() => {
                     setTheme("dark");
+                    console.log(theme);
                   }}
                   isSelected={theme === "dark"}
                   caption={"Dark Mode"}
