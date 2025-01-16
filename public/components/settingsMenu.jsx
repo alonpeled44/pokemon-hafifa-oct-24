@@ -32,7 +32,6 @@ export default function SettingsMenu() {
     if (typeof window !== "undefined") {
       const handleResize = () => {
         setWindowWidth(window.innerWidth);
-        setTheme(theme);
       };
 
       window.addEventListener("resize", handleResize);
