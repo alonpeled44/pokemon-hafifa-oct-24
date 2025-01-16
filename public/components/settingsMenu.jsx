@@ -12,26 +12,29 @@ export default function SettingsMenu() {
   // Get the references of the elements.
   const dialog = useRef(null);
   const close = useRef(null);
+
   const lightMode = useRef(null);
   const darkMode = useRef(null);
+
   const head = useRef(null);
   const extensions = useRef(null);
 
   // States
   const [toggleDialog, setToggleDialog] = useState(false);
   const [theme, setTheme] = useState("light");
-  const [toggleFonts, setToggleFonts] = useState(true);
+
+  const [toggleFonts, setToggleFonts] = useState(false);
   const [selectedFont, setSelectedFont] = useState(fontSizes.medium);
+
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 0
   );
 
   useEffect(() => {
-    handleShowFonts();
-
     if (typeof window !== "undefined") {
       const handleResize = () => {
         setWindowWidth(window.innerWidth);
+        setToggleFonts(false);
       };
 
       window.addEventListener("resize", handleResize);
@@ -39,47 +42,29 @@ export default function SettingsMenu() {
         window.removeEventListener("resize", handleResize);
       };
     }
-  }, []);
+  }, []); //get window width
 
   useEffect(() => {
-    if (toggleDialog && dialog.current) {
-      if (dialog.current.open) {
-        handleClose();
-      }
-      handleShowFonts();
-      if (windowWidth > 1200) {
-        dialog.current.showModal();
-      } else {
-        dialog.current.show();
-      }
-    }
-  }, [windowWidth, toggleDialog]);
-
-  const handleClick = (event) => {
-    setToggleDialog(!toggleDialog);
-
-    if (!toggleDialog && dialog.current) {
-      if (dialog.current.open) dialog.current.close();
-      windowWidth > 1200 ? dialog.current.showModal() : dialog.current.show();
-      event.target.classList.add(css["settings-open"]);
-    } else {
-      handleClose();
-      event.target.classList.remove(css["settings-open"]);
-    }
-  };
-
-  const handleClose = () => {
-    dialog.current.close();
-  };
-
-  const handleShowFonts = () => {
-    setToggleFonts(!toggleFonts);
     windowWidth <= 1200
       ? toggleFonts
         ? (extensions.current.style.display = "flex")
         : (extensions.current.style.display = "none")
       : (extensions.current.style.display = "flex");
-  };
+  }, [windowWidth, toggleFonts]); //open or close the font size extensions div
+
+  useEffect(() => {
+    if (toggleDialog) {
+      dialog.current.close();
+      if (windowWidth <= 1200) {
+        dialog.current.show();
+      } else {
+        dialog.current.showModal();
+      }
+    } else {
+      dialog.current.close();
+    }
+    setToggleDialog(dialog.current.open);
+  }, [windowWidth, toggleDialog]); //keep dialog open and modal / non-modal if needed
 
   return (
     <>
@@ -87,10 +72,19 @@ export default function SettingsMenu() {
         className={css["settings-icon"]}
         src="https://img.icons8.com/?size=50&id=2969&format=png"
         alt="settings icon"
-        onClick={handleClick}
+        data-open={toggleDialog}
+        onClick={() => {
+          setToggleDialog((prev) => !prev);
+        }}
       />
       <dialog ref={dialog} className={css["settings-dialog"]}>
-        <button ref={close} onClick={handleClose}>
+        <button
+          ref={close}
+          onClick={() => {
+            dialog.current.close();
+            setToggleDialog(false);
+          }}
+        >
           &times; {/* closing button!! its the times symbol (like in math) */}
         </button>
         <div>
@@ -134,7 +128,7 @@ export default function SettingsMenu() {
           <div className={css["font-size"]}>
             <h1>Font Size</h1>
             <div>
-              <div ref={head} onClick={handleShowFonts}>
+              <div ref={head} onClick={() => setToggleFonts((prev) => !prev)}>
                 <Button
                   fontSize={
                     windowWidth <= 1200 ? selectedFont : fontSizes.large
@@ -163,7 +157,6 @@ export default function SettingsMenu() {
                           fontSize={fontSizes[fontSizeKey]}
                           handleClick={() => {
                             setSelectedFont(fontSizes[fontSizeKey]);
-                            handleShowFonts();
                           }}
                           isSelected={false}
                           content={<p>Aa</p>}
