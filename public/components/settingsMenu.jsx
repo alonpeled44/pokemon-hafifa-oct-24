@@ -68,15 +68,18 @@ export default function SettingsMenu() {
 
   return (
     <>
-      <img
+      <div
         className={css["settings-icon"]}
-        src="https://img.icons8.com/?size=50&id=2969&format=png"
-        alt="settings icon"
         data-open={toggleDialog}
         onClick={() => {
           setToggleDialog((prev) => !prev);
         }}
-      />
+      >
+        <img
+          src="https://img.icons8.com/?size=50&id=2969&format=png"
+          alt="settings icon"
+        />
+      </div>
       <dialog ref={dialog} className={css["settings-dialog"]}>
         <button
           ref={close}

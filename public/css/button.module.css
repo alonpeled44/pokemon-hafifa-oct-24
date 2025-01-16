@@ -44,28 +44,15 @@
   border-color: #ffc908 !important;
 }
 
-.selected-theme {
-  border-color: #ffc908 !important;
-  & img {
-    filter: invert(83%) sepia(52%) saturate(2285%) hue-rotate(350deg)
-      brightness(103%) contrast(105%) !important;
-  }
-}
-
-.selected-font-size {
-  color: #ffc908 !important;
-  border-color: #ffc908 !important;
-}
-
 @media only screen and (max-width: 1200px) {
   .figure {
     & button {
       width: 50px;
-      aspect-ratio: 1 / 1;
+      height: 50px;
 
       & img {
-        width: 35px;
-        aspect-ratio: 1 / 1;
+        width: 35px !important;
+        height: 35px !important;
       }
     }
 

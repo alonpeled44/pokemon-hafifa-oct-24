@@ -2,7 +2,7 @@
   display: none;
   width: 60px;
   aspect-ratio: 1 / 1;
-  filter: invert(100%);
+  filter: var(--img-filter);
   position: absolute;
   z-index: 1;
   top: 0;
