@@ -85,6 +85,10 @@
     padding: 5px;
     margin: 5px;
     border-radius: 25px 25px 0 0;
+
+    &[data-open="true"] {
+      background-color: #ccc;
+    }
   }
 
   .settings-dialog[open] {
@@ -129,9 +133,5 @@
         }
       }
     }
-  }
-
-  .settings-open {
-    background-color: #ccc;
   }
 }
