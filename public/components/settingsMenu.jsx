@@ -81,7 +81,6 @@ export default function SettingsMenu() {
         <button
           ref={close}
           onClick={() => {
-            dialog.current.close();
             setToggleDialog(false);
           }}
         >
