@@ -21,10 +21,10 @@ export default function SettingsMenu() {
 
   // States
   const [toggleDialog, setToggleDialog] = useState(false);
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState();
 
   const [toggleFonts, setToggleFonts] = useState(false);
-  const [selectedFont, setSelectedFont] = useState(fontSizes.medium);
+  const [selectedFont, setSelectedFont] = useState();
 
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 0
@@ -32,6 +32,9 @@ export default function SettingsMenu() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
+      setTheme(localStorage.getItem("theme") || "light");
+      setSelectedFont(localStorage.getItem("font-size") || fontSizes.large);
+
       const handleResize = () => {
         setWindowWidth(window.innerWidth);
         setToggleFonts(false);
@@ -43,6 +46,11 @@ export default function SettingsMenu() {
       };
     }
   }, []); //get window width
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    localStorage.setItem("font-size", selectedFont);
+  }, [theme, selectedFont]);
 
   useEffect(() => {
     windowWidth <= 1200
@@ -87,7 +95,7 @@ export default function SettingsMenu() {
             setToggleDialog(false);
           }}
         >
-          &times; {/* closing button!! its the times symbol (like in math) */}
+          &times; {/* closing button!! it's the times symbol (like in math) */}
         </button>
         <div>
           <div className={css.theme}>

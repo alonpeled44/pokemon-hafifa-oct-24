@@ -8,8 +8,11 @@
   z-index: 1;
   margin: 0;
   padding: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
+  background-color: var(--opacity-font-color);
+  color: var(--font-color);
+  box-shadow: 0px 5px 5px 1px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 5px 5px 1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 5px 5px 1px rgba(0, 0, 0, 0.75);
   user-select: none;
 
   & > h1 {
@@ -57,26 +60,20 @@
 
 @media only screen and (max-width: 1200px) {
   .header {
-    background-color: rgba(0, 0, 0, 0);
+    top: 15%;
     justify-content: center;
     gap: 0;
-    top: 15%;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    background-color: rgba(0, 0, 0, 0);
 
-    & > div:first-child {
+    & > div:first-of-type {
       flex-direction: column;
+      gap: 15px;
 
-      & > div:first-child {
+      & > div:first-of-type {
         flex-direction: row-reverse;
-      }
-
-      & > div:nth-of-type(2) {
-        & > h2 {
-          margin: 0;
-        }
-      }
-
-      & > div:last-child {
-        display: none;
       }
     }
 

@@ -54,44 +54,41 @@ export default function LoginForm() {
   };
 
   return (
-    <div className={css.componentWrapper}>
-      <div className={css.blurryBackground} />
-      <div className={css.formWrapper}>
-        <form onSubmit={handleSubmit}>
-          <h1>
-            L
-            <span>
-              <img src="https://cdn-icons-png.flaticon.com/128/868/868596.png" />
-            </span>
-            gin
-          </h1>
-          <section className={css.inputs}>
-            <input
-              type="text"
-              id="_username"
-              placeholder="username..."
-              onChange={handleUsernameChange}
-              value={username}
-              required
-            />
-            <input
-              type="password"
-              id="_password"
-              placeholder="password..."
-              onChange={handlePasswordChange}
-              value={password}
-              required
-            />
-            <p>{error}</p>
-          </section>
-          <section className={css.buttons}>
-            <button type="submit">Login</button>
-            <button type="button" onClick={handleGuset}>
-              Join As Guest
-            </button>
-          </section>
-        </form>
-      </div>
+    <div className={css.wrapper}>
+      <form onSubmit={handleSubmit}>
+        <h1>
+          L
+          <span>
+            <img src="https://cdn-icons-png.flaticon.com/128/868/868596.png" />
+          </span>
+          gin
+        </h1>
+        <section className={css.inputs}>
+          <input
+            type="text"
+            id="_username"
+            placeholder="username..."
+            onChange={handleUsernameChange}
+            value={username}
+            required
+          />
+          <input
+            type="password"
+            id="_password"
+            placeholder="password..."
+            onChange={handlePasswordChange}
+            value={password}
+            required
+          />
+          <p>{error}</p>
+        </section>
+        <section className={css.buttons}>
+          <button type="submit">Login</button>
+          <button type="button" onClick={handleGuset}>
+            Join As Guest
+          </button>
+        </section>
+      </form>
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import LoginForm from "../../public/components/loginForm";
+import LoginForm from "../../public/components/LoginForm";
 
 export default function Index() {
   const router = useRouter();

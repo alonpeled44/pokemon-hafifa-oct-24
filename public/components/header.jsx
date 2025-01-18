@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import UserGreeting from "./UserGreeting";
-import BurgerMenu from "./burgerMenu";
+import HeaderLinksDialog from "./HeaderLinksDialog";
 import HeaderLinks from "./headerLinks";
 import SettingsMenu from "./SettingsMenu";
 import css from "../css/header.module.css";
 
-export default function Header() {
+export default function Header({ isLoggedIn }) {
   const currentDate = new Date().toLocaleDateString("en-gb", {
     day: "numeric",
     month: "numeric",
@@ -22,7 +22,7 @@ export default function Header() {
 
   return (
     <>
-      <BurgerMenu />
+      {user && <HeaderLinksDialog />}
       <header className={css.header}>
         <div>
           <div>

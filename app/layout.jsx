@@ -2,19 +2,20 @@
 
 import React, { useEffect, useState } from "react";
 import Header from "../public/components/header";
+import HeaderLinksDialog from "../public/components/HeaderLinksDialog";
 import css from "../public/css/general.module.css";
 
 export default function RootLayout({ children }) {
   const [theme, setTheme] = useState();
+  const [user, setUser] = useState();
 
   useEffect(() => {
     setTheme(localStorage.getItem("theme") || "light");
-  }, []);
 
-  useEffect(() => {
     const handleThemeChange = () => {
       const updatedTheme = localStorage.getItem("theme");
       setTheme(updatedTheme || "light");
+      console.log(updatedTheme);
     };
 
     typeof window !== undefined &&

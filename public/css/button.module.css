@@ -32,16 +32,15 @@
 }
 
 .selected-theme {
-  border-color: #ffc908 !important;
+  border-color: var(--primary-color) !important;
   & img {
-    filter: invert(83%) sepia(52%) saturate(2285%) hue-rotate(350deg)
-      brightness(103%) contrast(105%) !important;
+    filter: var(--selected-img-filter) !important;
   }
 }
 
 .selected-font-size {
-  color: #ffc908 !important;
-  border-color: #ffc908 !important;
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
 }
 
 @media only screen and (max-width: 1200px) {

@@ -14,24 +14,6 @@ export default function Button({
   const button = useRef(null);
 
   useEffect(() => {
-    if (fontSize) {
-      if (window.innerWidth > 1200)
-        isSelected
-          ? button.current.classList.add(css["selected-font-size"])
-          : button.current.classList.remove(css["selected-font-size"]);
-      else button.current.classList.remove(css["selected-font-size"]);
-    } else {
-      if (window.innerWidth > 1200) {
-        isSelected
-          ? button.current.classList.add(css["selected-theme"])
-          : button.current.classList.remove(css["selected-theme"]);
-      } else {
-        button.current.classList.remove(css["selected-theme"]);
-      }
-    }
-  }, [isSelected, windowWidth]);
-
-  useEffect(() => {
     if (typeof window !== "undefined") {
       const handleResize = () => {
         setWindowWidth(window.innerWidth);
@@ -44,8 +26,21 @@ export default function Button({
     }
   }, []);
 
+  useEffect(() => {
+    if (windowWidth > 1200 && fontSize)
+      isSelected
+        ? button.current.classList.add(css["selected-font-size"])
+        : button.current.classList.remove(css["selected-font-size"]);
+    else button.current.classList.remove(css["selected-font-size"]);
+    if (windowWidth > 1200)
+      isSelected
+        ? button.current.classList.add(css["selected-theme"])
+        : button.current.classList.remove(css["selected-theme"]);
+    else button.current.classList.remove(css["selected-theme"]);
+  }, [isSelected, windowWidth]);
+
   return (
-    <figure className={css["figure"]}>
+    <figure className={css.figure}>
       <button
         ref={button}
         style={fontSize && { fontSize: fontSize }}
