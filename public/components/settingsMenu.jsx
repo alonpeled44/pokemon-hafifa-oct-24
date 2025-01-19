@@ -17,14 +17,15 @@ export default function SettingsMenu() {
   const darkMode = useRef(null);
 
   const head = useRef(null);
-  const extensions = useRef(null);
+  const extension = useRef(null);
 
   // States
-  const [toggleDialog, setToggleDialog] = useState(false);
-  const [theme, setTheme] = useState("light");
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const [toggleFonts, setToggleFonts] = useState(false);
+  const [selectedTheme, setSelectedTheme] = useState("light");
   const [selectedFont, setSelectedFont] = useState(fontSizes.medium);
+
+  const [showFontExtension, setShowFontExtension] = useState(false);
 
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 0
@@ -34,7 +35,7 @@ export default function SettingsMenu() {
     if (typeof window !== "undefined") {
       const handleResize = () => {
         setWindowWidth(window.innerWidth);
-        setToggleFonts(false);
+        setShowFontExtension(false);
       };
 
       window.addEventListener("resize", handleResize);
@@ -45,15 +46,7 @@ export default function SettingsMenu() {
   }, []); //get window width
 
   useEffect(() => {
-    windowWidth <= 1200
-      ? toggleFonts
-        ? (extensions.current.style.display = "flex")
-        : (extensions.current.style.display = "none")
-      : (extensions.current.style.display = "flex");
-  }, [windowWidth, toggleFonts]); //open or close the font size extensions div
-
-  useEffect(() => {
-    if (toggleDialog) {
+    if (isDialogOpen) {
       dialog.current.close();
       if (windowWidth <= 1200) {
         dialog.current.show();
@@ -63,8 +56,8 @@ export default function SettingsMenu() {
     } else {
       dialog.current.close();
     }
-    setToggleDialog(dialog.current.open);
-  }, [windowWidth, toggleDialog]); //keep dialog open and modal / non-modal if needed
+    setIsDialogOpen(dialog.current.open);
+  }, [windowWidth, isDialogOpen]); //keep dialog open and modal / non-modal if needed
 
   return (
     <>
@@ -72,16 +65,16 @@ export default function SettingsMenu() {
         className={css["settings-icon"]}
         src="https://img.icons8.com/?size=50&id=2969&format=png"
         alt="settings icon"
-        data-open={toggleDialog}
+        data-open={isDialogOpen}
         onClick={() => {
-          setToggleDialog((prev) => !prev);
+          setIsDialogOpen((prev) => !prev);
         }}
       />
       <dialog ref={dialog} className={css["settings-dialog"]}>
         <button
           ref={close}
           onClick={() => {
-            setToggleDialog(false);
+            setIsDialogOpen(false);
           }}
         >
           &times; {/* closing button!! its the times symbol (like in math) */}
@@ -89,45 +82,52 @@ export default function SettingsMenu() {
         <div>
           <div className={css.theme}>
             <h1>Theme</h1>
-            <div data-switch-theme={theme}>
-              <div ref={lightMode}>
-                <Button
-                  content={
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/128/606/606795.png"
-                      alt="sun"
-                      draggable={false}
-                    />
-                  }
-                  handleClick={() => {
-                    setTheme(theme === "light" ? "dark" : "light");
-                  }}
-                  isSelected={theme === "light"}
-                  caption={"Light Mode"}
-                />
-              </div>
-              <div ref={darkMode}>
-                <Button
-                  content={
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/128/606/606807.png"
-                      alt="moon"
-                      draggable={false}
-                    />
-                  }
-                  handleClick={() => {
-                    setTheme(theme === "light" ? "dark" : "light");
-                  }}
-                  isSelected={theme === "dark"}
-                  caption={"Dark Mode"}
-                />
-              </div>
+            <div>
+              {!(selectedTheme !== "light" && windowWidth <= 1200) && (
+                <div ref={lightMode}>
+                  <Button
+                    content={
+                      <img
+                        src="https://cdn-icons-png.flaticon.com/128/606/606795.png"
+                        alt="sun"
+                        draggable={false}
+                      />
+                    }
+                    handleClick={() => {
+                      setSelectedTheme(windowWidth <= 1200 ? "dark" : "light");
+                    }}
+                    isSelected={selectedTheme === "light"}
+                    caption={"Light Mode"}
+                  />
+                </div>
+              )}
+              {!(selectedTheme !== "dark" && windowWidth <= 1200) && (
+                <div ref={darkMode}>
+                  <Button
+                    content={
+                      <img
+                        src="https://cdn-icons-png.flaticon.com/128/606/606807.png"
+                        alt="moon"
+                        draggable={false}
+                      />
+                    }
+                    handleClick={() => {
+                      setSelectedTheme(windowWidth <= 1200 ? "light" : "dark");
+                    }}
+                    isSelected={selectedTheme === "dark"}
+                    caption={"Dark Mode"}
+                  />
+                </div>
+              )}
             </div>
           </div>
           <div className={css["font-size"]}>
             <h1>Font Size</h1>
             <div>
-              <div ref={head} onClick={() => setToggleFonts((prev) => !prev)}>
+              <div
+                ref={head}
+                onClick={() => setShowFontExtension((prev) => !prev)}
+              >
                 <Button
                   fontSize={
                     windowWidth <= 1200 ? selectedFont : fontSizes.large
@@ -146,9 +146,19 @@ export default function SettingsMenu() {
                   caption={"large"}
                 />
               </div>
-              <div ref={extensions}>
-                {windowWidth <= 1200 &&
-                  Object.keys(fontSizes).map((fontSizeKey) => {
+              {windowWidth <= 1200 && (
+                <div
+                  ref={extension}
+                  style={{
+                    display:
+                      windowWidth <= 1200
+                        ? showFontExtension
+                          ? "flex"
+                          : "none"
+                        : "flex",
+                  }}
+                >
+                  {Object.keys(fontSizes).map((fontSizeKey) => {
                     if (fontSizes[fontSizeKey] !== selectedFont) {
                       return (
                         <Button
@@ -156,6 +166,7 @@ export default function SettingsMenu() {
                           fontSize={fontSizes[fontSizeKey]}
                           handleClick={() => {
                             setSelectedFont(fontSizes[fontSizeKey]);
+                            setShowFontExtension(false);
                           }}
                           isSelected={false}
                           content={<p>Aa</p>}
@@ -163,24 +174,25 @@ export default function SettingsMenu() {
                       );
                     }
                   })}
-                {windowWidth > 1200 &&
-                  Object.keys(fontSizes).map((fontSizeKey) => {
-                    if (fontSizeKey !== "large") {
-                      return (
-                        <Button
-                          key={fontSizeKey}
-                          fontSize={fontSizes[fontSizeKey]}
-                          handleClick={() => {
-                            setSelectedFont(fontSizes[fontSizeKey]);
-                          }}
-                          isSelected={fontSizes[fontSizeKey] === selectedFont}
-                          content={<p>Aa</p>}
-                          caption={fontSizeKey}
-                        />
-                      );
-                    }
-                  })}
-              </div>
+                </div>
+              )}
+              {windowWidth > 1200 &&
+                Object.keys(fontSizes).map((fontSizeKey) => {
+                  if (fontSizeKey !== "large") {
+                    return (
+                      <Button
+                        key={fontSizeKey}
+                        fontSize={fontSizes[fontSizeKey]}
+                        handleClick={() => {
+                          setSelectedFont(fontSizes[fontSizeKey]);
+                        }}
+                        isSelected={fontSizes[fontSizeKey] === selectedFont}
+                        content={<p>Aa</p>}
+                        caption={fontSizeKey}
+                      />
+                    );
+                  }
+                })}
             </div>
           </div>
         </div>
