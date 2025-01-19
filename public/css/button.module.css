@@ -18,7 +18,6 @@
     cursor: pointer;
 
     & p {
-      font-size: inherit;
       pointer-events: none;
     }
 
@@ -31,16 +30,12 @@
   }
 }
 
-.selected-theme {
-  border-color: var(--primary-color) !important;
+.selected-setting {
+  color: #ffc908 !important;
+  border-color: #ffc908 !important;
   & img {
     filter: var(--selected-img-filter) !important;
   }
-}
-
-.selected-font-size {
-  color: var(--primary-color) !important;
-  border-color: var(--primary-color) !important;
 }
 
 @media only screen and (max-width: 1200px) {

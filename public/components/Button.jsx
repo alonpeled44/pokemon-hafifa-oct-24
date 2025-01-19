@@ -45,6 +45,9 @@ export default function Button({
         ref={button}
         style={fontSize && { fontSize: fontSize }}
         onClick={handleClick}
+        className={
+          windowWidth > 1200 && isSelected ? css["selected-setting"] : undefined
+        }
       >
         {content}
       </button>
