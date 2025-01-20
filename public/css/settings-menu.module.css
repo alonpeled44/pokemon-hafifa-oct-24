@@ -60,7 +60,6 @@
     & > div {
       display: flex;
       gap: 10px;
-      background-color: #333;
       padding-right: 5px;
       padding-block: 10px;
       border-radius: 25px;
@@ -76,29 +75,39 @@
 @media only screen and (max-width: 1200px) {
   .settings-icon {
     position: fixed;
+    z-index: 10;
     top: 0;
     left: 0;
     padding: 5px;
     margin: 5px;
     width: 50px;
     height: 50px;
-
-    &[data-open="true"] {
-      border-radius: 25px 25px 0 0;
-      background-color: var(--secondary-color);
-    }
   }
 
   .settings-dialog[open] {
     width: 50px;
     justify-content: space-around;
     position: fixed;
+    z-index: 2;
     top: 60px;
     left: 0;
     margin: 5px;
     padding: 10px 5px 5px;
     border-radius: 0 0 25px 25px;
     background-color: var(--secondary-color);
+
+    &::before {
+      content: "";
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      top: -60px;
+      left: 0;
+      padding: 5px;
+      z-index: -1;
+      border-radius: 25px 25px 0 0;
+      background-color: var(--secondary-color);
+    }
 
     & > div {
       gap: 0.5em;
@@ -118,7 +127,6 @@
       gap: 10px;
       align-items: center;
       position: relative;
-
       background-color: var(--secondary-color);
     }
   }

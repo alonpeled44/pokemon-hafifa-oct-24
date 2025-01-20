@@ -2,32 +2,32 @@
 
 import React, { useEffect, useState } from "react";
 import Header from "../public/components/header";
-import HeaderLinksDialog from "../public/components/HeaderLinksDialog";
 import css from "../public/css/general.module.css";
+import SettingsMenu from "../public/components/SettingsMenu";
 
 export default function RootLayout({ children }) {
   const [theme, setTheme] = useState();
-  const [user, setUser] = useState();
+  const [fontSize, setFontSize] = useState();
 
   useEffect(() => {
-    setTheme(localStorage.getItem("theme") || "light");
-
-    const handleThemeChange = () => {
-      const updatedTheme = localStorage.getItem("theme");
-      setTheme(updatedTheme || "light");
-      console.log(updatedTheme);
-    };
-
-    typeof window !== undefined &&
-      window.addEventListener("storage", handleThemeChange);
-
-    return () =>
-      typeof window !== undefined &&
-      window.removeEventListener("storage", handleThemeChange);
+    const storedTheme = localStorage.getItem("theme");
+    const storedFontSize = localStorage.getItem("font-size");
+    setTheme(storedTheme ? storedTheme : "light");
+    setFontSize(storedFontSize ? storedFontSize : "16px");
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    localStorage.setItem("font-size", fontSize);
+  }, [theme, fontSize]);
+
   return (
-    <html lang="en" className={css.html} data-theme={theme}>
+    <html
+      lang="en"
+      className={css.html}
+      data-theme={theme}
+      data-font-size={fontSize}
+    >
       <head>
         <title>Pokedex</title>
         <link
@@ -36,6 +36,12 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={css.body}>
+        <SettingsMenu
+          theme={theme}
+          setTheme={setTheme}
+          fontSize={fontSize}
+          setFontSize={setFontSize}
+        />
         <Header />
         {children}
       </body>

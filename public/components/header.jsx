@@ -37,7 +37,6 @@ export default function Header({ isLoggedIn }) {
         </div>
         <div>
           <h1>{currentDate}</h1>
-          {user && <SettingsMenu />}
         </div>
       </header>
     </>
