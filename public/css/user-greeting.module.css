@@ -3,9 +3,10 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
+  font-size: 1.2rem;
 
   & button {
-    font-size: 20px;
+    font-size: 1.2rem;
     border: none;
     transition: 100ms;
     background-color: transparent;

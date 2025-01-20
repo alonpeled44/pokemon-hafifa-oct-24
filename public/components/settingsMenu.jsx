@@ -57,6 +57,7 @@ export default function SettingsMenu({
         className={css["settings-icon"]}
         src="https://img.icons8.com/?size=50&id=2969&format=png"
         alt="settings icon"
+        data-open-dialog={isDialogOpen}
         onClick={() => {
           setIsDialogOpen((prev) => !prev);
         }}

@@ -49,7 +49,6 @@
       border: none;
       background-color: transparent;
       border-radius: 10px;
-      font-size: 36px;
 
       &:focus {
         outline: none;

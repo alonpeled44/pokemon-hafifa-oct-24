@@ -6,28 +6,36 @@
 .html {
   height: 100%;
   width: 100%;
+  font-size: 16px;
   position: relative;
 
   --primary-color: #0d47a1;
-  --secondary-color: #f9a825;
+  --secondary-color: #f7c505;
   --font-color: #212121;
 
-  --opacity-font-color: #e0e0e080;
+  --background-color: #e0e0e080;
   --img-filter: invert(14%) sepia(0%) saturate(1%) hue-rotate(159deg)
     brightness(99%) contrast(102%);
   --selected-img-filter: invert(15%) sepia(74%) saturate(3884%)
     hue-rotate(212deg) brightness(91%) contrast(90%);
 
   &[data-theme="dark"] {
-    --primary-color: #f9a825;
+    --primary-color: #f7c505;
     --secondary-color: #0d47a1;
     --font-color: #e0e0e0;
 
-    --opacity-font-color: #21212180;
+    --background-color: #21212180;
     --img-filter: invert(89%) sepia(90%) saturate(150%) hue-rotate(193deg)
       brightness(117%) contrast(76%);
-    --selected-img-filter: invert(67%) sepia(88%) saturate(1071%)
-      hue-rotate(342deg) brightness(104%) contrast(95%);
+    --selected-img-filter: invert(73%) sepia(98%) saturate(472%)
+      hue-rotate(351deg) brightness(95%) contrast(104%);
+  }
+
+  &[data-font-size="13px"] {
+    font-size: 13px;
+  }
+  &[data-font-size="19px"] {
+    font-size: 19px;
   }
 
   &::before {

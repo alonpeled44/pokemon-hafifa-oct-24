@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import Header from "../public/components/header";
 import css from "../public/css/general.module.css";
 import SettingsMenu from "../public/components/SettingsMenu";
@@ -8,6 +9,7 @@ import SettingsMenu from "../public/components/SettingsMenu";
 export default function RootLayout({ children }) {
   const [theme, setTheme] = useState();
   const [fontSize, setFontSize] = useState();
+  const pathname = usePathname();
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
@@ -20,6 +22,13 @@ export default function RootLayout({ children }) {
     localStorage.setItem("theme", theme);
     localStorage.setItem("font-size", fontSize);
   }, [theme, fontSize]);
+
+  useEffect(() => {
+    if (pathname === "/login") {
+      setTheme("light");
+      setFontSize("16px");
+    }
+  }, [pathname]);
 
   return (
     <html
@@ -36,12 +45,14 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={css.body}>
-        <SettingsMenu
-          theme={theme}
-          setTheme={setTheme}
-          fontSize={fontSize}
-          setFontSize={setFontSize}
-        />
+        {pathname !== "/login" && (
+          <SettingsMenu
+            theme={theme}
+            setTheme={setTheme}
+            fontSize={fontSize}
+            setFontSize={setFontSize}
+          />
+        )}
         <Header />
         {children}
       </body>

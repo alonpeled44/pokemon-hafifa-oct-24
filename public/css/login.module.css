@@ -11,21 +11,41 @@
   align-items: center;
 
   & form {
+    width: 25%;
+    height: 70%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
     gap: 40px;
-    border: 5px solid var(--primary-color);
-    background-color: var(--opacity-font-color);
-    border-radius: 20px;
-    height: 70%;
-    width: 25%;
+
+    &::after {
+      content: "";
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: -1;
+      background-color: var(--font-color);
+      filter: invert(100%) opacity(45%);
+      border-radius: 50px;
+    }
+
+    &::before {
+      content: "";
+      width: 105%;
+      height: 105%;
+      background-color: var(--secondary-color);
+      filter: blur(20px);
+      border-radius: 50px;
+      position: absolute;
+      z-index: -1;
+    }
 
     & > h1 {
       display: flex;
       justify-content: center;
-      font-size: 90px;
+      font-size: 5rem;
       color: var(--primary-color);
       user-select: none;
       margin-block: 10%;
@@ -54,14 +74,13 @@
   margin-top: 20px;
 
   & input {
+    width: 100%;
     margin: 0;
-    border-radius: 0;
     border: none;
     border-bottom: 3px solid var(--primary-color);
     background-color: rgba(255, 255, 255, 0);
     color: var(--primary-color);
-    font-size: 32px;
-    width: 100%;
+    font-size: 2rem;
     font-family: poke-font;
 
     &::placeholder {
@@ -80,9 +99,9 @@
 
   & p {
     align-self: flex-start;
-    color: #d32f2f;
-    font-size: 18px;
     margin: 0;
+    color: #d32f2f;
+    font-size: 1.25rem;
   }
 }
 
@@ -95,13 +114,13 @@
 
   & button {
     height: 50px;
-    font-size: 26px;
+    border: 4px solid var(--primary-color);
     border-radius: 10px;
     background-color: transparent;
     color: var(--primary-color);
-    border: 4px solid var(--primary-color);
-    user-select: none;
+    font-size: 1.75rem;
     cursor: pointer;
+    user-select: none;
     transition: 300ms;
 
     &:hover {
@@ -136,7 +155,13 @@
         height: 100%;
         position: absolute;
         z-index: -1;
-        background-color: var(--opacity-font-color);
+        background-color: var(--background-color);
+        border: none;
+        border-radius: 0;
+      }
+
+      &::after {
+        display: none;
       }
 
       & > h1 {

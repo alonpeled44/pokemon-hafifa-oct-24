@@ -1,5 +1,28 @@
+@keyframes rotate-wheel {
+  0% {
+    transform: translate(0);
+  }
+  25% {
+    transform: rotate(22.5deg);
+  }
+  50% {
+    transform: rotate(45deg);
+  }
+  75% {
+    transform: rotate(67.5deg);
+  }
+  100% {
+    transform: rotate(90deg);
+  }
+}
+
 .settings-icon {
   cursor: pointer;
+  filter: var(--img-filter);
+  position: absolute;
+  z-index: 2;
+  right: 225px;
+  top: 20px;
 }
 
 .settings-dialog[open] {
@@ -11,8 +34,8 @@
   border-radius: 25px;
   outline: 0;
   padding: 20px;
+  background-color: var(--background-color);
   color: var(--font-color);
-  background-color: var(--opacity-font-color);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12);
   backdrop-filter: blur(14.9px);
   -webkit-backdrop-filter: blur(14.9px);
@@ -20,17 +43,16 @@
   overflow: visible;
 
   &::backdrop {
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(2px);
   }
 
   & > button {
-    font-size: 36px;
+    font-size: 2.25rem;
     cursor: pointer;
     align-self: flex-end;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: transparent;
     color: inherit;
     border: 0;
-    font-size: 36px;
   }
 
   & > div {
@@ -39,11 +61,16 @@
     gap: 5em;
     width: 100%;
   }
+
   & .theme {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    & > h1 {
+      font-size: 2.5rem;
+    }
 
     & > div {
       display: flex;
@@ -51,11 +78,16 @@
       width: 245px;
     }
   }
+
   & .font-size {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+
+    & > h1 {
+      font-size: 2.5rem;
+    }
 
     & > div {
       display: flex;
@@ -82,6 +114,10 @@
     margin: 5px;
     width: 50px;
     height: 50px;
+
+    &[data-open-dialog="true"] {
+      animation: rotate-wheel 350ms ease-in-out;
+    }
   }
 
   .settings-dialog[open] {
