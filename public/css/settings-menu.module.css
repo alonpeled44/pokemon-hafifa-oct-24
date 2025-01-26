@@ -1,27 +1,9 @@
-@keyframes rotate-wheel {
-  0% {
-    transform: translate(0);
-  }
-  25% {
-    transform: rotate(22.5deg);
-  }
-  50% {
-    transform: rotate(45deg);
-  }
-  75% {
-    transform: rotate(67.5deg);
-  }
-  100% {
-    transform: rotate(90deg);
-  }
-}
-
 .settings-icon {
   cursor: pointer;
   filter: var(--img-filter);
   position: absolute;
   z-index: 2;
-  right: 225px;
+  right: 10px;
   top: 20px;
 }
 

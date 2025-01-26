@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import UserGreeting from "./UserGreeting";
 import HeaderLinksDialog from "./HeaderLinksDialog";
 import HeaderLinks from "./headerLinks";
-import SettingsMenu from "./SettingsMenu";
 import css from "../css/header.module.css";
 
 export default function Header({ isLoggedIn }) {
@@ -36,7 +36,13 @@ export default function Header({ isLoggedIn }) {
           {user && <HeaderLinks />}
         </div>
         <div>
-          <h1>{currentDate}</h1>
+          <h1
+            style={
+              usePathname() !== "/login" ? { marginRight: "60px" } : undefined
+            }
+          >
+            {currentDate}
+          </h1>
         </div>
       </header>
     </>
