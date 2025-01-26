@@ -1,4 +1,4 @@
-.greetingWrapper {
+.greeting-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,19 +21,24 @@
   }
 }
 
-.verticalDivider {
+.vertical-divider {
   border-left: 2px solid #fff;
   height: 50px;
   border-radius: 50px;
 }
 
 @media only screen and (max-width: 1200px) {
-  .verticalDivider {
-    display: none;
+  .greeting-wrapper {
+    & > h2 {
+      margin: 0;
+    }
+    & > button {
+      border: 2px solid #fff;
+      border-radius: 20px;
+    }
   }
 
-  .greetingWrapper button {
-    border: 2px solid #fff;
-    border-radius: 20px;
+  .vertical-divider {
+    display: none;
   }
 }

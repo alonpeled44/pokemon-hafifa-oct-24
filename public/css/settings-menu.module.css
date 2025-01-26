@@ -1,0 +1,113 @@
+.settings-icon {
+  cursor: pointer;
+  filter: invert(100%);
+}
+
+.settings-dialog[open] {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 45%;
+  border: none;
+  border-radius: 10px;
+  outline: 0;
+  padding: 20px;
+  color: #fff;
+  background: #333;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(14.9px);
+  -webkit-backdrop-filter: blur(14.9px);
+  user-select: none;
+  overflow: visible;
+
+  &::backdrop {
+    backdrop-filter: blur(5px);
+  }
+
+  & > button {
+    font-size: 36px;
+    cursor: pointer;
+    align-self: flex-end;
+    background-color: transparent;
+    color: #fff;
+    border: none;
+  }
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5em;
+    width: 100%;
+  }
+  & .theme {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & > div {
+      display: flex;
+      gap: 10px;
+      width: 245px;
+    }
+  }
+  & .font-size {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    & > div {
+      display: flex;
+      gap: 10px;
+      background-color: #333;
+      padding-right: 5px;
+      padding-block: 10px;
+      border-radius: 25px;
+
+      & > div {
+        display: flex;
+        gap: 10px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .settings-icon {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 25px 25px 0 0;
+
+    &[data-open="true"] {
+      background-color: #ccc;
+    }
+  }
+
+  .settings-dialog[open] {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    width: 50px;
+    border-radius: 0 0 25px 25px;
+    margin: 5px;
+    padding: 15px 5px 5px;
+    justify-content: space-around;
+
+    & > div {
+      gap: 0.5em;
+    }
+
+    & > button {
+      display: none;
+    }
+
+    & h1 {
+      display: none;
+    }
+  }
+}

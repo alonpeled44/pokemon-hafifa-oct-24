@@ -1,4 +1,8 @@
 .header {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -44,9 +48,16 @@
     & > div:first-child > div:first-child {
       display: flex;
       gap: 10px;
+
+      & img {
+        width: 50px;
+        aspect-ratio: 1;
+        filter: invert(100%);
+      }
     }
   }
 }
+
 @media only screen and (max-width: 1200px) {
   .header {
     background-color: rgba(0, 0, 0, 0);
@@ -67,6 +78,7 @@
         display: none;
       }
     }
+
     & > div:last-child > h1 {
       display: none;
     }
