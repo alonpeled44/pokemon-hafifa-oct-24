@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "./Button";
 import css from "../css/settings-menu.module.css";
 
@@ -25,31 +25,28 @@ export default function SettingsMenu({
   const extension = useRef(null);
 
   // States
+  const [windowWidth, setWindowWidth] = useState();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-
   const [showFontExtension, setShowFontExtension] = useState(false);
 
-  const windowWidth = useMemo(() => {
-    if (isDialogOpen && typeof window !== "undefined") {
-      setShowFontExtension(false);
-      return window.innerWidth;
-    }
-    return 0;
-  }, [isDialogOpen]);
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
+    dialog.current.close();
     if (isDialogOpen) {
-      dialog.current.close();
-      if (windowWidth <= 1200) {
-        dialog.current.show();
-      } else {
-        dialog.current.showModal();
-      }
-    } else {
-      dialog.current.close();
+      windowWidth <= 1200 ? dialog.current.show() : dialog.current.showModal();
     }
     setIsDialogOpen(dialog.current.open);
-  }, [windowWidth, isDialogOpen]); //keep dialog open and modal / non-modal if needed
+  }, [isDialogOpen, windowWidth]);
 
   return (
     <>
@@ -57,7 +54,6 @@ export default function SettingsMenu({
         className={css["settings-icon"]}
         src="https://img.icons8.com/?size=50&id=2969&format=png"
         alt="settings icon"
-        data-open-dialog={isDialogOpen}
         onClick={() => {
           setIsDialogOpen((prev) => !prev);
         }}

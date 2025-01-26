@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import UserGreeting from "./UserGreeting";
-import HeaderLinksDialog from "./HeaderLinksDialog";
 import HeaderLinks from "./headerLinks";
+import HeaderLinksDialog from "./HeaderLinksDialog";
 import css from "../css/header.module.css";
 
-export default function Header({ isLoggedIn }) {
+export default function Header() {
   const currentDate = new Date().toLocaleDateString("en-gb", {
     day: "numeric",
     month: "numeric",
