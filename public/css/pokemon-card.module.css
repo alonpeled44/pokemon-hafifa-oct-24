@@ -1,0 +1,41 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 200px;
+  aspect-ratio: 1 / 1.5;
+  background-color: var(--secondary-color);
+  color: var(--font-color);
+  padding: 10px;
+
+  & > section:first-of-type {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    & h2 {
+      font-size: 1.75rem;
+    }
+    & p {
+      font-size: 1.5rem;
+    }
+  }
+
+  & > section:nth-of-type(2) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & img {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  & > section:last-of-type {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -5,3 +5,27 @@
   z-index: -1;
   background-color: var(--background-color);
 }
+
+.cards-section {
+  height: 75vh;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 200px);
+  margin: auto;
+  grid-gap: 50px;
+  padding: 10px;
+  overflow: hidden auto;
+}
+
+.loading {
+  position: fixed;
+  z-index: 99;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+}
