@@ -59,17 +59,19 @@ export default function SettingsMenu({
         }}
       />
       <dialog ref={dialog} className={css["settings-dialog"]}>
-        <button
-          ref={close}
-          onClick={() => {
-            setIsDialogOpen(false);
-          }}
-        >
-          &times; {/* closing button!! its the times symbol (like in math) */}
-        </button>
+        {windowWidth > 1200 && (
+          <button
+            ref={close}
+            onClick={() => {
+              setIsDialogOpen(false);
+            }}
+          >
+            &times; {/* closing button!! its the times symbol (like in math) */}
+          </button>
+        )}
         <div>
           <div className={css.theme}>
-            <h1>Theme</h1>
+            {windowWidth > 1200 && <h1>Theme</h1>}
             <div>
               {!(theme !== "light" && windowWidth <= 1200) && (
                 <div ref={lightMode}>
@@ -85,7 +87,7 @@ export default function SettingsMenu({
                       setTheme(windowWidth <= 1200 ? "dark" : "light");
                     }}
                     isHighlighted={theme === "light" && windowWidth > 1200}
-                    caption={"Light Mode"}
+                    caption={windowWidth > 1200 && "Light Mode"}
                   />
                 </div>
               )}
@@ -103,14 +105,14 @@ export default function SettingsMenu({
                       setTheme(windowWidth <= 1200 ? "light" : "dark");
                     }}
                     isHighlighted={theme === "dark" && windowWidth > 1200}
-                    caption={"Dark Mode"}
+                    caption={windowWidth > 1200 && "Dark Mode"}
                   />
                 </div>
               )}
             </div>
           </div>
           <div className={css["font-size"]}>
-            <h1>Font Size</h1>
+            {windowWidth > 1200 && <h1>Font Size</h1>}
             <div>
               <div
                 ref={head}
@@ -127,7 +129,7 @@ export default function SettingsMenu({
                     windowWidth > 1200 && fontSize === fontSizes.large
                   }
                   content={<p>Aa</p>}
-                  caption={"large"}
+                  caption={windowWidth > 1200 && "Large"}
                 />
               </div>
               {windowWidth <= 1200 && (

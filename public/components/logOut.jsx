@@ -3,9 +3,7 @@ import { useRouter } from "next/navigation";
 export default function LogOut() {
   const router = useRouter();
   const handleClick = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("theme");
-    localStorage.removeItem("font-size");
+    localStorage.clear();
     router.push("/login");
     router.refresh();
   };

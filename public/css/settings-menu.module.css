@@ -126,14 +126,6 @@
     & > div {
       gap: 0.5em;
     }
-
-    & > button {
-      display: none;
-    }
-
-    & h1 {
-      display: none;
-    }
   }
 
   .font-size {

@@ -58,7 +58,7 @@
     box-shadow: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: transparent;
 
     & > div:first-of-type {
       flex-direction: column;
@@ -66,12 +66,6 @@
 
       & > div:first-of-type {
         flex-direction: row-reverse;
-      }
-    }
-
-    & > div:last-of-type {
-      & > h1 {
-        display: none;
       }
     }
   }
