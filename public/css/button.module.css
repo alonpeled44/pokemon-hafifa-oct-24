@@ -9,8 +9,8 @@
     justify-content: center;
     align-items: center;
     width: 75px;
-    aspect-ratio: 1 / 1;
-    background-color: rgba(0, 0, 0, 0);
+    height: 75px;
+    background-color: transparent;
     color: var(--font-color);
     border: 5px solid;
     border-color: var(--font-color);
@@ -52,10 +52,6 @@
         width: 35px !important;
         height: 35px !important;
       }
-    }
-
-    & figcaption {
-      display: none;
     }
   }
 }

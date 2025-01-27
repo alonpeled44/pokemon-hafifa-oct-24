@@ -1,7 +1,6 @@
 .burger-menu {
-  display: none;
   width: 60px;
-  aspect-ratio: 1 / 1;
+  height: 60px;
   filter: var(--img-filter);
   position: absolute;
   z-index: 1;
@@ -40,8 +39,9 @@
     justify-content: space-around;
     height: 100%;
     margin-inline: 10px;
+
     & ul {
-      display: flex !important;
+      display: flex;
     }
 
     & button {
@@ -54,11 +54,5 @@
         outline: none;
       }
     }
-  }
-}
-
-@media only screen and (max-width: 1200px) {
-  .burger-menu {
-    display: block;
   }
 }

@@ -12,7 +12,21 @@ export default function Header() {
     year: "numeric",
   });
 
+  const pathname = usePathname();
+  const [windowWidth, setWindowWidth] = useState();
   const [user, setUser] = useState();
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedUser = localStorage.getItem("user");
@@ -22,7 +36,9 @@ export default function Header() {
 
   return (
     <>
-      {user && <HeaderLinksDialog />}
+      {user && windowWidth <= 1200 && (
+        <HeaderLinksDialog windowWidth={windowWidth} />
+      )}
       <header className={css.header}>
         <div>
           <div>
@@ -32,18 +48,20 @@ export default function Header() {
             />
             <h1>Pokèmon</h1>
           </div>
-          {user && <UserGreeting user={user} />}
-          {user && <HeaderLinks />}
+          {user && <UserGreeting user={user} windowWidth={windowWidth} />}
+          {user && windowWidth > 1200 && <HeaderLinks />}
         </div>
-        <div>
-          <h1
-            style={
-              usePathname() !== "/login" ? { marginRight: "60px" } : undefined
-            }
-          >
-            {currentDate}
-          </h1>
-        </div>
+        {windowWidth > 1200 && (
+          <div>
+            <h1
+              style={
+                pathname !== "/login" ? { marginRight: "60px" } : undefined
+              }
+            >
+              {currentDate}
+            </h1>
+          </div>
+        )}
       </header>
     </>
   );
