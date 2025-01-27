@@ -48,7 +48,7 @@ export default function Header() {
             />
             <h1>Pokèmon</h1>
           </div>
-          {user && <UserGreeting user={user} windowWidth={windowWidth} />}
+          {user && <UserGreeting user={user} />}
           {user && windowWidth > 1200 && <HeaderLinks />}
         </div>
         {windowWidth > 1200 && (

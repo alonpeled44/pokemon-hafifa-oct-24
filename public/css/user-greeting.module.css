@@ -1,4 +1,4 @@
-.greeting-wrapper {
+.wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6,31 +6,21 @@
   font-size: 1.2rem;
 
   & button {
-    font-size: 1.2rem;
+    font-size: inherit;
     border: none;
     transition: 100ms;
     background-color: transparent;
-    color: var(--accent-color);
 
     &:hover {
       transform: scale(1.1);
       text-shadow: 2px 5px rgba(0, 0, 0, 0.5);
       transition: 100ms;
-      color: var(--accent-color);
-      background-color: transparent;
     }
   }
 }
 
-.vertical-divider {
-  border-left: 2px solid;
-  border-color: var(--accent-color);
-  border-radius: 50px;
-  height: 50px;
-}
-
 @media only screen and (max-width: 1200px) {
-  .greeting-wrapper {
+  .wrapper {
     & > h2 {
       margin: 0;
     }
