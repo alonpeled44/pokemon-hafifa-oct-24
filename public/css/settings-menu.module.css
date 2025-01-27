@@ -14,7 +14,7 @@
   width: 45%;
   border: none;
   border-radius: 25px;
-  outline: 0;
+  outline: none;
   padding: 20px;
   background-color: var(--background-color);
   color: var(--font-color);
@@ -33,14 +33,14 @@
     cursor: pointer;
     align-self: flex-end;
     background-color: transparent;
-    color: inherit;
-    border: 0;
+    color: var(--font-color);
+    border: none;
   }
 
   & > div {
     display: flex;
     flex-direction: column;
-    gap: 5em;
+    gap: 5rem;
     width: 100%;
   }
 
@@ -117,14 +117,14 @@
       position: absolute;
       top: -60px;
       left: 0;
-      padding: 5px;
       z-index: -1;
+      padding: 5px;
       border-radius: 25px 25px 0 0;
       background-color: var(--secondary-color);
     }
 
     & > div {
-      gap: 0.5em;
+      gap: 0.5rem;
     }
   }
 

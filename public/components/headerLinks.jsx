@@ -1,9 +1,10 @@
+import VerticalDivider from "./VerticalDivider";
 import css from "../css/header-links.module.css";
 
-export default function HeaderLinks({ windowWidth }) {
+export default function HeaderLinks() {
   return (
-    <div className={css["header-links-wrapper"]}>
-      {windowWidth > 1200 && <div />}
+    <div className={css.wrapper}>
+      <VerticalDivider />
       <ul>
         <li>
           <a href="/" title="Go to the pokedex!">

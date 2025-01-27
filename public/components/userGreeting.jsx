@@ -1,10 +1,11 @@
+import VerticalDivider from "./VerticalDivider";
 import LogOut from "./LogOut";
 import css from "../css/user-greeting.module.css";
 
-export default function UserGreeting({ user, windowWidth }) {
+export default function UserGreeting({ user }) {
   return (
-    <div className={css["greeting-wrapper"]}>
-      {windowWidth > 1200 && <div className={css["vertical-divider"]} />}
+    <div className={css.wrapper}>
+      <VerticalDivider />
       <h2>{`Hello, ${user}!`}</h2>
       <LogOut />
     </div>

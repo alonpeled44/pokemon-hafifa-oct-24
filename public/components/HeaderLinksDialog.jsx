@@ -35,7 +35,7 @@ export default function HeaderLinksDialog({ windowWidth }) {
           >
             &times;
           </button>
-          <HeaderLinks windowWidth={windowWidth} />
+          <HeaderLinks />
         </div>
       </dialog>
     </>
