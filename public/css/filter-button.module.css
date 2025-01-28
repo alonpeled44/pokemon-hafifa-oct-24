@@ -1,0 +1,43 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  color: var(--font-color);
+
+  & button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: 5px solid var(--font-color);
+    border-radius: 20px;
+    color: inherit;
+    padding: 5px;
+    font-size: 2rem;
+    width: 100px;
+    height: 50px;
+  }
+
+  & div {
+    background-color: var(--secondary-color);
+    border: 5px solid var(--font-color);
+    border-radius: 0 0 20px 20px;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    top: 50px;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, 0);
+
+    & p {
+      padding: 5px;
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    & p:not(p:first-child) {
+      border-top: 2px solid var(--font-color);
+    }
+  }
+}

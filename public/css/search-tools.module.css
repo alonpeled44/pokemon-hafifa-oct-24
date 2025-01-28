@@ -1,0 +1,11 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 50vw;
+
+  & > div {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+}

@@ -10,11 +10,12 @@
     border: none;
     transition: 100ms;
     background-color: transparent;
+    color: var(--font-color);
 
     &:hover {
       transform: scale(1.1);
-      text-shadow: 2px 5px rgba(0, 0, 0, 0.5);
       transition: 100ms;
+      color: red;
     }
   }
 }

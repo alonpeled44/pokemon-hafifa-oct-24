@@ -1,20 +1,5 @@
-.background {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  z-index: -1;
-  background-color: var(--background-color);
-}
-
-.wrapper {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  height: 100%;
-}
-
 .cards-section {
-  height: 75%;
+  height: 75vh;
   width: 85%;
   display: grid;
   grid-template-columns: repeat(auto-fit, 220px);

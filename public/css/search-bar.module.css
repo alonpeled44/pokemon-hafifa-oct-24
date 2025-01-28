@@ -1,0 +1,22 @@
+.wrapper {
+  & input {
+    border: none;
+    border-bottom: 3px solid var(--font-color);
+    background-color: transparent;
+    font-size: 2rem;
+    color: var(--font-color);
+
+    &::placeholder {
+      color: var(--font-color);
+      opacity: 0.3;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  & img {
+    filter: var(--img-filter);
+  }
+}

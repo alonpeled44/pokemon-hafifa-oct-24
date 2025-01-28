@@ -12,10 +12,5 @@ export default function VerticalDivider() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  return (
-    <>
-      {windowWidth > 1200 && <div className={css.divider} />}
-      {console.log(windowWidth)}
-    </>
-  );
+  return <>{windowWidth > 1200 && <div className={css.divider} />}</>;
 }
