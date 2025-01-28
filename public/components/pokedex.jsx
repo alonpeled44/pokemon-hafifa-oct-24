@@ -20,7 +20,7 @@ export default function Pokedex() {
     fetchData();
   }, []);
   return (
-    <>
+    <div className={css.wrapper}>
       <div className={css.background} />
       {isLoading && <h1 className={css.loading}>Loading...</h1>}
       <div className={css["cards-section"]}>
@@ -44,6 +44,6 @@ export default function Pokedex() {
         {pokeList.length > 0 && <PokemonCard pokemon={pokeList[17]} />}
         {pokeList.length > 0 && <PokemonCard pokemon={pokeList[18]} />}
       </div>
-    </>
+    </div>
   );
 }
