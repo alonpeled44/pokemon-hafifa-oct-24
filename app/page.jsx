@@ -16,12 +16,12 @@ export default function Index() {
   const [isLoading, setIsLoading] = useState(true);
 
   const [filterList, setFilterList] = useState([]);
-  const [sortMethod, setSortMethod] = useState();
-  const [searchValue, setSearchValue] = useState();
+  const [sortMethod, setSortMethod] = useState("");
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     if (typeof window !== "undefined" && localStorage.getItem("user") === null)
-      router.replace("/login");
+      router.push("/login");
 
     const fetchData = async () => {
       setIsLoading(true);
@@ -58,25 +58,43 @@ export default function Index() {
   }, [sortMethod]);
 
   useEffect(() => {
-    if (filterList.length === 0) setPokeList(fullPokeList);
-    else
-      setPokeList(
-        fullPokeList.filter((pokemon) =>
-          pokemon.types.some((type) => filterList.includes(type))
-        )
-      );
-  }, [filterList]);
+    console.log("filter&search");
+    setPokeList(
+      fullPokeList.filter((pokemon) => {
+        // Filter by type
+        const matchesFilter =
+          filterList.length === 0 ||
+          pokemon.types.some((type) => filterList.includes(type));
+
+        // Search functionality
+        const matchesSearch =
+          pokemon.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+          pokemon.id.toString().includes(searchValue) ||
+          pokemon.weight.toString().includes(searchValue) ||
+          pokemon.height.toString().includes(searchValue) ||
+          (searchValue.startsWith("#") && pokemon.id === searchValue.slice(1));
+
+        return matchesFilter && matchesSearch;
+      })
+    );
+  }, [filterList, searchValue]);
 
   return (
     <main className={css.main}>
-      <SearchTools
-        setFilterList={setFilterList}
-        filterList={filterList}
-        setSortMethod={setSortMethod}
-        setSearchValue={setSearchValue}
-        typeList={typeList}
-      />
-      <Pokedex isLoading={isLoading} pokeList={pokeList} />
+      {isLoading ? (
+        <p className={css.loading}>Loading...</p>
+      ) : (
+        <>
+          <SearchTools
+            setFilterList={setFilterList}
+            filterList={filterList}
+            setSortMethod={setSortMethod}
+            setSearchValue={setSearchValue}
+            typeList={typeList}
+          />
+          <Pokedex pokeList={pokeList} />
+        </>
+      )}
     </main>
   );
 }

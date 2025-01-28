@@ -11,7 +11,9 @@ export default function PokemonCard({ pokemon }) {
         <img src={pokemon.frontView} />
       </section>
       <section>
-        <p>{`Type(s): ${pokemon.types.join(", ")}`}</p>
+        <p>{`Type(s): ${pokemon.types
+          .map((type) => type[0].toUpperCase() + type.slice(1))
+          .join(", ")}`}</p>
         <p>{`Height: ${pokemon.height}`}</p>
         <p>{`Weight: ${pokemon.weight}`}</p>
       </section>

@@ -42,7 +42,6 @@ export default function LoginForm() {
 
     localStorage.setItem("user", "Guest");
     router.replace("/");
-    router.refresh();
   };
 
   const handleSubmit = (e) => {
@@ -55,7 +54,6 @@ export default function LoginForm() {
         localStorage.setItem("user", username);
         setShowError(false);
         router.replace("/");
-        router.refresh();
       }
     });
   };

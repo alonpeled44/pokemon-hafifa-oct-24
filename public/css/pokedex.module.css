@@ -20,12 +20,3 @@
     background-color: var(--secondary-color);
   }
 }
-
-.loading {
-  position: fixed;
-  z-index: 99;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 3rem;
-}

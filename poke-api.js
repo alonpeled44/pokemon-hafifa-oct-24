@@ -24,14 +24,14 @@ async function fetchPokemonsAndTypes() {
 
       const newPokemon = new Pokemon(
         pokeData.name,
-        pokeData.id,
+        pokeData.id.toString(),
         pokemonTypes,
         pokeData.sprites.front_default,
         pokeData.sprites.back_default,
         pokeData.sprites.front_shiny,
         pokeData.sprites.back_shiny,
-        pokeData.height,
-        pokeData.weight
+        pokeData.height.toString(),
+        pokeData.weight.toString()
       );
       poke100List.push(newPokemon);
     });

@@ -6,7 +6,6 @@ export default function LogOut() {
   const handleClick = () => {
     localStorage.clear();
     router.push("/login");
-    router.refresh();
   };
 
   return (

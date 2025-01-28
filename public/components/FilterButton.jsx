@@ -23,11 +23,11 @@ export default function FilterButton({ setFilterList, filterList, typeList }) {
   }, []);
 
   useEffect(() => {
-    setTypes([...typeList]);
+    setTypes(typeList);
   }, [typeList]); //when the typeList fecth promise is complete.
 
   useEffect(() => {
-    setTypes(typeList.filter((type) => !filterList.includes(type)));
+    typeList && setTypes(typeList.filter((type) => !filterList.includes(type)));
   }, [filterList]);
 
   const handleShowOptions = () => {
