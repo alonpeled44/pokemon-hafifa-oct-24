@@ -12,8 +12,7 @@
     height: 75px;
     background-color: transparent;
     color: var(--font-color);
-    border: 5px solid;
-    border-color: var(--font-color);
+    border: 5px solid var(--font-color);
     border-radius: 10px;
     cursor: pointer;
 
