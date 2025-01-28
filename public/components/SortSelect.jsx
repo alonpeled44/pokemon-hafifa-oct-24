@@ -1,6 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import css from "../css/sort-select.module.css";
 
+const sortMethods = ["Id", "Reversed", "Name", "Weight", "Height"];
+
 export default function SortSelect({ setSortMethod }) {
   const [btnValue, setBtnValue] = useState("Sort");
   const [showOptions, setShowOptions] = useState(false);
@@ -48,11 +50,11 @@ export default function SortSelect({ setSortMethod }) {
       </button>
       {showOptions && (
         <div>
-          <p onClick={handleSortSelector}>Id</p>
-          <p onClick={handleSortSelector}>Reversed</p>
-          <p onClick={handleSortSelector}>Name</p>
-          <p onClick={handleSortSelector}>Weight</p>
-          <p onClick={handleSortSelector}>Height</p>
+          {sortMethods.map((method, index) => (
+            <p key={index} onClick={handleSortSelector}>
+              {method}
+            </p>
+          ))}
         </div>
       )}
     </div>

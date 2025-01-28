@@ -9,3 +9,22 @@
     gap: 15px;
   }
 }
+
+.filter-item-container {
+  max-width: 30vw;
+  max-height: 11vh;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  position: absolute;
+  right: calc(22vw + 15px);
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+  }
+}

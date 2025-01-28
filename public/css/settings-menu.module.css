@@ -4,7 +4,7 @@
   position: absolute;
   z-index: 2;
   right: 10px;
-  top: 20px;
+  top: 2.5vh;
 }
 
 .settings-dialog[open] {

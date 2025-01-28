@@ -3,12 +3,16 @@ import css from "../css/search-bar.module.css";
 
 export default function SearchBar({ setSearchValue }) {
   const search = useRef(null);
+
   useEffect(() => {
     const handleInput = () => {
       setSearchValue(search.current.value);
     };
     search.current.addEventListener("input", handleInput);
-    return () => search.current.addEventListener("input", handleInput);
+    return () => {
+      search.current &&
+        search.current.removeEventListener("input", handleInput);
+    };
   }, []);
 
   return (

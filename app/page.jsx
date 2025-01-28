@@ -11,6 +11,7 @@ export default function Index() {
   const router = useRouter();
 
   const [pokeList, setPokeList] = useState([]);
+  const [fullPokeList, setFullPokeList] = useState([]);
   const [typeList, setTypeList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -26,6 +27,7 @@ export default function Index() {
       setIsLoading(true);
       const { poke100List, typesList } = await initData();
       setPokeList([...poke100List].sort((a, b) => a.id - b.id));
+      setFullPokeList([...poke100List]);
       setTypeList([...typesList]);
       setIsLoading(false);
     };
@@ -55,10 +57,21 @@ export default function Index() {
     }
   }, [sortMethod]);
 
+  useEffect(() => {
+    if (filterList.length === 0) setPokeList(fullPokeList);
+    else
+      setPokeList(
+        fullPokeList.filter((pokemon) =>
+          pokemon.types.some((type) => filterList.includes(type))
+        )
+      );
+  }, [filterList]);
+
   return (
     <main className={css.main}>
       <SearchTools
         setFilterList={setFilterList}
+        filterList={filterList}
         setSortMethod={setSortMethod}
         setSearchValue={setSearchValue}
         typeList={typeList}
