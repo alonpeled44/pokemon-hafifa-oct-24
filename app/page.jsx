@@ -25,7 +25,7 @@ export default function Index() {
     const fetchData = async () => {
       setIsLoading(true);
       const { poke100List, typesList } = await initData();
-      setPokeList([...poke100List]);
+      setPokeList([...poke100List].sort((a, b) => a.id - b.id));
       setTypeList([...typesList]);
       setIsLoading(false);
     };
