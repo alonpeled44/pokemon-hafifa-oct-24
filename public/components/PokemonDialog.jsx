@@ -1,18 +1,14 @@
 import { useEffect, useRef } from "react";
 import css from "../css/pokemon-dialog.module.css";
 
-export default function PokemonDialog({ pokemon, openDialog, setOpenDialog }) {
+export default function PokemonDialog({ pokeList, clickedCardID }) {
   const dialog = useRef(null);
-
-  useEffect(() => {
-    openDialog0 ? dialog.current.showModal() : dialog.current.close();
-  }, [openDialog]);
+  const content = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (openDialog && !dialog.current.contains(event.target)) {
-        setOpenDialog(false);
-      }
+      if (!content.current.contains(event.target)) dialog.current.close();
+      else dialog.current.showModal();
     };
 
     document.addEventListener("click", handleClickOutside);
@@ -22,7 +18,11 @@ export default function PokemonDialog({ pokemon, openDialog, setOpenDialog }) {
 
   return (
     <dialog ref={dialog} className={css.dialog}>
-      <button onClick={() => setOpenDialog(false)}>&times;</button>
+      <div ref={content} className={css.content}>
+        <button onClick={() => dialog.current.close()}>&times;</button>
+
+        <p>{clickedCardID}</p>
+      </div>
     </dialog>
   );
 }
