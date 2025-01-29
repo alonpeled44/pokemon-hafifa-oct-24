@@ -1,12 +1,12 @@
 import Pokemon from "./pokemons";
+
 const pokeAPI = "https://pokeapi.co/api/v2/";
 const poke100 = `${pokeAPI}/pokemon?offset=0&limit=100`;
 const typesAPI = `${pokeAPI}/type?offset=0&limit=21`;
 
-const poke100List = [];
-const typesList = [];
-
 async function fetchPokemonsAndTypes() {
+  const poke100List = [];
+  const typesList = [];
   try {
     const poke100Response = await fetch(poke100);
     if (!poke100Response.ok) {
@@ -44,12 +44,14 @@ async function fetchPokemonsAndTypes() {
     }
     const pokeTypesData = await pokeTypeRes.json();
     pokeTypesData.results.forEach((type) => typesList.push(type.name));
+
+    return { poke100List, typesList };
   } catch (error) {
     console.error("Error:", error);
   }
 }
 
 export async function initData() {
-  await fetchPokemonsAndTypes();
+  const { poke100List, typesList } = await fetchPokemonsAndTypes();
   return { poke100List, typesList };
 }

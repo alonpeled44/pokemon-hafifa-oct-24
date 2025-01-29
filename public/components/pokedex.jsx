@@ -5,8 +5,8 @@ export default function Pokedex({ pokeList }) {
   return (
     <>
       <div className={css["cards-section"]}>
-        {pokeList.map((poke, index) => (
-          <PokemonCard key={poke.id * index} pokemon={poke} />
+        {pokeList.map((poke) => (
+          <PokemonCard key={poke.id} pokemon={poke} />
         ))}
       </div>
     </>

@@ -22,56 +22,55 @@ export default function Index() {
   useEffect(() => {
     if (typeof window !== "undefined" && localStorage.getItem("user") === null)
       router.push("/login");
-
-    const fetchData = async () => {
-      setIsLoading(true);
-      const { poke100List, typesList } = await initData();
-      setPokeList([...poke100List].sort((a, b) => a.id - b.id));
-      setFullPokeList([...poke100List]);
-      setTypeList([...typesList]);
-      setIsLoading(false);
-    };
-
     fetchData();
-  }, []);
+  }, [router]);
+
+  const fetchData = async () => {
+    const { poke100List, typesList } = await initData();
+    setPokeList(poke100List.sort((a, b) => a.id - b.id));
+    setFullPokeList(poke100List);
+    setTypeList(typesList);
+    setIsLoading(false);
+  };
 
   useEffect(() => {
-    switch (sortMethod) {
-      case "Id":
-        setPokeList((prev) => [...prev].sort((a, b) => a.id - b.id));
-        break;
-      case "Reversed":
-        setPokeList((prev) => [...prev].sort((a, b) => b.id - a.id));
-        break;
-      case "Name":
-        setPokeList((prev) =>
-          [...prev].sort((a, b) => a.name.localeCompare(b.name))
-        );
-        break;
-      case "Weight":
-        setPokeList((prev) => [...prev].sort((a, b) => a.weight - b.weight));
-        break;
-      case "Height":
-        setPokeList((prev) => [...prev].sort((a, b) => a.height - b.height));
-        break;
+    if (pokeList.length > 0) {
+      let sortedList = [...pokeList];
+      switch (sortMethod) {
+        case "Id":
+          sortedList.sort((a, b) => a.id - b.id);
+          break;
+        case "Reversed":
+          sortedList.sort((a, b) => b.id - a.id);
+          break;
+        case "Name":
+          sortedList.sort((a, b) => a.name.localeCompare(b.name));
+          break;
+        case "Weight":
+          sortedList.sort((a, b) => a.weight - b.weight);
+          break;
+        case "Height":
+          sortedList.sort((a, b) => a.height - b.height);
+          break;
+        default:
+          break;
+      }
+      setPokeList(sortedList);
     }
   }, [sortMethod]);
 
   useEffect(() => {
-    console.log("filter&search");
     setPokeList(
       fullPokeList.filter((pokemon) => {
-        // Filter by type
         const matchesFilter =
           filterList.length === 0 ||
           pokemon.types.some((type) => filterList.includes(type));
 
-        // Search functionality
         const matchesSearch =
-          pokemon.name.toLowerCase().includes(searchValue.toLowerCase()) ||
-          pokemon.id.toString().includes(searchValue) ||
-          pokemon.weight.toString().includes(searchValue) ||
-          pokemon.height.toString().includes(searchValue) ||
+          pokemon.name.includes(searchValue.toLowerCase()) ||
+          pokemon.id.includes(searchValue) ||
+          pokemon.weight.includes(searchValue) ||
+          pokemon.height.includes(searchValue) ||
           (searchValue.startsWith("#") && pokemon.id === searchValue.slice(1));
 
         return matchesFilter && matchesSearch;
