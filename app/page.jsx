@@ -16,7 +16,7 @@ export default function Index() {
   const [isLoading, setIsLoading] = useState(true);
 
   const [filterList, setFilterList] = useState([]);
-  const [sortMethod, setSortMethod] = useState("");
+  const [sortMethod, setSortMethod] = useState("Sort");
   const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
@@ -88,6 +88,7 @@ export default function Index() {
             setFilterList={setFilterList}
             filterList={filterList}
             setSortMethod={setSortMethod}
+            sortMethod={sortMethod}
             setSearchValue={setSearchValue}
             typeList={typeList}
           />

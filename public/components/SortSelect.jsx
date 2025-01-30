@@ -3,8 +3,7 @@ import css from "../css/sort-select.module.css";
 
 const sortMethods = ["Id", "Reversed", "Name", "Weight", "Height"];
 
-export default function SortSelect({ setSortMethod }) {
-  const [btnValue, setBtnValue] = useState("Sort");
+export default function SortSelect({ setSortMethod, sortMethod }) {
   const [showOptions, setShowOptions] = useState(false);
   const [isHighlighted, setIsHighlighted] = useState(false);
 
@@ -17,7 +16,6 @@ export default function SortSelect({ setSortMethod }) {
 
   const handleSortSelector = (event) => {
     setSortMethod(event.target.innerText);
-    setBtnValue(event.target.innerText);
     setShowOptions(false);
   };
 
@@ -35,8 +33,9 @@ export default function SortSelect({ setSortMethod }) {
   }, []);
 
   useEffect(() => {
-    setIsHighlighted(!showOptions && btnValue !== "Sort");
-  }, [showOptions, btnValue]);
+    setIsHighlighted(!showOptions && sortMethod !== "Sort");
+    if (sortMethod === "Sort") setIsHighlighted(false);
+  }, [showOptions, sortMethod]);
 
   return (
     <div className={css.wrapper} ref={wrapper}>
@@ -46,7 +45,7 @@ export default function SortSelect({ setSortMethod }) {
         className={isHighlighted ? css.highlight : undefined}
         ref={button}
       >
-        {btnValue}
+        {sortMethod}
       </button>
       {showOptions && (
         <div>

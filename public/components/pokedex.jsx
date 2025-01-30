@@ -4,10 +4,14 @@ import PokemonCard from "./PokemonCard";
 import css from "../css/pokedex.module.css";
 
 export default function Pokedex({ pokeList }) {
-  const [clickedCardID, setClickedCardID] = useState();
+  const [selectedPokemon, setSelectedPokemon] = useState();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const handleCardClick = (event) => {
-    setClickedCardID(event.target.id);
+    setSelectedPokemon(
+      pokeList.filter((poke) => poke.id === event.target.id)[0]
+    );
+    setIsDialogOpen(true);
   };
 
   return (
@@ -17,7 +21,12 @@ export default function Pokedex({ pokeList }) {
           <PokemonCard key={poke.id} pokemon={poke} onClick={handleCardClick} />
         ))}
       </div>
-      <PokemonDialog pokeList={pokeList} clickedCardID={clickedCardID} />
+      {isDialogOpen && (
+        <PokemonDialog
+          selectedPokemon={selectedPokemon}
+          setIsDialogOpen={setIsDialogOpen}
+        />
+      )}
     </>
   );
 }
