@@ -29,17 +29,19 @@ export default function SearchTools({
             />
           ))}
         </div>
-        <FilterButton
-          setFilterList={setFilterList}
-          filterList={filterList}
-          typeList={typeList}
-        />
-        <SortSelect setSortMethod={setSortMethod} sortMethod={sortMethod} />
-        {(filterList.length > 0 || sortMethod !== "Sort") && (
-          <button className={css["reset-filters-btn"]} onClick={handleClick}>
-            &times;
-          </button>
-        )}
+        <div>
+          <FilterButton
+            setFilterList={setFilterList}
+            filterList={filterList}
+            typeList={typeList}
+          />
+          <SortSelect setSortMethod={setSortMethod} sortMethod={sortMethod} />
+          {(filterList.length > 0 || sortMethod !== "Sort") && (
+            <button className={css["reset-filters-btn"]} onClick={handleClick}>
+              &times;
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

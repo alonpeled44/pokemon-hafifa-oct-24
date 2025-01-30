@@ -21,6 +21,7 @@ export default function Pokedex({ pokeList }) {
           <PokemonCard key={poke.id} pokemon={poke} onClick={handleCardClick} />
         ))}
       </div>
+
       {isDialogOpen && (
         <PokemonDialog
           selectedPokemon={selectedPokemon}

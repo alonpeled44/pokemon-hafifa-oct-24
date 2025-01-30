@@ -26,3 +26,9 @@
   font-size: 3rem;
   color: var(--font-color);
 }
+
+@media only screen and (max-width: 1200px) {
+  .main {
+    gap: 5rem;
+  }
+}

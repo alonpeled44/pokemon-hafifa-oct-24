@@ -1,5 +1,5 @@
 .cards-section {
-  height: 75vh;
+  height: 75%;
   width: 85%;
   display: grid;
   grid-template-columns: repeat(auto-fit, calc(12.5rem + 20px));
@@ -9,7 +9,6 @@
 
   &::-webkit-scrollbar {
     width: 0.5rem;
-    height: 90%;
   }
 
   &::-webkit-scrollbar-track {
@@ -18,5 +17,19 @@
 
   &::-webkit-scrollbar-thumb {
     background-color: var(--secondary-color);
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .cards-section {
+    height: 40%;
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, 8rem);
+    align-items: center;
+    justify-content: center;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }

@@ -5,17 +5,18 @@
   color: var(--font-color);
 
   & button {
+    width: 10rem;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: transparent;
     border: 5px solid var(--font-color);
     border-radius: 20px;
+    background-color: transparent;
     color: inherit;
-    padding: 5px;
     font-size: 2rem;
-    width: 10rem;
-    height: 50px;
+    padding: 5px;
+    cursor: pointer;
 
     &[data-options-open="true"] {
       background-color: var(--secondary-color);
@@ -57,6 +58,32 @@
 
     & p:not(p:first-child) {
       border-top: 2px solid var(--font-color);
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .wrapper {
+    & button {
+      width: 7.5rem;
+      height: 2.5rem;
+      font-size: 1.5rem;
+      border-width: 3px;
+    }
+
+    & div {
+      width: calc(7.5rem - 6px);
+      max-height: 10rem;
+      top: 2.5rem;
+      border-width: 3px;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      & p {
+        font-size: 0.9rem;
+      }
     }
   }
 }

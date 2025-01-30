@@ -25,6 +25,7 @@
       border: none;
       font-size: 2rem;
       color: inherit; /* default is black */
+      cursor: pointer;
     }
 
     & > section:first-of-type {
@@ -53,6 +54,7 @@
           }
 
           & label {
+            cursor: pointer;
             display: flex;
             align-items: center;
             gap: 5px;
@@ -95,5 +97,14 @@
         text-decoration-skip-ink: none;
       }
     }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .dialog {
+    margin: 0;
+    margin-top: 80%;
+    height: 50vh;
+    width: 100%;
   }
 }
