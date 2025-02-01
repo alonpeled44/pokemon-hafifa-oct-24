@@ -2,9 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { WindowWidthProvider } from "../public/context/WindowWidthContext";
 import Header from "../public/components/header";
 import css from "../public/css/general.module.css";
-import SettingsMenu from "../public/components/SettingsMenu";
+import SettingsMenu from "../public/components/settingsMenu";
 
 export default function RootLayout({ children }) {
   const [theme, setTheme] = useState();
@@ -44,18 +45,20 @@ export default function RootLayout({ children }) {
           href="https://cdn-icons-png.flaticon.com/128/868/868596.png"
         />
       </head>
-      <body className={css.body}>
-        {pathname !== "/login" && (
-          <SettingsMenu
-            theme={theme}
-            setTheme={setTheme}
-            fontSize={fontSize}
-            setFontSize={setFontSize}
-          />
-        )}
-        <Header />
-        {children}
-      </body>
+      <WindowWidthProvider>
+        <body className={css.body}>
+          {pathname !== "/login" && (
+            <SettingsMenu
+              theme={theme}
+              setTheme={setTheme}
+              fontSize={fontSize}
+              setFontSize={setFontSize}
+            />
+          )}
+          <Header />
+          {children}
+        </body>
+      </WindowWidthProvider>
     </html>
   );
 }

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useWindowWidth } from "../context/WindowWidthContext";
 import Button from "./Button";
 import css from "../css/settings-menu.module.css";
 
@@ -25,20 +26,9 @@ export default function SettingsMenu({
   const extension = useRef(null);
 
   // States
-  const [windowWidth, setWindowWidth] = useState();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [showFontExtension, setShowFontExtension] = useState(false);
-
-  useEffect(() => {
-    setWindowWidth(window.innerWidth);
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const windowWidth = useWindowWidth();
 
   useEffect(() => {
     dialog.current.close();

@@ -1,6 +1,6 @@
 .card {
   width: 12.5rem;
-  height: 22rem;
+  height: 20rem;
   display: flex;
   flex-direction: column;
   background-color: var(--secondary-color);
@@ -44,7 +44,7 @@
     flex-direction: column;
 
     & p {
-      margin: 1rem;
+      margin: 0.75rem;
 
       & span {
         text-decoration: underline;
@@ -59,13 +59,14 @@
   .card {
     width: 7rem;
     height: 15rem;
+    box-shadow: none;
 
     & > section:first-of-type {
       & h2 {
-        font-size: 1.25rem;
+        font-size: 1.1rem;
       }
       & p {
-        font-size: 1rem;
+        font-size: 0.9rem;
       }
     }
 
@@ -85,7 +86,7 @@
 
         & span {
           text-decoration: none;
-          font-size: 1rem;
+          font-size: 0.8rem;
         }
       }
     }

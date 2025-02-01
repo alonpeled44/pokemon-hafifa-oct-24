@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useWindowWidth } from "../context/WindowWidthContext";
 import css from "../css/pokemon-dialog.module.css";
 
 export default function PokemonDialog({ selectedPokemon, setIsDialogOpen }) {
@@ -6,6 +7,7 @@ export default function PokemonDialog({ selectedPokemon, setIsDialogOpen }) {
   const content = useRef(null);
 
   const [isShiny, setIsShiny] = useState(false);
+  const windowWidth = useWindowWidth();
 
   const handleClick = (event) => {
     if (!content.current.contains(event.target)) {
@@ -42,7 +44,8 @@ export default function PokemonDialog({ selectedPokemon, setIsDialogOpen }) {
   return (
     <dialog ref={dialog} className={css.dialog} onCancel={handleCancel}>
       <div ref={content} className={css.content}>
-        <button onClick={closeModal}>&times;</button>
+        {windowWidth > 1200 && <button onClick={closeModal}>&times;</button>}
+        {/* Title, id and shiny */}
         <section>
           <h1>{capitalize(selectedPokemon.name)}</h1>
           <div>
@@ -55,6 +58,7 @@ export default function PokemonDialog({ selectedPokemon, setIsDialogOpen }) {
             <p>{`#${selectedPokemon.id}`}</p>
           </div>
         </section>
+        {/* back and front */}
         <section>
           <img
             src={
@@ -71,6 +75,7 @@ export default function PokemonDialog({ selectedPokemon, setIsDialogOpen }) {
             alt={"pokemon_back"}
           />
         </section>
+        {/* info */}
         <section>
           <p>
             <span>{"Type(s): "}</span>

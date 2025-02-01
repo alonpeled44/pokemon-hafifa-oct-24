@@ -102,9 +102,54 @@
 
 @media only screen and (max-width: 1200px) {
   .dialog {
+    height: 50vh;
+    width: 100vw;
     margin: 0;
     margin-top: 80%;
-    height: 50vh;
-    width: 100%;
+    border-radius: 20px 20px 0 0;
+    box-shadow: none;
+
+    &:focus {
+      outline: none;
+    }
+
+    & .content {
+      & > section:first-of-type {
+        & > h1 {
+          font-size: 1.5rem;
+        }
+        & > div {
+          flex-direction: row-reverse;
+
+          & > div {
+            font-size: 1.2rem;
+
+            & > label::before {
+              width: 15px;
+              height: 15px;
+            }
+          }
+
+          & > p {
+            font-size: 1.5rem;
+          }
+        }
+      }
+
+      & > section:nth-of-type(2) {
+        & img {
+          width: 125px;
+          height: 125px;
+        }
+      }
+
+      & > section:last-of-type {
+        font-size: 1rem;
+
+        & p {
+          margin: 15px;
+        }
+      }
+    }
   }
 }

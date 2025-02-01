@@ -2,26 +2,17 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useWindowWidth } from "../context/WindowWidthContext";
 import users from "../users";
 import css from "../css/login.module.css";
 
 export default function LoginForm() {
   const router = useRouter();
   const _users = [...users];
-  const [windowWidth, setWindowWidth] = useState();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showError, setShowError] = useState(false);
-
-  useEffect(() => {
-    setWindowWidth(window.innerWidth);
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const windowWidth = useWindowWidth();
 
   const handleUsernameChange = (e) => {
     const value = e.target.value;
