@@ -68,7 +68,7 @@
     box-shadow: none;
 
     & > section:first-of-type {
-      & h2 {
+      & h1 {
         font-size: 1.1rem;
       }
 
