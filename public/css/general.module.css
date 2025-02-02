@@ -14,8 +14,8 @@
   --font-color: #212121;
 
   --background-color: #e0e0e080;
-  --danger-color: red;
-  --approve-color: green;
+  --warning-color: red;
+  --accept-color: green;
   --img-filter: invert(14%) sepia(0%) saturate(1%) hue-rotate(159deg)
     brightness(99%) contrast(102%);
   --selected-img-filter: invert(15%) sepia(74%) saturate(3884%)
@@ -27,8 +27,8 @@
     --font-color: #e0e0e0;
 
     --background-color: #21212180;
-    --danger-color: tomato;
-    --approve-color: greenyellow;
+    --warning-color: tomato;
+    --accept-color: greenyellow;
     --img-filter: invert(89%) sepia(90%) saturate(150%) hue-rotate(193deg)
       brightness(117%) contrast(76%);
     --selected-img-filter: invert(73%) sepia(98%) saturate(472%)

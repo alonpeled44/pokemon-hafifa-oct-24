@@ -101,7 +101,7 @@
   & p {
     align-self: flex-start;
     margin: 0;
-    color: var(--danger-color);
+    color: var(--warning-color);
     font-size: 1.25rem;
   }
 }

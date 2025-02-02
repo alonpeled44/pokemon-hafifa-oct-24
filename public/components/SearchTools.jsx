@@ -5,13 +5,13 @@ import SortSelect from "./SortSelect";
 import css from "../css/search-tools.module.css";
 
 export default function SearchTools({
-  setSelectedFilters,
   selectedFilters,
-  setSortMethod,
+  setSelectedFilters,
   sortMethod,
+  setSortMethod,
   setSearchValue,
-  setTypes,
   types,
+  setTypes,
 }) {
   return (
     <div className={css.wrapper}>

@@ -4,7 +4,7 @@ export default function PokemonCard({ pokemon, onClick }) {
   return (
     <div className={css.card} onClick={onClick} id={pokemon.id}>
       <section className={css["card-header"]}>
-        <h2>{pokemon.name}</h2>
+        <h1>{pokemon.name}</h1>
         <p>{`#${pokemon.id}`}</p>
       </section>
       <section className={css["card-img"]}>

@@ -44,7 +44,7 @@
   padding: 0;
   border: none;
   background-color: transparent;
-  color: var(--danger-color);
+  color: var(--warning-color);
   font-size: 2.5rem;
   cursor: pointer;
 }

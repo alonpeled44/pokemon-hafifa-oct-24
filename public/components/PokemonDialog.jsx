@@ -20,10 +20,6 @@ export default function PokemonDialog({ selectedPokemon, setIsDialogOpen }) {
     setIsDialogOpen(false);
   };
 
-  const handleChange = () => {
-    setIsShiny((prev) => !prev);
-  };
-
   useEffect(() => {
     dialog.current.showModal();
 
@@ -47,7 +43,13 @@ export default function PokemonDialog({ selectedPokemon, setIsDialogOpen }) {
           <h1>{selectedPokemon.name}</h1>
           <div>
             <div>
-              <input type={"checkbox"} id={"isShiny"} onChange={handleChange} />
+              <input
+                type={"checkbox"}
+                id={"isShiny"}
+                onChange={() => {
+                  setIsShiny((prev) => !prev);
+                }}
+              />
               <label htmlFor={"isShiny"} data-is-shiny={isShiny}>
                 Shiny
               </label>

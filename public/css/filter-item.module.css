@@ -14,8 +14,8 @@
 
   &:hover {
     transition: 300ms;
-    border-color: var(--danger-color);
-    color: var(--danger-color);
+    border-color: var(--warning-color);
+    color: var(--warning-color);
   }
 }
 

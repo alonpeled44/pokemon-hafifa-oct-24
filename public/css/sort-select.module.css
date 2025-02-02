@@ -33,7 +33,7 @@
     width: calc(10rem - 10px);
     position: absolute;
     z-index: 1;
-    top: 49px;
+    top: 50px;
     left: 50%;
     right: 50%;
     transform: translate(-50%, 0);

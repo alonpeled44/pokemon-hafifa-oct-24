@@ -21,7 +21,7 @@
     align-items: center;
     justify-content: space-around;
 
-    & h2 {
+    & h1 {
       font-size: 1.75rem;
       text-transform: capitalize;
     }
@@ -34,6 +34,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
     & img {
       width: 100px;
       height: 100px;
@@ -70,6 +71,7 @@
       & h2 {
         font-size: 1.1rem;
       }
+
       & p {
         font-size: 0.9rem;
       }
