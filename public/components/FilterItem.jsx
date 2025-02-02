@@ -1,8 +1,10 @@
 import css from "../css/filter-item.module.css";
 
-export default function FilterItem({ filterTitle, setFilterList }) {
+export default function FilterItem({ filterTitle, setSelectedFilters }) {
   const handleClick = () => {
-    setFilterList((prev) => prev.filter((filter) => filter !== filterTitle));
+    setSelectedFilters((prev) =>
+      prev.filter((filter) => filter !== filterTitle)
+    );
   };
   return (
     <p className={css["filter-item"]} onClick={handleClick}>

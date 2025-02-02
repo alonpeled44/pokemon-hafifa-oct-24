@@ -1,23 +1,19 @@
 import css from "../css/pokemon-card.module.css";
 
 export default function PokemonCard({ pokemon, onClick }) {
-  const capitalize = (string) => {
-    return string[0].toUpperCase() + string.slice(1);
-  };
-
   return (
     <div className={css.card} onClick={onClick} id={pokemon.id}>
-      <section>
-        <h2>{capitalize(pokemon.name)}</h2>
+      <section className={css["card-header"]}>
+        <h2>{pokemon.name}</h2>
         <p>{`#${pokemon.id}`}</p>
       </section>
-      <section>
+      <section className={css["card-img"]}>
         <img src={pokemon.frontView} />
       </section>
-      <section>
+      <section className={css["card-info"]}>
         <p>
           <span>{"Type(s): "}</span>
-          {pokemon.types.map((type) => capitalize(type)).join(", ")}
+          {pokemon.types.join(", ")}
         </p>
         <p>
           <span>{"Height: "}</span>

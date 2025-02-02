@@ -15,11 +15,6 @@ export default function PokemonDialog({ selectedPokemon, setIsDialogOpen }) {
     }
   };
 
-  const handleCancel = (event) => {
-    event.preventDefault();
-    closeModal();
-  };
-
   const closeModal = () => {
     dialog.current.close();
     setIsDialogOpen(false);
@@ -27,10 +22,6 @@ export default function PokemonDialog({ selectedPokemon, setIsDialogOpen }) {
 
   const handleChange = () => {
     setIsShiny((prev) => !prev);
-  };
-
-  const capitalize = (string) => {
-    return string[0].toUpperCase() + string.slice(1);
   };
 
   useEffect(() => {
@@ -42,12 +33,18 @@ export default function PokemonDialog({ selectedPokemon, setIsDialogOpen }) {
   }, []);
 
   return (
-    <dialog ref={dialog} className={css.dialog} onCancel={handleCancel}>
+    <dialog
+      ref={dialog}
+      className={css.dialog}
+      onCancel={(event) => {
+        event.preventDefault();
+        closeModal();
+      }}
+    >
       <div ref={content} className={css.content}>
         {windowWidth > 1200 && <button onClick={closeModal}>&times;</button>}
-        {/* Title, id and shiny */}
-        <section>
-          <h1>{capitalize(selectedPokemon.name)}</h1>
+        <section className={css["card-header"]}>
+          <h1>{selectedPokemon.name}</h1>
           <div>
             <div>
               <input type={"checkbox"} id={"isShiny"} onChange={handleChange} />
@@ -58,8 +55,7 @@ export default function PokemonDialog({ selectedPokemon, setIsDialogOpen }) {
             <p>{`#${selectedPokemon.id}`}</p>
           </div>
         </section>
-        {/* back and front */}
-        <section>
+        <section className={css["card-img"]}>
           <img
             src={
               isShiny
@@ -75,11 +71,10 @@ export default function PokemonDialog({ selectedPokemon, setIsDialogOpen }) {
             alt={"pokemon_back"}
           />
         </section>
-        {/* info */}
-        <section>
+        <section className={css["card-info"]}>
           <p>
             <span>{"Type(s): "}</span>
-            {selectedPokemon.types.map((type) => capitalize(type)).join(", ")}
+            {selectedPokemon.types.join(", ")}
           </p>
           <p>
             <span>{"Height: "}</span>

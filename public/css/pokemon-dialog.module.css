@@ -28,7 +28,7 @@
       cursor: pointer;
     }
 
-    & > section:first-of-type {
+    & .card-header {
       width: 100%;
       display: flex;
       align-items: center;
@@ -36,6 +36,7 @@
 
       & h1 {
         font-size: 3rem;
+        text-transform: capitalize;
       }
 
       & > div {
@@ -81,15 +82,22 @@
       }
     }
 
-    & > section:nth-of-type(2) {
+    & .card-img {
+      display: flex;
+      gap: 3rem;
+
       & img {
         width: 200px;
         height: 200px;
       }
     }
 
-    & > section:last-of-type {
+    & .card-info {
       font-size: 1.5rem;
+
+      & p:first-of-type {
+        text-transform: capitalize;
+      }
 
       & span {
         text-decoration: underline;

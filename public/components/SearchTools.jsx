@@ -5,39 +5,43 @@ import SortSelect from "./SortSelect";
 import css from "../css/search-tools.module.css";
 
 export default function SearchTools({
-  setFilterList,
-  filterList,
+  setSelectedFilters,
+  selectedFilters,
   setSortMethod,
   sortMethod,
   setSearchValue,
-  typeList,
+  setTypes,
+  types,
 }) {
-  const handleClick = () => {
-    setFilterList([]);
-    setSortMethod("Sort");
-  };
   return (
     <div className={css.wrapper}>
       <SearchBar setSearchValue={setSearchValue} />
       <div>
         <div className={css["filter-item-container"]}>
-          {filterList.map((filter, index) => (
+          {selectedFilters.map((filter, index) => (
             <FilterItem
               key={index}
               filterTitle={filter}
-              setFilterList={setFilterList}
+              setSelectedFilters={setSelectedFilters}
             />
           ))}
         </div>
         <div>
           <FilterButton
-            setFilterList={setFilterList}
-            filterList={filterList}
-            typeList={typeList}
+            setSelectedFilters={setSelectedFilters}
+            selectedFilters={selectedFilters}
+            setTypes={setTypes}
+            types={types}
           />
           <SortSelect setSortMethod={setSortMethod} sortMethod={sortMethod} />
-          {(filterList.length > 0 || sortMethod !== "Sort") && (
-            <button className={css["reset-filters-btn"]} onClick={handleClick}>
+          {(selectedFilters.length > 0 || sortMethod !== "Sort") && (
+            <button
+              className={css["reset-filters-btn"]}
+              onClick={() => {
+                setSelectedFilters([]);
+                setSortMethod("Sort");
+              }}
+            >
               &times;
             </button>
           )}

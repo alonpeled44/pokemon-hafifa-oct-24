@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import { useWindowWidth } from "../context/WindowWidthContext";
 import HeaderLinks from "./headerLinks";
 import css from "../css/header-links-dialog.module.css";
 

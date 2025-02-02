@@ -10,12 +10,12 @@ import css from "../public/css/home-page.module.css";
 export default function Index() {
   const router = useRouter();
 
-  const [pokeList, setPokeList] = useState([]);
-  const [fullPokeList, setFullPokeList] = useState([]);
-  const [typeList, setTypeList] = useState([]);
+  const [pokemons, setpokemons] = useState([]);
+  const [fullPokemons, setFullPokemons] = useState([]);
+  const [types, setTypes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const [filterList, setFilterList] = useState([]);
+  const [selectedFilters, setSelectedFilters] = useState([]);
   const [sortMethod, setSortMethod] = useState("Sort");
   const [searchValue, setSearchValue] = useState("");
 
@@ -27,15 +27,15 @@ export default function Index() {
 
   const fetchData = async () => {
     const { poke100List, typesList } = await initData();
-    setPokeList(poke100List.sort((a, b) => a.id - b.id));
-    setFullPokeList(poke100List);
-    setTypeList(typesList);
+    setpokemons(poke100List.sort((a, b) => a.id - b.id));
+    setFullPokemons(poke100List);
+    setTypes(typesList);
     setIsLoading(false);
   };
 
   useEffect(() => {
-    if (pokeList.length > 0) {
-      let sortedList = [...pokeList];
+    if (pokemons.length > 0) {
+      let sortedList = [...pokemons];
       switch (sortMethod) {
         case "Id":
           sortedList.sort((a, b) => a.id - b.id);
@@ -55,16 +55,16 @@ export default function Index() {
         default:
           break;
       }
-      setPokeList(sortedList);
+      setpokemons(sortedList);
     }
   }, [sortMethod]);
 
   useEffect(() => {
-    setPokeList(
-      fullPokeList.filter((pokemon) => {
+    setpokemons(
+      fullPokemons.filter((pokemon) => {
         const matchesFilter =
-          filterList.length === 0 ||
-          pokemon.types.some((type) => filterList.includes(type));
+          selectedFilters.length === 0 ||
+          pokemon.types.some((type) => selectedFilters.includes(type));
 
         const matchesSearch =
           pokemon.name.includes(searchValue.toLowerCase()) ||
@@ -76,7 +76,7 @@ export default function Index() {
         return matchesFilter && matchesSearch;
       })
     );
-  }, [filterList, searchValue]);
+  }, [selectedFilters, searchValue]);
 
   return (
     <main className={css.main}>
@@ -85,14 +85,15 @@ export default function Index() {
       ) : (
         <>
           <SearchTools
-            setFilterList={setFilterList}
-            filterList={filterList}
+            setSelectedFilters={setSelectedFilters}
+            selectedFilters={selectedFilters}
             setSortMethod={setSortMethod}
             sortMethod={sortMethod}
             setSearchValue={setSearchValue}
-            typeList={typeList}
+            setTypes={setTypes}
+            types={types}
           />
-          <Pokedex pokeList={pokeList} />
+          <Pokedex pokemons={pokemons} />
         </>
       )}
     </main>
