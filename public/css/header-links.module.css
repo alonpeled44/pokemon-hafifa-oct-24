@@ -1,13 +1,8 @@
-.header-links-wrapper {
+.wrapper {
   display: flex;
   align-items: center;
   gap: 10px;
 
-  & > div {
-    border-left: 2px solid #fff;
-    height: 50px;
-    border-radius: 50px;
-  }
   & > ul {
     display: flex;
     gap: 15px;
@@ -16,7 +11,6 @@
     padding: 0;
 
     & li {
-      font-size: 20px;
       cursor: pointer;
       text-decoration: underline;
       transition: 200ms;
@@ -28,7 +22,7 @@
 
       & a {
         text-decoration: none;
-        color: #fff;
+        color: inherit;
 
         &:hover {
           transition: 200ms;

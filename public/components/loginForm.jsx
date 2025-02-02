@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import users from "../users";
 import css from "../css/login.module.css";
@@ -8,9 +8,20 @@ import css from "../css/login.module.css";
 export default function LoginForm() {
   const router = useRouter();
   const _users = [...users];
+  const [windowWidth, setWindowWidth] = useState();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [showError, setShowError] = useState(false);
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleUsernameChange = (e) => {
     const value = e.target.value;
@@ -37,27 +48,22 @@ export default function LoginForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    let isValid = false;
+    setShowError(true);
 
     _users.forEach((user) => {
       if (username === user.username && password === user.password) {
         localStorage.setItem("user", username);
-        isValid = true;
-        setError("");
+        setShowError(false);
         router.replace("/");
         router.refresh();
       }
     });
-    if (!isValid) {
-      setError("Username or password are incorrect.");
-    }
   };
 
   return (
-    <div className={css.componentWrapper}>
-      <div className={css.blurryBackground} />
-      <div className={css.formWrapper}>
-        <form onSubmit={handleSubmit}>
+    <div className={css.wrapper}>
+      <form onSubmit={handleSubmit}>
+        {windowWidth > 1200 && (
           <h1>
             L
             <span>
@@ -65,33 +71,33 @@ export default function LoginForm() {
             </span>
             gin
           </h1>
-          <section className={css.inputs}>
-            <input
-              type="text"
-              id="_username"
-              placeholder="username..."
-              onChange={handleUsernameChange}
-              value={username}
-              required
-            />
-            <input
-              type="password"
-              id="_password"
-              placeholder="password..."
-              onChange={handlePasswordChange}
-              value={password}
-              required
-            />
-            <p>{error}</p>
-          </section>
-          <section className={css.buttons}>
-            <button type="submit">Login</button>
-            <button type="button" onClick={handleGuset}>
-              Join As Guest
-            </button>
-          </section>
-        </form>
-      </div>
+        )}
+        <section className={css.inputs}>
+          <input
+            type="text"
+            id="_username"
+            placeholder="username..."
+            onChange={handleUsernameChange}
+            value={username}
+            required
+          />
+          <input
+            type="password"
+            id="_password"
+            placeholder="password..."
+            onChange={handlePasswordChange}
+            value={password}
+            required
+          />
+          {showError && <p>{"Username or password are incorrect"}</p>}
+        </section>
+        <section className={css.buttons}>
+          <button type="submit">Login</button>
+          <button type="button" onClick={handleGuset}>
+            Join As Guest
+          </button>
+        </section>
+      </form>
     </div>
   );
 }

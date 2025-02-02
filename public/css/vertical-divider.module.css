@@ -1,0 +1,5 @@
+.divider {
+  border-left: 2px solid var(--font-color);
+  height: 50px;
+  border-radius: 50px;
+}
