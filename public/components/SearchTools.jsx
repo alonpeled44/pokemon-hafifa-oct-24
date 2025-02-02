@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
-import FilterButton from "./FilterButton";
 import FilterItem from "./FilterItem";
-import SortSelect from "./SortSelect";
 import css from "../css/search-tools.module.css";
 import Select from "./Select";
 
