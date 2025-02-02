@@ -8,8 +8,8 @@
     width: 10rem;
     height: 50px;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     border: 5px solid var(--font-color);
     border-radius: 20px;
     background-color: transparent;
@@ -23,6 +23,12 @@
       border-radius: 20px 20px 0 0;
       border-bottom: 2px solid var(--font-color);
     }
+
+    &[data-highlighted="true"] {
+      background-color: var(--background-color);
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
   }
 
   & div {
@@ -31,31 +37,36 @@
     border-top: none;
     border-radius: 0 0 20px 20px;
     width: calc(10rem - 10px);
+    max-height: 160px;
     position: absolute;
     z-index: 1;
     top: 50px;
     left: 50%;
     right: 50%;
-    transform: translate(-50%, 0);
+    transform: translate(-50%);
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--font-color);
+    }
 
     & p {
       padding: 5px;
       margin: 0;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       user-select: none;
       cursor: pointer;
+      text-transform: capitalize;
     }
 
     & p:not(p:first-child) {
       border-top: 2px solid var(--font-color);
     }
   }
-}
-
-.highlight {
-  background-color: var(--background-color) !important;
-  border-color: var(--primary-color) !important;
-  color: var(--primary-color) !important;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -69,8 +80,8 @@
 
     & div {
       width: calc(7.5rem - 6px);
+      max-height: 10rem;
       top: 2.5rem;
-      overflow: auto;
       border-width: 3px;
 
       &::-webkit-scrollbar {

@@ -1,8 +1,10 @@
+import { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import FilterButton from "./FilterButton";
 import FilterItem from "./FilterItem";
 import SortSelect from "./SortSelect";
 import css from "../css/search-tools.module.css";
+import Select from "./Select";
 
 export default function SearchTools({
   selectedFilters,
@@ -13,6 +15,13 @@ export default function SearchTools({
   types,
   setTypes,
 }) {
+  const [showFilterOptions, setShowFilterOptions] = useState(false);
+  const [showSortOptions, setShowSortOptions] = useState(false);
+
+  useEffect(() => {
+    types && setTypes(types.filter((type) => !selectedFilters.includes(type)));
+  }, [selectedFilters]);
+
   return (
     <div className={css.wrapper}>
       <SearchBar setSearchValue={setSearchValue} />
@@ -27,13 +36,34 @@ export default function SearchTools({
           ))}
         </div>
         <div>
-          <FilterButton
-            setSelectedFilters={setSelectedFilters}
-            selectedFilters={selectedFilters}
-            setTypes={setTypes}
-            types={types}
+          <Select
+            onHeadClick={() => {
+              setShowFilterOptions((prev) => types.length > 0 && !prev);
+            }}
+            options={types}
+            showOptions={showFilterOptions}
+            setShowOptions={setShowFilterOptions}
+            onOptionClick={(event) => {
+              setSelectedFilters((prev) => [...prev, event.target.id]);
+              setTypes((prev) =>
+                prev.filter((type) => type !== event.target.id)
+              );
+            }}
+            caption={"Filter"}
           />
-          <SortSelect setSortMethod={setSortMethod} sortMethod={sortMethod} />
+          <Select
+            onHeadClick={() => {
+              setShowSortOptions((prev) => !prev);
+            }}
+            options={["Id", "Reversed", "Name", "Weight", "Height"]}
+            showOptions={showSortOptions}
+            setShowOptions={setShowSortOptions}
+            onOptionClick={(event) => {
+              setSortMethod(event.target.innerText);
+              setShowSortOptions(false);
+            }}
+            caption={sortMethod}
+          />
           {(selectedFilters.length > 0 || sortMethod !== "Sort") && (
             <button
               className={css["reset-filters-btn"]}

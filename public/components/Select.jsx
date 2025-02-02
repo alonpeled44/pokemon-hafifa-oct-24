@@ -1,9 +1,15 @@
-import { useState, useRef } from "react";
+import { useRef, useEffect } from "react";
 import css from "../css/select.module.css";
 
-export default function Select({ onClick, options, caption }) {
-  const [showOptions, setShowOptions] = useState();
-
+export default function Select({
+  onHeadClick,
+  options,
+  showOptions,
+  setShowOptions,
+  onOptionClick,
+  isHighlighted,
+  caption,
+}) {
   const wrapper = useRef(null);
   const selectHead = useRef(null);
 
@@ -24,13 +30,22 @@ export default function Select({ onClick, options, caption }) {
   return (
     <div className={css.wrapper} ref={wrapper}>
       <button
-        onClick={onClick}
+        onClick={onHeadClick}
         ref={selectHead}
-        data-show-options={showOptions}
+        data-options-open={showOptions}
+        data-highlighted={!showOptions && !["Sort", "Filter"].includes(caption)}
       >
         {caption}
       </button>
-      {showOptions && <div>{options}</div>}
+      {options.length > 0 && showOptions && (
+        <div>
+          {options.map((type, index) => (
+            <p key={index} onClick={onOptionClick} id={type}>
+              {type}
+            </p>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
