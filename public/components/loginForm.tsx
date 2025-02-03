@@ -1,56 +1,34 @@
-import React, { ChangeEvent, ChangeEventHandler, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { useWindowWidth } from "../context/WindowWidthContext";
-import users, { user } from "../users";
+import users from "../users";
 import css from "../css/login.module.css";
 
 export default function LoginForm() {
-  const router: AppRouterInstance = useRouter();
-  const _users: user[] = [...users];
+  const router = useRouter();
+  const _users = [...users];
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showError, setShowError] = useState<boolean>(false);
-  const windowWidth: number = useWindowWidth();
-
-  const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    const value = event.target.value as string;
-    if (/^[A-Za-z0-9]*$/.test(value)) {
-      setUsername(value);
-    }
-  };
-
-  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    const value = event.target.value as string;
-    if (/^[A-Za-z0-9]*$/.test(value)) {
-      setPassword(value);
-    }
-  };
-
-  const handleGuset = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    event.preventDefault();
-
-    localStorage.setItem("user", "Guest");
-    router.replace("/");
-  };
-
-  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    event.preventDefault();
-
-    setShowError(true);
-
-    _users.forEach((user) => {
-      if (username === user.username && password === user.password) {
-        localStorage.setItem("user", username);
-        setShowError(false);
-        router.replace("/");
-      }
-    });
-  };
+  const windowWidth = useWindowWidth();
 
   return (
     <div className={css.wrapper}>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+
+          setShowError(true);
+
+          _users.forEach((user) => {
+            if (username === user.username && password === user.password) {
+              localStorage.setItem("user", username);
+              setShowError(false);
+              router.replace("/");
+            }
+          });
+        }}
+      >
         {windowWidth > 1200 && (
           <h1>
             L
@@ -65,7 +43,12 @@ export default function LoginForm() {
             type="text"
             id="_username"
             placeholder="username..."
-            onChange={handleUsernameChange}
+            onChange={(event) => {
+              const value = event.target.value;
+              if (/^[A-Za-z0-9]*$/.test(value)) {
+                setUsername(value);
+              }
+            }}
             value={username}
             required
           />
@@ -73,7 +56,12 @@ export default function LoginForm() {
             type="password"
             id="_password"
             placeholder="password..."
-            onChange={handlePasswordChange}
+            onChange={(event) => {
+              const value = event.target.value;
+              if (/^[A-Za-z0-9]*$/.test(value)) {
+                setPassword(value);
+              }
+            }}
             value={password}
             required
           />
@@ -81,7 +69,15 @@ export default function LoginForm() {
         </section>
         <section className={css.buttons}>
           <button type="submit">Login</button>
-          <button type="button" onClick={handleGuset}>
+          <button
+            type="button"
+            onClick={(event) => {
+              event.preventDefault();
+
+              localStorage.setItem("user", "Guest");
+              router.replace("/");
+            }}
+          >
             Join As Guest
           </button>
         </section>

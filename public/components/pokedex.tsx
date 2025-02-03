@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { Component, useState } from "react";
 import PokemonDialog from "./PokemonDialog";
 import PokemonCard from "./PokemonCard";
+import Pokemon from "../../pokemons";
 import css from "../css/pokedex.module.css";
 
-export default function Pokedex({ pokemons }) {
-  const [selectedPokemon, setSelectedPokemon] = useState({});
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+interface PokedexProps {
+  pokemons: Pokemon[];
+}
+
+export default function Pokedex({ pokemons }: PokedexProps) {
+  const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
 
   return (
     <>
@@ -14,10 +19,8 @@ export default function Pokedex({ pokemons }) {
           <PokemonCard
             key={pokemon.id}
             pokemon={pokemon}
-            onClick={(event) => {
-              setSelectedPokemon(
-                pokemons.filter((pokemon) => pokemon.id === event.target.id)[0]
-              );
+            onClick={() => {
+              setSelectedPokemon(pokemon);
               setIsDialogOpen(true);
             }}
           />

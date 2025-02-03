@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 import { useWindowWidth } from "../context/WindowWidthContext";
 import Button from "./Button";
 import css from "../css/settings-menu.module.css";
@@ -9,25 +9,34 @@ const fontSizes = {
   small: "13px",
 };
 
+type stateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
+
+interface SettingsMenuProps {
+  theme: "light" | "dark";
+  setTheme: stateSetter<"light" | "dark">;
+  fontSize: "13px" | "16px" | "19px";
+  setFontSize: stateSetter<"13px" | "16px" | "19px">;
+}
+
 export default function SettingsMenu({
   theme,
   setTheme,
   fontSize,
   setFontSize,
-}) {
+}: SettingsMenuProps) {
   // Get the references of the elements.
-  const dialog = useRef(null);
-  const close = useRef(null);
+  const dialog: RefObject<HTMLDialogElement> | null = useRef(null);
+  const close: RefObject<HTMLButtonElement> | null = useRef(null);
 
-  const lightMode = useRef(null);
-  const darkMode = useRef(null);
+  const lightMode: RefObject<HTMLDivElement> | null = useRef(null);
+  const darkMode: RefObject<HTMLDivElement> | null = useRef(null);
 
-  const head = useRef(null);
-  const extension = useRef(null);
+  const head: RefObject<HTMLDivElement> | null = useRef(null);
+  const extension: RefObject<HTMLDivElement> | null = useRef(null);
 
   // States
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [showFontExtension, setShowFontExtension] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+  const [showFontExtension, setShowFontExtension] = useState<boolean>(false);
   const windowWidth = useWindowWidth();
 
   useEffect(() => {
@@ -111,9 +120,7 @@ export default function SettingsMenu({
                 <Button
                   fontSize={windowWidth <= 1200 ? fontSize : fontSizes.large}
                   handleClick={() => {
-                    setFontSize(
-                      windowWidth <= 1200 ? fontSize : fontSizes.large
-                    );
+                    setFontSize(windowWidth <= 1200 ? fontSize : "19px");
                   }}
                   isHighlighted={
                     windowWidth > 1200 && fontSize === fontSizes.large

@@ -1,14 +1,23 @@
 export default class Pokemon {
+  private _name: string;
+  private _id: number;
+  private _types: string[];
+  private _frontView: string;
+  private _backView: string;
+  private _frontViewShiny: string;
+  private _backViewShiny: string;
+  private _height: number;
+  private _weight: number;
   constructor(
-    name,
-    id,
-    types,
-    frontView,
-    backView,
-    frontViewShiny,
-    backViewShiny,
-    height,
-    weight
+    name: string,
+    id: number,
+    types: string[],
+    frontView: string,
+    backView: string,
+    frontViewShiny: string,
+    backViewShiny: string,
+    height: number,
+    weight: number
   ) {
     this._name = name;
     this._id = id;

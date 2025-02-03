@@ -11,6 +11,7 @@
   margin: 0;
   user-select: none;
   cursor: pointer;
+  text-transform: capitalize;
 
   &:hover {
     transition: 300ms;

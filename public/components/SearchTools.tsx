@@ -4,6 +4,20 @@ import FilterItem from "./FilterItem";
 import css from "../css/search-tools.module.css";
 import Select from "./Select";
 
+type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
+
+interface SearchToolsProps {
+  selectedFilters: string[];
+  setSelectedFilters: StateSetter<string[]>;
+  sortMethod: "Sort" | "Id" | "Reversed" | "Name" | "Height" | "Weight";
+  setSortMethod: StateSetter<
+    "Sort" | "Id" | "Reversed" | "Name" | "Height" | "Weight"
+  >;
+  setSearchValue: StateSetter<string>;
+  types: string[];
+  setTypes: StateSetter<string[]>;
+}
+
 export default function SearchTools({
   selectedFilters,
   setSelectedFilters,
@@ -12,9 +26,9 @@ export default function SearchTools({
   setSearchValue,
   types,
   setTypes,
-}) {
-  const [showFilterOptions, setShowFilterOptions] = useState(false);
-  const [showSortOptions, setShowSortOptions] = useState(false);
+}: SearchToolsProps) {
+  const [showFilterOptions, setShowFilterOptions] = useState<boolean>(false);
+  const [showSortOptions, setShowSortOptions] = useState<boolean>(false);
 
   useEffect(() => {
     types && setTypes(types.filter((type) => !selectedFilters.includes(type)));
@@ -41,10 +55,15 @@ export default function SearchTools({
             options={types}
             showOptions={showFilterOptions}
             setShowOptions={setShowFilterOptions}
-            onOptionClick={(event) => {
-              setSelectedFilters((prev) => [...prev, event.target.id]);
+            onOptionClick={(event: MouseEvent) => {
+              setSelectedFilters((prev) => [
+                ...prev,
+                (event.target as HTMLParagraphElement).id,
+              ]);
               setTypes((prev) =>
-                prev.filter((type) => type !== event.target.id)
+                prev.filter(
+                  (type) => type !== (event.target as HTMLParagraphElement).id
+                )
               );
             }}
             caption={"Filter"}
@@ -56,8 +75,11 @@ export default function SearchTools({
             options={["Id", "Reversed", "Name", "Weight", "Height"]}
             showOptions={showSortOptions}
             setShowOptions={setShowSortOptions}
-            onOptionClick={(event) => {
-              setSortMethod(event.target.innerText);
+            onOptionClick={(event: MouseEvent) => {
+              setSortMethod(
+                (event.target as HTMLParagraphElement)
+                  .innerText as typeof sortMethod
+              );
               setShowSortOptions(false);
             }}
             caption={sortMethod}

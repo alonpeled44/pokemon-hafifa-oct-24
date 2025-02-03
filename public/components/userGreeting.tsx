@@ -1,11 +1,15 @@
-import LogOut from "./LogOut";
+import LogOut from "./logOut";
 import css from "../css/user-greeting.module.css";
 
-export default function UserGreeting({ user }) {
+interface UserGrettingProps {
+  user: string;
+}
+
+export default function UserGreeting({ user }: UserGrettingProps) {
   return (
     <div className={css.wrapper}>
       <h2>{`Hello, ${user}!`}</h2>
-      <LogOut />
+      <LogOut user={user} />
     </div>
   );
 }

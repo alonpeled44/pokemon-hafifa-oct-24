@@ -1,13 +1,13 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
-const WindowWidthContext = createContext(null);
+const WindowWidthContext = createContext<number | null>(null);
 
 export function useWindowWidth() {
   return useContext(WindowWidthContext);
 }
 
 export function WindowWidthProvider({ children }) {
-  const [windowWidth, setWindowWidth] = useState(0);
+  const [windowWidth, setWindowWidth] = useState<number>(0);
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);

@@ -1,9 +1,9 @@
 import css from "../css/button.module.css";
 
 interface ButtonProps {
-  caption: string;
+  caption?: string;
   fontSize?: string;
-  content: string;
+  content: string | React.ReactNode;
   isHighlighted?: boolean;
   handleClick: () => void;
 }

@@ -1,9 +1,8 @@
-import { Dispatch, SetStateAction } from "react";
 import css from "../css/filter-item.module.css";
 
 interface FilterItemProps {
   filterTitle: string;
-  setSelectedFilters: Dispatch<SetStateAction<string[]>>;
+  setSelectedFilters: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 export default function FilterItem({
@@ -19,7 +18,7 @@ export default function FilterItem({
         );
       }}
     >
-      {filterTitle[0].toUpperCase() + filterTitle.slice(1)}
+      {filterTitle}
     </p>
   );
 }

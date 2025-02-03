@@ -1,19 +1,22 @@
 import { useEffect, useRef, useState } from "react";
 import { useWindowWidth } from "../context/WindowWidthContext";
+import Pokemon from "../../pokemons";
 import css from "../css/pokemon-dialog.module.css";
 
-export default function PokemonDialog({ selectedPokemon, setIsDialogOpen }) {
-  const dialog = useRef(null);
-  const content = useRef(null);
+interface PokemonDialogProps {
+  selectedPokemon: Pokemon;
+  setIsDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-  const [isShiny, setIsShiny] = useState(false);
+export default function PokemonDialog({
+  selectedPokemon,
+  setIsDialogOpen,
+}: PokemonDialogProps) {
+  const dialog: React.RefObject<HTMLDialogElement> | null = useRef(null);
+  const content: React.RefObject<HTMLDivElement> | null = useRef(null);
+
+  const [isShiny, setIsShiny] = useState<boolean>(false);
   const windowWidth = useWindowWidth();
-
-  const handleClick = (event) => {
-    if (!content.current.contains(event.target)) {
-      closeModal();
-    }
-  };
 
   const closeModal = () => {
     dialog.current.close();
@@ -22,6 +25,12 @@ export default function PokemonDialog({ selectedPokemon, setIsDialogOpen }) {
 
   useEffect(() => {
     dialog.current.showModal();
+
+    const handleClick = (event: MouseEvent) => {
+      if (!content.current.contains(event.target as HTMLElement)) {
+        closeModal();
+      }
+    };
 
     document.addEventListener("click", handleClick);
 

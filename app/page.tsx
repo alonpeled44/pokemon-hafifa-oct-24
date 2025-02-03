@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useMemo } from "react";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { useRouter } from "next/navigation";
 import { initData } from "../poke-api";
 import SearchTools from "../public/components/SearchTools";
@@ -9,29 +8,36 @@ import Pokedex from "../public/components/pokedex";
 import Pokemon from "../pokemons";
 import css from "../public/css/home-page.module.css";
 
+interface PokemonData {
+  poke100List: Pokemon[];
+  typesList: string[];
+}
+
 export default function Index() {
-  const router: AppRouterInstance = useRouter();
+  const router = useRouter();
 
   const [fullPokemons, setFullPokemons] = useState<Pokemon[]>([]);
   const [types, setTypes] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
-  const [sortMethod, setSortMethod] = useState<string>("Sort");
+  const [sortMethod, setSortMethod] = useState<
+    "Sort" | "Id" | "Reversed" | "Name" | "Weight" | "Height"
+  >("Sort");
   const [searchValue, setSearchValue] = useState<string>("");
 
-  const setData = async (): Promise<void> => {
-    const { poke100List, typesList } = await initData();
+  const setData = async () => {
+    const { poke100List, typesList }: PokemonData = await initData();
     setFullPokemons(poke100List);
     setTypes(typesList);
   };
 
-  const fetchData = async (): Promise<void> => {
+  const fetchData = async () => {
     await setData();
     setIsLoading(false);
   };
 
-  const sortList = (pokemons: Pokemon[], sortMethod: string): Pokemon[] => {
+  const sortList = (pokemons: Pokemon[], sortMethod: string) => {
     switch (sortMethod) {
       case "Id":
         return pokemons.sort((a, b) => a.id - b.id);
@@ -48,18 +54,19 @@ export default function Index() {
     }
   };
 
-  const pokemons: Pokemon[] = useMemo((): Pokemon[] => {
-    return sortList(fullPokemons, sortMethod).filter((pokemon: Pokemon) => {
-      const matchesFilter: boolean =
+  const pokemons = useMemo((): Pokemon[] => {
+    return sortList(fullPokemons, sortMethod).filter((pokemon) => {
+      const matchesFilter =
         selectedFilters.length === 0 ||
-        pokemon.types.some((type: string) => selectedFilters.includes(type));
+        pokemon.types.some((type) => selectedFilters.includes(type));
 
-      const matchesSearch: boolean =
+      const matchesSearch =
         pokemon.name.includes(searchValue.toLowerCase()) ||
-        pokemon.id.includes(searchValue) ||
-        pokemon.weight.includes(searchValue) ||
-        pokemon.height.includes(searchValue) ||
-        (searchValue.startsWith("#") && pokemon.id === searchValue.slice(1));
+        pokemon.id.toString().includes(searchValue) ||
+        pokemon.weight.toString().includes(searchValue) ||
+        pokemon.height.toString().includes(searchValue) ||
+        (searchValue.startsWith("#") &&
+          pokemon.id.toString() === searchValue.slice(1));
 
       return matchesFilter && matchesSearch;
     });

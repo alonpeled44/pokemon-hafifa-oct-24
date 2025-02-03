@@ -8,15 +8,18 @@ import css from "../public/css/general.module.css";
 import SettingsMenu from "../public/components/settingsMenu";
 
 export default function RootLayout({ children }) {
-  const [theme, setTheme] = useState<string>("");
-  const [fontSize, setFontSize] = useState<string>("");
-  const pathname: string = usePathname();
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [fontSize, setFontSize] = useState<"13px" | "16px" | "19px">("16px");
+  const pathname = usePathname();
 
   useEffect(() => {
-    const storedTheme: string = localStorage.getItem("theme");
-    const storedFontSize: string = localStorage.getItem("font-size");
-    setTheme(storedTheme ? storedTheme : "light");
-    setFontSize(storedFontSize ? storedFontSize : "16px");
+    const storedTheme = localStorage.getItem("theme") as "light" | "dark";
+    const storedFontSize = localStorage.getItem("font-size") as
+      | "13px"
+      | "16px"
+      | "19px";
+    setTheme((prev) => (storedTheme ? storedTheme : prev));
+    setFontSize((prev) => (storedFontSize ? storedFontSize : prev));
   }, []);
 
   useEffect(() => {

@@ -1,16 +1,21 @@
 import { useRouter } from "next/navigation";
 
-export default function LogOut() {
+interface LogOutProps {
+  user: string;
+}
+
+export default function LogOut({ user }: LogOutProps) {
   const router = useRouter();
 
-  const handleClick = () => {
-    localStorage.clear();
-    router.push("/login");
-  };
-
   return (
-    <button type="button" onClick={handleClick}>
-      {localStorage.getItem("user") !== "Guest" ? "Log out" : "Log In"}
+    <button
+      type="button"
+      onClick={() => {
+        localStorage.clear();
+        router.push("/login");
+      }}
+    >
+      {user !== "Guest" ? "Log out" : "Log In"}
     </button>
   );
 }

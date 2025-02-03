@@ -1,10 +1,10 @@
-import { MouseEvent, MouseEventHandler, RefObject, useRef } from "react";
+import { useRef } from "react";
 import HeaderLinks from "./headerLinks";
 import css from "../css/header-links-dialog.module.css";
 
 export default function HeaderLinksDialog() {
-  const dialog: RefObject<HTMLDialogElement | null> = useRef(null);
-  const contentContainer: RefObject<HTMLDivElement> = useRef(null);
+  const dialog: React.RefObject<HTMLDialogElement | null> = useRef(null);
+  const contentContainer: React.RefObject<HTMLDivElement | null> = useRef(null);
 
   return (
     <>
@@ -19,7 +19,7 @@ export default function HeaderLinksDialog() {
       <dialog
         ref={dialog}
         className={css.dialog}
-        onClick={(event: MouseEvent<HTMLDialogElement>): void => {
+        onClick={(event) => {
           !contentContainer.current.contains(event.target as HTMLElement) &&
             dialog.current.close();
         }}

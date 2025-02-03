@@ -1,8 +1,13 @@
 import { useWindowWidth } from "../context/WindowWidthContext";
 import css from "../css/search-bar.module.css";
 
-export default function SearchBar({ setSearchValue }) {
+interface SearchBarProps {
+  setSearchValue: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export default function SearchBar({ setSearchValue }: SearchBarProps) {
   const windowWidth = useWindowWidth();
+
   return (
     <div className={css.wrapper}>
       {windowWidth > 1200 && (
@@ -14,7 +19,9 @@ export default function SearchBar({ setSearchValue }) {
       <input
         type={"search"}
         placeholder={"Search the Pokedex!"}
-        onInput={(event) => setSearchValue(event.target.value)}
+        onInput={(event) =>
+          setSearchValue((event.target as HTMLInputElement).value)
+        }
       />
     </div>
   );

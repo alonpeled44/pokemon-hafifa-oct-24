@@ -1,5 +1,14 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, RefObject } from "react";
 import css from "../css/select.module.css";
+
+interface SelectProps {
+  onHeadClick: () => void;
+  options: string[];
+  showOptions: boolean;
+  setShowOptions: React.Dispatch<React.SetStateAction<boolean>>;
+  onOptionClick: () => void;
+  caption: string;
+}
 
 export default function Select({
   onHeadClick,
@@ -8,15 +17,15 @@ export default function Select({
   setShowOptions,
   onOptionClick,
   caption,
-}) {
-  const wrapper = useRef(null);
-  const selectHead = useRef(null);
+}: SelectProps) {
+  const wrapper: RefObject<HTMLDivElement> | null = useRef(null);
+  const selectHead: RefObject<HTMLButtonElement> | null = useRef(null);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event: MouseEvent) => {
       if (
-        !wrapper.current.contains(event.target) &&
-        !selectHead.current.contains(event.target)
+        !wrapper.current.contains(event.target as HTMLElement) &&
+        !selectHead.current.contains(event.target as HTMLElement)
       ) {
         setShowOptions(false);
       }
@@ -38,9 +47,9 @@ export default function Select({
       </button>
       {options.length > 0 && showOptions && (
         <div>
-          {options.map((type, index) => (
-            <p key={index} onClick={onOptionClick} id={type}>
-              {type}
+          {options.map((option, index) => (
+            <p key={index} onClick={onOptionClick} id={option}>
+              {option}
             </p>
           ))}
         </div>
