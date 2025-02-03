@@ -7,7 +7,6 @@ export default function Select({
   showOptions,
   setShowOptions,
   onOptionClick,
-  isHighlighted,
   caption,
 }) {
   const wrapper = useRef(null);
