@@ -16,7 +16,7 @@ export default function Header() {
 
   const pathname = usePathname();
   const windowWidth = useWindowWidth();
-  const [user, setUser] = useState();
+  const [user, setUser] = useState("");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
