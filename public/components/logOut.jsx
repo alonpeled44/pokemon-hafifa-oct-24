@@ -2,10 +2,10 @@ import { useRouter } from "next/navigation";
 
 export default function LogOut() {
   const router = useRouter();
+
   const handleClick = () => {
-    localStorage.removeItem("user");
-    router.replace("/login");
-    router.refresh();
+    localStorage.clear();
+    router.push("/login");
   };
 
   return (

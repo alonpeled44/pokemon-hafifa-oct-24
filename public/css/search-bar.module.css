@@ -1,0 +1,42 @@
+.wrapper {
+  & input {
+    border: none;
+    border-bottom: 3px solid var(--font-color);
+    background-color: transparent;
+    font-size: 2rem;
+    color: var(--font-color);
+
+    &::placeholder {
+      color: var(--font-color);
+      opacity: 0.5;
+    }
+
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  & img {
+    filter: var(--img-filter);
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .wrapper {
+    & input {
+      width: 16.5rem;
+      border: 2px solid var(--font-color);
+      border-radius: 20px;
+      font-size: 1.5rem;
+      padding: 0.5rem;
+    }
+
+    & img {
+      display: none;
+    } /* --temp-- make conditional render*/
+  }
+}

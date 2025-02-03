@@ -1,0 +1,140 @@
+.settings-icon {
+  cursor: pointer;
+  filter: var(--img-filter);
+  position: absolute;
+  z-index: 2;
+  right: 10px;
+  top: 2.5vh;
+}
+
+.settings-dialog[open] {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 45%;
+  border: none;
+  border-radius: 25px;
+  outline: none;
+  padding: 20px;
+  background-color: var(--background-color);
+  color: var(--font-color);
+  box-shadow: inset 0 0 20px 5px black;
+  backdrop-filter: blur(14.9px);
+  -webkit-backdrop-filter: blur(14.9px);
+  user-select: none;
+  overflow: visible;
+
+  &::backdrop {
+    backdrop-filter: blur(2px);
+  }
+
+  & > button {
+    font-size: 2.25rem;
+    cursor: pointer;
+    align-self: flex-end;
+    background-color: transparent;
+    color: var(--font-color);
+    border: none;
+  }
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    width: 100%;
+  }
+
+  & .theme {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & > h1 {
+      font-size: 2.5rem;
+    }
+
+    & > div {
+      display: flex;
+      gap: 10px;
+      width: 245px;
+    }
+  }
+
+  & .font-size {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    & > h1 {
+      font-size: 2.5rem;
+    }
+
+    & > div {
+      display: flex;
+      gap: 10px;
+      padding-right: 5px;
+      padding-block: 10px;
+      border-radius: 25px;
+
+      & > div {
+        display: flex;
+        gap: 10px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .settings-icon {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    padding: 5px;
+    margin: 5px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .settings-dialog[open] {
+    width: 50px;
+    justify-content: space-around;
+    position: fixed;
+    z-index: 2;
+    top: 60px;
+    left: 0;
+    margin: 5px;
+    padding: 10px 5px 5px;
+    border-radius: 0 0 25px 25px;
+    background-color: var(--secondary-color);
+    box-shadow: none;
+
+    &::before {
+      content: "";
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      top: -60px;
+      left: 0;
+      z-index: -1;
+      padding: 5px;
+      border-radius: 25px 25px 0 0;
+      background-color: var(--secondary-color);
+    }
+
+    & > div {
+      gap: 0.5rem;
+    }
+  }
+
+  .font-size {
+    & > div {
+      gap: 10px;
+      align-items: center;
+      position: relative;
+      background-color: var(--secondary-color);
+    }
+  }
+}

@@ -2,8 +2,7 @@ import css from "../css/header-links.module.css";
 
 export default function HeaderLinks() {
   return (
-    <div className={css["header-links-wrapper"]}>
-      <div />
+    <div className={css.wrapper}>
       <ul>
         <li>
           <a href="/" title="Go to the pokedex!">

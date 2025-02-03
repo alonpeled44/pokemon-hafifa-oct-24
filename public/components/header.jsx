@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
-import UserGreeting from "./UserGreeting";
-import BurgerMenu from "./burgerMenu";
+import { usePathname } from "next/navigation";
+import { useWindowWidth } from "../context/WindowWidthContext";
+import VerticalDivider from "./VerticalDivider";
+import UserGreeting from "./userGreeting";
 import HeaderLinks from "./headerLinks";
+import HeaderLinksDialog from "./HeaderLinksDialog";
 import css from "../css/header.module.css";
 
 export default function Header() {
@@ -11,7 +14,10 @@ export default function Header() {
     year: "numeric",
   });
 
+  const pathname = usePathname();
+  const windowWidth = useWindowWidth();
   const [user, setUser] = useState();
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedUser = localStorage.getItem("user");
@@ -21,7 +27,7 @@ export default function Header() {
 
   return (
     <>
-      <BurgerMenu />
+      {user && windowWidth <= 1200 && <HeaderLinksDialog />}
       <header className={css.header}>
         <div>
           <div>
@@ -31,12 +37,30 @@ export default function Header() {
             />
             <h1>Pokèmon</h1>
           </div>
-          {user && <UserGreeting user={user} />}
-          {user && <HeaderLinks />}
+          {user && (
+            <>
+              {windowWidth > 1200 && <VerticalDivider />}
+              <UserGreeting user={user} />
+              {windowWidth > 1200 && (
+                <>
+                  <VerticalDivider />
+                  <HeaderLinks />
+                </>
+              )}
+            </>
+          )}
         </div>
-        <div>
-          <h1>{currentDate}</h1>
-        </div>
+        {windowWidth > 1200 && (
+          <div>
+            <h1
+              style={
+                pathname !== "/login" ? { marginRight: "60px" } : undefined
+              }
+            >
+              {currentDate}
+            </h1>
+          </div>
+        )}
       </header>
     </>
   );

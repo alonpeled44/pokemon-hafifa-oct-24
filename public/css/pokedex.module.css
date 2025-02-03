@@ -1,10 +1,35 @@
-.background{
-    background: url("https://i.pinimg.com/originals/b9/a9/3a/b9a93abf855cc040caf2d00705b1a029.png");
-    background-repeat:no-repeat;
-    background-size: cover;
+.cards-section {
+  height: 75%;
+  width: 85%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, calc(12.5rem + 20px));
+  grid-gap: 50px;
+  margin-block: 20px;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: var(--background-color);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--secondary-color);
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .cards-section {
+    height: 40%;
     width: 100%;
-    height: 100%;
-    filter: blur(5px);
-    position: absolute;
-    z-index: -1;
+    grid-template-columns: repeat(auto-fill, 8rem);
+    align-items: center;
+    justify-content: center;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }

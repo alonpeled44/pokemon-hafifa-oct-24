@@ -1,39 +1,33 @@
-.greetingWrapper {
+.wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
+  font-size: 1.2rem;
 
   & button {
-    font-size: 20px;
+    font-size: inherit;
     border: none;
     transition: 100ms;
-    background-color: rgba(255, 255, 255, 0);
-    color: #fff;
+    background-color: transparent;
+    color: var(--font-color);
 
     &:hover {
       transform: scale(1.1);
-      text-shadow: 2px 5px rgba(0, 0, 0, 0.5);
       transition: 100ms;
-      color: #fff;
-      background-color: rgba(255, 255, 255, 0);
+      color: red;
     }
   }
 }
 
-.verticalDivider {
-  border-left: 2px solid #fff;
-  height: 50px;
-  border-radius: 50px;
-}
-
 @media only screen and (max-width: 1200px) {
-  .verticalDivider {
-    display: none;
-  }
-
-  .greetingWrapper button {
-    border: 2px solid #fff;
-    border-radius: 20px;
+  .wrapper {
+    & > h2 {
+      margin: 0;
+    }
+    & > button {
+      border: 3px solid var(--font-color);
+      border-radius: 20px;
+    }
   }
 }

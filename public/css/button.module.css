@@ -1,0 +1,56 @@
+.figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+
+  & button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75px;
+    height: 75px;
+    background-color: transparent;
+    color: var(--font-color);
+    border: 5px solid var(--font-color);
+    border-radius: 10px;
+    cursor: pointer;
+
+    & p {
+      pointer-events: none;
+    }
+
+    & img {
+      width: 50px;
+      height: 50px;
+      filter: var(--img-filter);
+      pointer-events: none;
+    }
+  }
+}
+
+.selected-setting {
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  & img {
+    filter: var(--selected-img-filter) !important;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .figure {
+    & button {
+      width: 50px;
+      height: 50px;
+
+      &:focus {
+        outline: none;
+      }
+
+      & img {
+        width: 35px !important;
+        height: 35px !important;
+      }
+    }
+  }
+}
