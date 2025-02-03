@@ -1,6 +1,15 @@
+import { Dispatch, SetStateAction } from "react";
 import css from "../css/filter-item.module.css";
 
-export default function FilterItem({ filterTitle, setSelectedFilters }) {
+interface FilterItemProps {
+  filterTitle: string;
+  setSelectedFilters: Dispatch<SetStateAction<string[]>>;
+}
+
+export default function FilterItem({
+  filterTitle,
+  setSelectedFilters,
+}: FilterItemProps) {
   return (
     <p
       className={css["filter-item"]}

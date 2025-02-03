@@ -8,19 +8,19 @@ import HeaderLinksDialog from "./HeaderLinksDialog";
 import css from "../css/header.module.css";
 
 export default function Header() {
-  const currentDate = new Date().toLocaleDateString("en-gb", {
+  const currentDate: string = new Date().toLocaleDateString("en-gb", {
     day: "numeric",
     month: "numeric",
     year: "numeric",
   });
 
-  const pathname = usePathname();
-  const windowWidth = useWindowWidth();
-  const [user, setUser] = useState("");
+  const pathname: string = usePathname();
+  const windowWidth: number = useWindowWidth();
+  const [user, setUser] = useState<string>("");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const storedUser = localStorage.getItem("user");
+      const storedUser: string = localStorage.getItem("user");
       setUser(storedUser);
     }
   });

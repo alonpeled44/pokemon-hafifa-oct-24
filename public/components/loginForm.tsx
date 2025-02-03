@@ -1,42 +1,41 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import React, { ChangeEvent, ChangeEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { useWindowWidth } from "../context/WindowWidthContext";
-import users from "../users";
+import users, { user } from "../users";
 import css from "../css/login.module.css";
 
 export default function LoginForm() {
-  const router = useRouter();
-  const _users = [...users];
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [showError, setShowError] = useState(false);
-  const windowWidth = useWindowWidth();
+  const router: AppRouterInstance = useRouter();
+  const _users: user[] = [...users];
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [showError, setShowError] = useState<boolean>(false);
+  const windowWidth: number = useWindowWidth();
 
-  const handleUsernameChange = (e) => {
-    const value = e.target.value;
+  const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    const value = event.target.value as string;
     if (/^[A-Za-z0-9]*$/.test(value)) {
       setUsername(value);
     }
   };
 
-  const handlePasswordChange = (e) => {
-    const value = e.target.value;
+  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    const value = event.target.value as string;
     if (/^[A-Za-z0-9]*$/.test(value)) {
       setPassword(value);
     }
   };
 
-  const handleGuset = (e) => {
-    e.preventDefault();
+  const handleGuset = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    event.preventDefault();
 
     localStorage.setItem("user", "Guest");
     router.replace("/");
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    event.preventDefault();
 
     setShowError(true);
 
