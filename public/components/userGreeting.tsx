@@ -1,11 +1,7 @@
 import LogOut from "./logOut";
 import css from "../css/user-greeting.module.css";
 
-interface UserGrettingProps {
-  user: string;
-}
-
-export default function UserGreeting({ user }: UserGrettingProps) {
+export default function UserGreeting({ user }: { user: string }) {
   return (
     <div className={css.wrapper}>
       <h2>{`Hello, ${user}!`}</h2>

@@ -5,7 +5,7 @@ interface ButtonProps {
   fontSize?: string;
   content: string | React.ReactNode;
   isHighlighted?: boolean;
-  handleClick: () => void;
+  handleClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export default function Button({

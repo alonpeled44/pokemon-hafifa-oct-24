@@ -14,13 +14,13 @@ export default function Header() {
     year: "numeric",
   });
 
+  const [user, setUser] = useState<string>("");
   const pathname = usePathname();
   const windowWidth = useWindowWidth();
-  const [user, setUser] = useState<string>("");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const storedUser: string = localStorage.getItem("user");
+      const storedUser = localStorage.getItem("user") as string;
       setUser(storedUser);
     }
   });

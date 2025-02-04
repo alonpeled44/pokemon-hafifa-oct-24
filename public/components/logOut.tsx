@@ -1,10 +1,6 @@
 import { useRouter } from "next/navigation";
 
-interface LogOutProps {
-  user: string;
-}
-
-export default function LogOut({ user }: LogOutProps) {
+export default function LogOut({ user }: { user: string }) {
   const router = useRouter();
 
   return (

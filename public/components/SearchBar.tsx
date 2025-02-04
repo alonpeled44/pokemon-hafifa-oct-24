@@ -1,11 +1,11 @@
 import { useWindowWidth } from "../context/WindowWidthContext";
 import css from "../css/search-bar.module.css";
 
-interface SearchBarProps {
+export default function SearchBar({
+  setSearchValue,
+}: {
   setSearchValue: React.Dispatch<React.SetStateAction<string>>;
-}
-
-export default function SearchBar({ setSearchValue }: SearchBarProps) {
+}) {
   const windowWidth = useWindowWidth();
 
   return (

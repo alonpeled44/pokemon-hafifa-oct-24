@@ -4,11 +4,7 @@ import PokemonCard from "./PokemonCard";
 import Pokemon from "../../pokemons";
 import css from "../css/pokedex.module.css";
 
-interface PokedexProps {
-  pokemons: Pokemon[];
-}
-
-export default function Pokedex({ pokemons }: PokedexProps) {
+export default function Pokedex({ pokemons }: { pokemons: Pokemon[] }) {
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
 
