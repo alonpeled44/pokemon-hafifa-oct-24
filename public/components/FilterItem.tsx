@@ -1,14 +1,12 @@
 import css from "../css/filter-item.module.css";
 
-interface FilterItemProps {
+type stateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
+interface Props {
   filterTitle: string;
-  setSelectedFilters: React.Dispatch<React.SetStateAction<string[]>>;
+  setSelectedFilters: stateSetter<string[]>;
 }
 
-export default function FilterItem({
-  filterTitle,
-  setSelectedFilters,
-}: FilterItemProps) {
+export default function FilterItem({ filterTitle, setSelectedFilters }: Props) {
   return (
     <p
       className={css["filter-item"]}

@@ -3,15 +3,16 @@ import { useWindowWidth } from "../context/WindowWidthContext";
 import Pokemon from "../../pokemons";
 import css from "../css/pokemon-dialog.module.css";
 
-interface PokemonDialogProps {
+type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
+interface Props {
   selectedPokemon: Pokemon;
-  setIsDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsDialogOpen: StateSetter<boolean>;
 }
 
 export default function PokemonDialog({
   selectedPokemon,
   setIsDialogOpen,
-}: PokemonDialogProps) {
+}: Props) {
   const dialog: React.RefObject<HTMLDialogElement> | null = useRef(null);
   const content: React.RefObject<HTMLDivElement> | null = useRef(null);
 

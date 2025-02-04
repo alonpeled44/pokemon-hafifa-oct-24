@@ -1,10 +1,14 @@
-import { Component, useState } from "react";
+import { useState } from "react";
 import PokemonDialog from "./PokemonDialog";
 import PokemonCard from "./PokemonCard";
 import Pokemon from "../../pokemons";
 import css from "../css/pokedex.module.css";
 
-export default function Pokedex({ pokemons }: { pokemons: Pokemon[] }) {
+interface Props {
+  pokemons: Pokemon[];
+}
+
+export default function Pokedex({ pokemons }: Props) {
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
 

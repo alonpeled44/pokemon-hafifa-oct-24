@@ -1,12 +1,12 @@
 import Pokemon from "../../pokemons";
 import css from "../css/pokemon-card.module.css";
 
-interface PokemonCardProps {
+interface Props {
   pokemon: Pokemon;
   onClick: () => void;
 }
 
-export default function PokemonCard({ pokemon, onClick }: PokemonCardProps) {
+export default function PokemonCard({ pokemon, onClick }: Props) {
   return (
     <div className={css.card} onClick={onClick}>
       <section className={css["card-header"]}>

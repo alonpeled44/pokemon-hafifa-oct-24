@@ -1,6 +1,10 @@
 import { useRouter } from "next/navigation";
 
-export default function LogOut({ user }: { user: string }) {
+interface Props {
+  user: string;
+}
+
+export default function LogOut({ user }: Props) {
   const router = useRouter();
 
   return (

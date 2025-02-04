@@ -7,21 +7,36 @@ import Header from "../public/components/header";
 import css from "../public/css/general.module.css";
 import SettingsMenu from "../public/components/settingsMenu";
 
+type Theme = "light" | "dark";
+type PixelSize = "13px" | "16px" | "19px";
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
-  const [fontSize, setFontSize] = useState<"13px" | "16px" | "19px">("16px");
+  const [theme, setTheme] = useState<Theme>("light");
+  const [fontSize, setFontSize] = useState<PixelSize>("16px");
   const pathname = usePathname();
 
   useEffect(() => {
-    const storedTheme = localStorage.getItem("theme") as "light" | "dark";
-    const storedFontSize = localStorage.getItem("font-size") as
-      | "13px"
-      | "16px"
-      | "19px";
+    if (
+      localStorage.getItem("theme") !== "light" &&
+      localStorage.getItem("theme") !== "dark"
+    ) {
+      throw new Error("Invalid `Theme` value");
+    }
+    if (
+      localStorage.getItem("font-size") !== "13px" ||
+      localStorage.getItem("font-size") !== "16px" ||
+      localStorage.getItem("font-size") !== "19px"
+    ) {
+      throw new Error("Invalid `Font-size` value");
+    }
+    const storedTheme = localStorage.getItem("theme") as Theme | null;
+    const storedFontSize = localStorage.getItem(
+      "font-size"
+    ) as PixelSize | null;
     setTheme((prev) => (storedTheme ? storedTheme : prev));
     setFontSize((prev) => (storedFontSize ? storedFontSize : prev));
   }, []);

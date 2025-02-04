@@ -9,13 +9,15 @@ const fontSizes = {
   small: "13px",
 };
 
-type stateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
+type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
+type Theme = "light" | "dark";
+type PixelSize = "13px" | "16px" | "19px";
 
-interface SettingsMenuProps {
-  theme: "light" | "dark";
-  setTheme: stateSetter<"light" | "dark">;
-  fontSize: "13px" | "16px" | "19px";
-  setFontSize: stateSetter<"13px" | "16px" | "19px">;
+interface Props {
+  theme: Theme;
+  setTheme: StateSetter<Theme>;
+  fontSize: PixelSize;
+  setFontSize: StateSetter<PixelSize>;
 }
 
 export default function SettingsMenu({
@@ -23,7 +25,7 @@ export default function SettingsMenu({
   setTheme,
   fontSize,
   setFontSize,
-}: SettingsMenuProps) {
+}: Props) {
   // Get the references of the elements.
   const dialog: RefObject<HTMLDialogElement> | null = useRef(null);
   const close: RefObject<HTMLButtonElement> | null = useRef(null);

@@ -6,7 +6,7 @@ import Select from "./Select";
 
 type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
 
-interface SearchToolsProps {
+interface Props {
   selectedFilters: string[];
   setSelectedFilters: StateSetter<string[]>;
   sortMethod: string;
@@ -24,7 +24,7 @@ export default function SearchTools({
   setSearchValue,
   types,
   setTypes,
-}: SearchToolsProps) {
+}: Props) {
   const [showFilterOptions, setShowFilterOptions] = useState<boolean>(false);
   const [showSortOptions, setShowSortOptions] = useState<boolean>(false);
 

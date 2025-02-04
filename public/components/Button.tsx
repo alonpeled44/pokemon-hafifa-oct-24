@@ -1,6 +1,6 @@
 import css from "../css/button.module.css";
 
-interface ButtonProps {
+interface Props {
   caption?: string;
   fontSize?: string;
   content: string | React.ReactNode;
@@ -14,7 +14,7 @@ export default function Button({
   content,
   isHighlighted,
   handleClick,
-}: ButtonProps) {
+}: Props) {
   return (
     <figure className={css.figure}>
       <button

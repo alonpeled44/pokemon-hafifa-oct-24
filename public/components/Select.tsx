@@ -1,11 +1,12 @@
 import { useRef, useEffect, RefObject, MouseEventHandler } from "react";
 import css from "../css/select.module.css";
 
+type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
 interface SelectProps {
   onHeadClick: MouseEventHandler<HTMLButtonElement>;
   options: string[];
   showOptions: boolean;
-  setShowOptions: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowOptions: StateSetter<boolean>;
   onOptionClick: MouseEventHandler<HTMLParagraphElement>;
   caption: string;
 }
