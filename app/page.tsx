@@ -21,9 +21,7 @@ export default function Index() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
-  const [sortMethod, setSortMethod] = useState<
-    "Sort" | "Id" | "Reversed" | "Name" | "Weight" | "Height"
-  >("Sort");
+  const [sortMethod, setSortMethod] = useState<string>("Sort");
   const [searchValue, setSearchValue] = useState<string>("");
 
   const setData = async () => {

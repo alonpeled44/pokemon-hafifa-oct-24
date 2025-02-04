@@ -1,12 +1,12 @@
-import { useRef, useEffect, RefObject } from "react";
+import { useRef, useEffect, RefObject, MouseEventHandler } from "react";
 import css from "../css/select.module.css";
 
 interface SelectProps {
-  onHeadClick: () => void;
+  onHeadClick: MouseEventHandler<HTMLButtonElement>;
   options: string[];
   showOptions: boolean;
   setShowOptions: React.Dispatch<React.SetStateAction<boolean>>;
-  onOptionClick: () => void;
+  onOptionClick: MouseEventHandler<HTMLParagraphElement>;
   caption: string;
 }
 

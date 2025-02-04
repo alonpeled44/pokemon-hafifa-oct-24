@@ -9,10 +9,8 @@ type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
 interface SearchToolsProps {
   selectedFilters: string[];
   setSelectedFilters: StateSetter<string[]>;
-  sortMethod: "Sort" | "Id" | "Reversed" | "Name" | "Height" | "Weight";
-  setSortMethod: StateSetter<
-    "Sort" | "Id" | "Reversed" | "Name" | "Height" | "Weight"
-  >;
+  sortMethod: string;
+  setSortMethod: StateSetter<string>;
   setSearchValue: StateSetter<string>;
   types: string[];
   setTypes: StateSetter<string[]>;
@@ -55,7 +53,7 @@ export default function SearchTools({
             options={types}
             showOptions={showFilterOptions}
             setShowOptions={setShowFilterOptions}
-            onOptionClick={(event: MouseEvent) => {
+            onOptionClick={(event) => {
               setSelectedFilters((prev) => [
                 ...prev,
                 (event.target as HTMLParagraphElement).id,
@@ -75,11 +73,8 @@ export default function SearchTools({
             options={["Id", "Reversed", "Name", "Weight", "Height"]}
             showOptions={showSortOptions}
             setShowOptions={setShowSortOptions}
-            onOptionClick={(event: MouseEvent) => {
-              setSortMethod(
-                (event.target as HTMLParagraphElement)
-                  .innerText as typeof sortMethod
-              );
+            onOptionClick={(event) => {
+              setSortMethod((event.target as HTMLParagraphElement).innerText);
               setShowSortOptions(false);
             }}
             caption={sortMethod}
