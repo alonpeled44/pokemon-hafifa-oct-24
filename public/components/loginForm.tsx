@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useWindowWidth } from "../context/WindowWidthContext";
-import users from "../users";
+import users from "../../db/fetchUsers";
 import css from "../css/login.module.css";
 
 export default function LoginForm() {

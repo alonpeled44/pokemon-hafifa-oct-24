@@ -22,14 +22,18 @@ export default function RootLayout({
   useEffect(() => {
     if (
       localStorage.getItem("theme") !== "light" &&
-      localStorage.getItem("theme") !== "dark"
+      localStorage.getItem("theme") !== "dark" &&
+      localStorage.getItem("theme") !== null &&
+      pathname !== "/login"
     ) {
       throw new Error("Invalid `Theme` value");
     }
     if (
-      localStorage.getItem("font-size") !== "13px" ||
-      localStorage.getItem("font-size") !== "16px" ||
-      localStorage.getItem("font-size") !== "19px"
+      localStorage.getItem("font-size") !== "13px" &&
+      localStorage.getItem("font-size") !== "16px" &&
+      localStorage.getItem("font-size") !== "19px" &&
+      localStorage.getItem("font-size") !== null &&
+      pathname === "/login"
     ) {
       throw new Error("Invalid `Font-size` value");
     }
