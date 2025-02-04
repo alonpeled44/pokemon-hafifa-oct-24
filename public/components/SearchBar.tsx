@@ -1,7 +1,7 @@
 import { useWindowWidth } from "../context/WindowWidthContext";
+import { StateSetter } from "./FilterItem";
 import css from "../css/search-bar.module.css";
 
-type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
 interface Props {
   setSearchValue: StateSetter<string>;
 }

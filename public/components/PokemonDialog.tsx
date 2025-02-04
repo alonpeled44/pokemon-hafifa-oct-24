@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useWindowWidth } from "../context/WindowWidthContext";
 import Pokemon from "../../pokemons";
+import { StateSetter } from "./FilterItem";
 import css from "../css/pokemon-dialog.module.css";
-
-type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
 interface Props {
   selectedPokemon: Pokemon;
   setIsDialogOpen: StateSetter<boolean>;

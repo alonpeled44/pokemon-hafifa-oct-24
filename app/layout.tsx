@@ -7,8 +7,8 @@ import Header from "../public/components/header";
 import css from "../public/css/general.module.css";
 import SettingsMenu from "../public/components/settingsMenu";
 
-type Theme = "light" | "dark";
-type PixelSize = "13px" | "16px" | "19px";
+export type Theme = "light" | "dark";
+export type PixelSize = "13px" | "16px" | "19px";
 
 export default function RootLayout({
   children,

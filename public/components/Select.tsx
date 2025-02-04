@@ -1,7 +1,6 @@
 import { useRef, useEffect, RefObject, MouseEventHandler } from "react";
+import { StateSetter } from "./FilterItem";
 import css from "../css/select.module.css";
-
-type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
 interface SelectProps {
   onHeadClick: MouseEventHandler<HTMLButtonElement>;
   options: string[];

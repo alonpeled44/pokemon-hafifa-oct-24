@@ -1,6 +1,8 @@
 import { RefObject, useEffect, useRef, useState } from "react";
 import { useWindowWidth } from "../context/WindowWidthContext";
 import Button from "./Button";
+import { StateSetter } from "./FilterItem";
+import { Theme, PixelSize } from "../../app/layout";
 import css from "../css/settings-menu.module.css";
 
 const fontSizes = {
@@ -8,10 +10,6 @@ const fontSizes = {
   medium: "16px",
   small: "13px",
 };
-
-type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
-type Theme = "light" | "dark";
-type PixelSize = "13px" | "16px" | "19px";
 
 interface Props {
   theme: Theme;

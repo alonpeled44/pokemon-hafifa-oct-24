@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import FilterItem from "./FilterItem";
-import css from "../css/search-tools.module.css";
 import Select from "./Select";
-
-type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
+import { StateSetter } from "./FilterItem";
+import css from "../css/search-tools.module.css";
 
 interface Props {
   selectedFilters: string[];
