@@ -6,7 +6,11 @@ export function useWindowWidth() {
   return useContext(WindowWidthContext);
 }
 
-export function WindowWidthProvider({ children }) {
+export function WindowWidthProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [windowWidth, setWindowWidth] = useState<number>(0);
 
   useEffect(() => {

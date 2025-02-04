@@ -7,7 +7,11 @@ import Header from "../public/components/header";
 import css from "../public/css/general.module.css";
 import SettingsMenu from "../public/components/settingsMenu";
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [fontSize, setFontSize] = useState<"13px" | "16px" | "19px">("16px");
   const pathname = usePathname();
