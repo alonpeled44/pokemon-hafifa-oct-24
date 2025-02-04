@@ -35,20 +35,20 @@ export default function Index() {
     setIsLoading(false);
   };
 
-  const sortList = (pokemons: Pokemon[], sortMethod: string) => {
+  const sortList = (fullPokemons: Pokemon[], sortMethod: string) => {
     switch (sortMethod) {
       case "Id":
-        return pokemons.sort((a, b) => a.id - b.id);
+        return fullPokemons.sort((a, b) => a.id - b.id);
       case "Reversed":
-        return pokemons.sort((a, b) => b.id - a.id);
+        return fullPokemons.sort((a, b) => b.id - a.id);
       case "Name":
-        return pokemons.sort((a, b) => a.name.localeCompare(b.name));
+        return fullPokemons.sort((a, b) => a.name.localeCompare(b.name));
       case "Weight":
-        return pokemons.sort((a, b) => a.weight - b.weight);
+        return fullPokemons.sort((a, b) => a.weight - b.weight);
       case "Height":
-        return pokemons.sort((a, b) => a.height - b.height);
+        return fullPokemons.sort((a, b) => a.height - b.height);
       default:
-        return pokemons.sort((a, b) => a.id - b.id);
+        return fullPokemons.sort((a, b) => a.id - b.id);
     }
   };
 
@@ -71,7 +71,7 @@ export default function Index() {
   }, [fullPokemons, sortMethod, selectedFilters, searchValue]);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && localStorage.getItem("user") === null)
+    if (typeof window !== "undefined" && !localStorage.getItem("user"))
       router.push("/login");
     fetchData();
   }, []);
