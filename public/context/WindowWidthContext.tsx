@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
-const WindowWidthContext = createContext<number | null>(null);
+const WindowWidthContext = createContext<number>(0);
 
 export function useWindowWidth() {
   return useContext(WindowWidthContext);

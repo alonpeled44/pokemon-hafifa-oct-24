@@ -1,30 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useWindowWidth } from "../context/WindowWidthContext";
+import { User } from "../../app/login/page";
 import css from "../css/login.module.css";
 
-interface User {
-  id: number;
-  username: string;
-  password: string;
+interface Props {
+  users: User[];
 }
 
-export default function LoginForm() {
+export default function LoginForm({ users }: Props) {
   const router = useRouter();
-  const [users, setUsers] = useState<User[]>([]);
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showError, setShowError] = useState<boolean>(false);
   const windowWidth = useWindowWidth();
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const res = await fetch("http://localhost:3000/api/users/");
-      const data = await res.json();
-      setUsers(data.users);
-    };
-    fetchUsers();
-  }, []);
 
   return (
     <div className={css.wrapper}>
