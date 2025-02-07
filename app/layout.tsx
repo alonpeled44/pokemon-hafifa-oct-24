@@ -1,14 +1,25 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 import { WindowWidthProvider } from "../public/context/WindowWidthContext";
+import { usePathname } from "next/navigation";
 import Header from "../public/components/header";
 import css from "../public/css/general.module.css";
 import SettingsMenu from "../public/components/settingsMenu";
 
 export type Theme = "light" | "dark";
-export type PixelSize = "13px" | "16px" | "19px";
+export type FontSize = "13px" | "16px" | "19px";
+export interface User {
+  id: number;
+  username: string;
+  password: string;
+}
+export interface Settings {
+  theme: Theme;
+  font_size: FontSize;
+  user_id: number;
+}
+export type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
 
 export default function RootLayout({
   children,
@@ -16,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const [theme, setTheme] = useState<Theme>("light");
-  const [fontSize, setFontSize] = useState<PixelSize>("16px");
+  const [fontSize, setFontSize] = useState<FontSize>("16px");
   const pathname = usePathname();
 
   useEffect(() => {
@@ -38,9 +49,7 @@ export default function RootLayout({
       throw new Error("Invalid `Font-size` value");
     }
     const storedTheme = localStorage.getItem("theme") as Theme | null;
-    const storedFontSize = localStorage.getItem(
-      "font-size"
-    ) as PixelSize | null;
+    const storedFontSize = localStorage.getItem("font-size") as FontSize | null;
     setTheme((prev) => (storedTheme ? storedTheme : prev));
     setFontSize((prev) => (storedFontSize ? storedFontSize : prev));
   }, []);

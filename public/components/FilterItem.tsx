@@ -1,6 +1,5 @@
+import { StateSetter } from "../../app/layout";
 import css from "../css/filter-item.module.css";
-
-export type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
 interface Props {
   filterTitle: string;
   setSelectedFilters: StateSetter<string[]>;

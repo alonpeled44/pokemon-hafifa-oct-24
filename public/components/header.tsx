@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 import { useWindowWidth } from "../context/WindowWidthContext";
+import { usePathname } from "next/navigation";
+import { User } from "../../app/layout";
 import VerticalDivider from "./VerticalDivider";
 import UserGreeting from "./userGreeting";
 import HeaderLinks from "./headerLinks";
@@ -14,20 +15,40 @@ export default function Header() {
     year: "numeric",
   });
 
-  const [user, setUser] = useState<string>("");
+  const [user, setUser] = useState<User | undefined>(undefined);
+  const [users, setUsers] = useState<User[]>([]);
   const pathname = usePathname();
   const windowWidth = useWindowWidth();
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedUser = localStorage.getItem("user") as string;
-      setUser(storedUser);
+  const fetchData = async () => {
+    try {
+      const response = await fetch("/api/users");
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      const data = await response.json();
+      setUsers(data);
+    } catch (err: any) {
+      console.error(err.message);
     }
-  });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const storedUserId = localStorage.getItem("user_id");
+    if (storedUserId && storedUserId !== "-1") {
+      setUser(users.find((user) => user.id.toString() === storedUserId));
+    } else {
+      setUser(undefined);
+    }
+  }, [users, pathname]);
 
   return (
     <>
-      {user && windowWidth <= 1200 && <HeaderLinksDialog />}
+      {pathname !== "/login" && windowWidth <= 1200 && <HeaderLinksDialog />}
       <header className={css.header}>
         <div>
           <div>
@@ -37,10 +58,10 @@ export default function Header() {
             />
             <h1>Pokèmon</h1>
           </div>
-          {user && (
+          {pathname !== "/login" && (
             <>
               {windowWidth > 1200 && <VerticalDivider />}
-              <UserGreeting user={user} />
+              <UserGreeting user={user?.username || "Guest"} />
               {windowWidth > 1200 && (
                 <>
                   <VerticalDivider />

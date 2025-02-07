@@ -71,7 +71,7 @@ export default function Index() {
   }, [fullPokemons, sortMethod, selectedFilters, searchValue]);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && !localStorage.getItem("user"))
+    if (typeof window !== "undefined" && !localStorage.getItem("user_id"))
       router.push("/login");
     fetchData();
   }, []);

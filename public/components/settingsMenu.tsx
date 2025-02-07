@@ -1,8 +1,7 @@
 import { RefObject, useEffect, useRef, useState } from "react";
 import { useWindowWidth } from "../context/WindowWidthContext";
+import { Theme, FontSize, StateSetter } from "../../app/layout";
 import Button from "./Button";
-import { StateSetter } from "./FilterItem";
-import { Theme, PixelSize } from "../../app/layout";
 import css from "../css/settings-menu.module.css";
 
 const fontSizes = {
@@ -14,8 +13,8 @@ const fontSizes = {
 interface Props {
   theme: Theme;
   setTheme: StateSetter<Theme>;
-  fontSize: PixelSize;
-  setFontSize: StateSetter<PixelSize>;
+  fontSize: FontSize;
+  setFontSize: StateSetter<FontSize>;
 }
 
 export default function SettingsMenu({
@@ -25,14 +24,14 @@ export default function SettingsMenu({
   setFontSize,
 }: Props) {
   // Get the references of the elements.
-  const dialog: RefObject<HTMLDialogElement> | null = useRef(null);
-  const close: RefObject<HTMLButtonElement> | null = useRef(null);
+  const dialog: RefObject<HTMLDialogElement | null> = useRef(null);
+  const close: RefObject<HTMLButtonElement | null> = useRef(null);
 
-  const lightMode: RefObject<HTMLDivElement> | null = useRef(null);
-  const darkMode: RefObject<HTMLDivElement> | null = useRef(null);
+  const lightMode: RefObject<HTMLDivElement | null> = useRef(null);
+  const darkMode: RefObject<HTMLDivElement | null> = useRef(null);
 
-  const head: RefObject<HTMLDivElement> | null = useRef(null);
-  const extension: RefObject<HTMLDivElement> | null = useRef(null);
+  const head: RefObject<HTMLDivElement | null> = useRef(null);
+  const extension: RefObject<HTMLDivElement | null> = useRef(null);
 
   // States
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
@@ -40,11 +39,15 @@ export default function SettingsMenu({
   const windowWidth = useWindowWidth();
 
   useEffect(() => {
-    dialog.current.close();
-    if (isDialogOpen) {
-      windowWidth <= 1200 ? dialog.current.show() : dialog.current.showModal();
+    if (dialog.current) {
+      dialog.current.close();
+      if (isDialogOpen) {
+        windowWidth <= 1200
+          ? dialog.current.show()
+          : dialog.current.showModal();
+      }
+      setIsDialogOpen(dialog.current.open);
     }
-    setIsDialogOpen(dialog.current.open);
   }, [isDialogOpen, windowWidth]);
 
   return (
@@ -86,7 +89,7 @@ export default function SettingsMenu({
                       setTheme(windowWidth <= 1200 ? "dark" : "light");
                     }}
                     isHighlighted={theme === "light" && windowWidth > 1200}
-                    caption={windowWidth > 1200 && "Light Mode"}
+                    caption={windowWidth > 1200 ? "Light Mode" : ""}
                   />
                 </div>
               )}
@@ -104,7 +107,7 @@ export default function SettingsMenu({
                       setTheme(windowWidth <= 1200 ? "light" : "dark");
                     }}
                     isHighlighted={theme === "dark" && windowWidth > 1200}
-                    caption={windowWidth > 1200 && "Dark Mode"}
+                    caption={windowWidth > 1200 ? "Dark Mode" : ""}
                   />
                 </div>
               )}
@@ -126,7 +129,7 @@ export default function SettingsMenu({
                     windowWidth > 1200 && fontSize === fontSizes.large
                   }
                   content={<p>Aa</p>}
-                  caption={windowWidth > 1200 && "Large"}
+                  caption={windowWidth > 1200 ? "Large" : ""}
                 />
               </div>
               {windowWidth <= 1200 && (
@@ -142,13 +145,14 @@ export default function SettingsMenu({
                   }}
                 >
                   {Object.keys(fontSizes).map((fontSizeKey) => {
-                    if (fontSizes[fontSizeKey] !== fontSize) {
+                    const key = fontSizeKey as keyof typeof fontSizes;
+                    if (fontSizes[key] !== fontSize) {
                       return (
                         <Button
                           key={fontSizeKey}
-                          fontSize={fontSizes[fontSizeKey]}
+                          fontSize={fontSizes[key]}
                           handleClick={() => {
-                            setFontSize(fontSizes[fontSizeKey]);
+                            setFontSize(fontSizes[key] as FontSize);
                             setShowFontExtension(false);
                           }}
                           isHighlighted={false}
@@ -161,17 +165,17 @@ export default function SettingsMenu({
               )}
               {windowWidth > 1200 &&
                 Object.keys(fontSizes).map((fontSizeKey) => {
+                  const key = fontSizeKey as keyof typeof fontSizes;
                   if (fontSizeKey !== "large") {
                     return (
                       <Button
                         key={fontSizeKey}
-                        fontSize={fontSizes[fontSizeKey]}
+                        fontSize={fontSizes[key]}
                         handleClick={() => {
-                          setFontSize(fontSizes[fontSizeKey]);
+                          setFontSize(fontSizes[key] as FontSize);
                         }}
                         isHighlighted={
-                          fontSizes[fontSizeKey] === fontSize &&
-                          windowWidth > 1200
+                          fontSizes[key] === fontSize && windowWidth > 1200
                         }
                         content={<p>Aa</p>}
                         caption={fontSizeKey}

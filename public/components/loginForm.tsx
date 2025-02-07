@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useWindowWidth } from "../context/WindowWidthContext";
-import { User } from "../../app/login/page";
+import { User } from "../../app/layout";
 import css from "../css/login.module.css";
 
 interface Props {
@@ -20,12 +20,13 @@ export default function LoginForm({ users }: Props) {
       <form
         onSubmit={(event) => {
           event.preventDefault();
-
           setShowError(true);
 
           users.forEach((user) => {
+            console.log(username, user.username);
+            console.log(password, user.password);
             if (username === user.username && password === user.password) {
-              localStorage.setItem("user", username);
+              localStorage.setItem("user_id", user.id.toString());
               setShowError(false);
               router.replace("/");
             }
@@ -77,7 +78,7 @@ export default function LoginForm({ users }: Props) {
             onClick={(event) => {
               event.preventDefault();
 
-              localStorage.setItem("user", "Guest");
+              localStorage.setItem("user_id", "-1");
               router.replace("/");
             }}
           >
