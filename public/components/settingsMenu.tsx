@@ -1,6 +1,6 @@
 import { RefObject, useEffect, useRef, useState } from "react";
-import { useWindowWidth } from "../context/WindowWidthContext";
 import { Theme, FontSize, StateSetter } from "../../app/layout";
+import { useWindowWidth } from "../context/WindowWidthContext";
 import Button from "./Button";
 import css from "../css/settings-menu.module.css";
 

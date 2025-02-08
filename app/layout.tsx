@@ -4,65 +4,98 @@ import React, { useEffect, useState } from "react";
 import { WindowWidthProvider } from "../public/context/WindowWidthContext";
 import { usePathname } from "next/navigation";
 import Header from "../public/components/header";
-import css from "../public/css/general.module.css";
 import SettingsMenu from "../public/components/settingsMenu";
+import css from "../public/css/general.module.css";
 
 export type Theme = "light" | "dark";
 export type FontSize = "13px" | "16px" | "19px";
+export type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
 export interface User {
   id: number;
   username: string;
   password: string;
-}
-export interface Settings {
   theme: Theme;
   font_size: FontSize;
-  user_id: number;
 }
-export type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
 
-export default function RootLayout({
-  children,
-}: {
+export interface ChildrenProps {
   children: React.ReactNode;
-}) {
-  const [theme, setTheme] = useState<Theme>("light");
-  const [fontSize, setFontSize] = useState<FontSize>("16px");
+}
+
+export default function RootLayout({ children }: ChildrenProps) {
+  const themes: { light: Theme; dark: Theme } = {
+    light: "light",
+    dark: "dark",
+  };
+  const fontSizes: { large: FontSize; medium: FontSize; small: FontSize } = {
+    large: "19px",
+    medium: "16px",
+    small: "13px",
+  };
+  const [theme, setTheme] = useState<Theme>(themes.light);
+  const [fontSize, setFontSize] = useState<FontSize>(fontSizes.medium);
+  const [user, setUser] = useState<User | null>(null);
   const pathname = usePathname();
 
+  const fetchData = async () => {
+    try {
+      const response = await fetch("/api/users");
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      const data = await response.json();
+      return data;
+    } catch (err: any) {
+      console.error(err.message);
+    }
+  };
+
+  const handleData = async (storedUserID: string) => {
+    const data: User[] = await fetchData();
+    setUser(
+      data.find((user: User) => {
+        user.id.toString() === storedUserID;
+      }) as User
+    );
+  };
+
+  const updateSettings = async (user: User) => {};
+
   useEffect(() => {
+    const storedTheme = localStorage.getItem("theme") as Theme | null;
+    const storedFontSize = localStorage.getItem("font-size") as FontSize | null;
+    const storedUserID = localStorage.getItem("user_id");
+
+    handleData(storedUserID as string);
     if (
-      localStorage.getItem("theme") !== "light" &&
-      localStorage.getItem("theme") !== "dark" &&
-      localStorage.getItem("theme") !== null &&
+      storedTheme !== themes.light &&
+      storedTheme !== themes.dark &&
+      storedTheme !== null &&
       pathname !== "/login"
     ) {
       throw new Error("Invalid `Theme` value");
     }
     if (
-      localStorage.getItem("font-size") !== "13px" &&
-      localStorage.getItem("font-size") !== "16px" &&
-      localStorage.getItem("font-size") !== "19px" &&
-      localStorage.getItem("font-size") !== null &&
+      storedFontSize !== fontSizes.large &&
+      storedFontSize !== fontSizes.medium &&
+      storedFontSize !== fontSizes.small &&
+      storedFontSize !== null &&
       pathname === "/login"
     ) {
       throw new Error("Invalid `Font-size` value");
     }
-    const storedTheme = localStorage.getItem("theme") as Theme | null;
-    const storedFontSize = localStorage.getItem("font-size") as FontSize | null;
     setTheme((prev) => (storedTheme ? storedTheme : prev));
     setFontSize((prev) => (storedFontSize ? storedFontSize : prev));
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("theme", theme);
-    localStorage.setItem("font-size", fontSize);
+    updateSettings(user as User);
   }, [theme, fontSize]);
 
   useEffect(() => {
     if (pathname === "/login") {
-      setTheme("light");
-      setFontSize("16px");
+      setTheme(themes.light);
+      setFontSize(fontSizes.medium);
     }
   }, [pathname]);
 

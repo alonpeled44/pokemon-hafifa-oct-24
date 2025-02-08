@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import { User } from "../../app/layout";
 import { useWindowWidth } from "../context/WindowWidthContext";
 import { usePathname } from "next/navigation";
-import { User } from "../../app/layout";
 import VerticalDivider from "./VerticalDivider";
 import UserGreeting from "./userGreeting";
 import HeaderLinks from "./headerLinks";
@@ -17,6 +17,7 @@ export default function Header() {
 
   const [user, setUser] = useState<User | undefined>(undefined);
   const [users, setUsers] = useState<User[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const pathname = usePathname();
   const windowWidth = useWindowWidth();
 
@@ -35,6 +36,7 @@ export default function Header() {
 
   useEffect(() => {
     fetchData();
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {
@@ -48,7 +50,9 @@ export default function Header() {
 
   return (
     <>
-      {pathname !== "/login" && windowWidth <= 1200 && <HeaderLinksDialog />}
+      {pathname !== "/login" && windowWidth <= 1200 && !isLoading && (
+        <HeaderLinksDialog />
+      )}
       <header className={css.header}>
         <div>
           <div>
@@ -58,7 +62,7 @@ export default function Header() {
             />
             <h1>Pokèmon</h1>
           </div>
-          {pathname !== "/login" && (
+          {pathname !== "/login" && !isLoading && (
             <>
               {windowWidth > 1200 && <VerticalDivider />}
               <UserGreeting user={user?.username || "Guest"} />
