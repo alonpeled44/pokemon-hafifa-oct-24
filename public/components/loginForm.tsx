@@ -23,8 +23,6 @@ export default function LoginForm({ users }: Props) {
           setShowError(true);
 
           users.forEach((user) => {
-            console.log(username, user.username);
-            console.log(password, user.password);
             if (username === user.username && password === user.password) {
               localStorage.setItem("user_id", user.id.toString());
               setShowError(false);

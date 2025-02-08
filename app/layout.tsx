@@ -53,20 +53,32 @@ export default function RootLayout({ children }: ChildrenProps) {
   const handleData = async (storedUserID: string) => {
     const data: User[] = await fetchData();
     setUser(
-      data.find((user: User) => {
-        user.id.toString() === storedUserID;
-      }) as User
+      data.find((user) => user.id.toString() === storedUserID || null) as User
     );
   };
 
-  const updateSettings = async (user: User) => {};
+  const updateSettings = async (user: Partial<User>) => {
+    try {
+      const response = await fetch("/api/users", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to update user's settings");
+      }
+      return await response.json();
+    } catch (err: any) {
+      console.error(err.message);
+    }
+  };
 
   useEffect(() => {
-    const storedTheme = localStorage.getItem("theme") as Theme | null;
-    const storedFontSize = localStorage.getItem("font-size") as FontSize | null;
     const storedUserID = localStorage.getItem("user_id");
-
     handleData(storedUserID as string);
+    const storedTheme = (user?.theme as Theme) || null;
+    const storedFontSize = (user?.font_size as FontSize) || null;
+
     if (
       storedTheme !== themes.light &&
       storedTheme !== themes.dark &&
@@ -89,8 +101,14 @@ export default function RootLayout({ children }: ChildrenProps) {
   }, []);
 
   useEffect(() => {
-    updateSettings(user as User);
-  }, [theme, fontSize]);
+    if (user) {
+      updateSettings({
+        id: user.id,
+        theme: theme,
+        font_size: fontSize,
+      } as Partial<User>);
+    }
+  }, [user, theme, fontSize]);
 
   useEffect(() => {
     if (pathname === "/login") {
