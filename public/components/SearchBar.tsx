@@ -1,5 +1,5 @@
 import { useWindowWidth } from "../context/WindowWidthContext";
-import { StateSetter } from "./FilterItem";
+import { StateSetter } from "../../app/layout";
 import css from "../css/search-bar.module.css";
 
 interface Props {

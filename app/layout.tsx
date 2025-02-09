@@ -37,27 +37,31 @@ export default function RootLayout({ children }: ChildrenProps) {
   const [user, setUser] = useState<User | null>(null);
   const pathname = usePathname();
 
-  const fetchData = async () => {
+  const fetchUsers = async () => {
     try {
       const response = await fetch("/api/users");
+
       if (!response.ok) {
         throw new Error("Failed to fetch data");
       }
+
       const data = await response.json();
+      console.log(data);
       return data;
     } catch (err: any) {
       console.error(err.message);
     }
   };
 
-  const handleData = async (storedUserID: string) => {
-    const data: User[] = await fetchData();
-    setUser(
-      data.find((user) => user.id.toString() === storedUserID || null) as User
-    );
+  const handleUsers = async (storedUserID: string) => {
+    const users: User[] = await fetchUsers();
+    const currentUser = users.find(
+      (user) => user.id.toString() === storedUserID || null
+    ) as User;
+    return currentUser;
   };
 
-  const updateSettings = async (user: Partial<User>) => {
+  const updateUserSettings = async (user: Partial<User>) => {
     try {
       const response = await fetch("/api/users", {
         method: "PUT",
@@ -73,49 +77,21 @@ export default function RootLayout({ children }: ChildrenProps) {
     }
   };
 
-  useEffect(() => {
+  const initUserData = async () => {
     const storedUserID = localStorage.getItem("user_id");
-    handleData(storedUserID as string);
-    const storedTheme = (user?.theme as Theme) || null;
-    const storedFontSize = (user?.font_size as FontSize) || null;
-
-    if (
-      storedTheme !== themes.light &&
-      storedTheme !== themes.dark &&
-      storedTheme !== null &&
-      pathname !== "/login"
-    ) {
-      throw new Error("Invalid `Theme` value");
-    }
-    if (
-      storedFontSize !== fontSizes.large &&
-      storedFontSize !== fontSizes.medium &&
-      storedFontSize !== fontSizes.small &&
-      storedFontSize !== null &&
-      pathname === "/login"
-    ) {
-      throw new Error("Invalid `Font-size` value");
-    }
+    console.log(storedUserID);
+    const currentUser = await handleUsers(storedUserID as string);
+    const storedTheme = (currentUser?.theme as Theme) || null;
+    const storedFontSize = (currentUser?.font_size as FontSize) || null;
+    console.log(currentUser);
     setTheme((prev) => (storedTheme ? storedTheme : prev));
     setFontSize((prev) => (storedFontSize ? storedFontSize : prev));
+    setUser(currentUser);
+  };
+
+  useEffect(() => {
+    initUserData();
   }, []);
-
-  useEffect(() => {
-    if (user) {
-      updateSettings({
-        id: user.id,
-        theme: theme,
-        font_size: fontSize,
-      } as Partial<User>);
-    }
-  }, [user, theme, fontSize]);
-
-  useEffect(() => {
-    if (pathname === "/login") {
-      setTheme(themes.light);
-      setFontSize(fontSizes.medium);
-    }
-  }, [pathname]);
 
   return (
     <html
@@ -139,9 +115,12 @@ export default function RootLayout({ children }: ChildrenProps) {
               setTheme={setTheme}
               fontSize={fontSize}
               setFontSize={setFontSize}
+              updateUserSettings={updateUserSettings}
+              user={user as User}
             />
           )}
-          <Header />
+          <Header user={user} setUser={setUser} />
+          <p>{user !== undefined ? user?.theme : "NOTHING"}</p>
           {children}
         </body>
       </WindowWidthProvider>

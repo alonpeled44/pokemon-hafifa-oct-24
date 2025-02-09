@@ -1,5 +1,5 @@
 import { RefObject, useEffect, useRef, useState } from "react";
-import { Theme, FontSize, StateSetter } from "../../app/layout";
+import { Theme, FontSize, StateSetter, User } from "../../app/layout";
 import { useWindowWidth } from "../context/WindowWidthContext";
 import Button from "./Button";
 import css from "../css/settings-menu.module.css";
@@ -15,6 +15,8 @@ interface Props {
   setTheme: StateSetter<Theme>;
   fontSize: FontSize;
   setFontSize: StateSetter<FontSize>;
+  updateUserSettings: (user: Partial<User>) => Promise<any>;
+  user: User;
 }
 
 export default function SettingsMenu({
@@ -22,6 +24,8 @@ export default function SettingsMenu({
   setTheme,
   fontSize,
   setFontSize,
+  updateUserSettings,
+  user,
 }: Props) {
   // Get the references of the elements.
   const dialog: RefObject<HTMLDialogElement | null> = useRef(null);
@@ -87,6 +91,10 @@ export default function SettingsMenu({
                     }
                     handleClick={() => {
                       setTheme(windowWidth <= 1200 ? "dark" : "light");
+                      updateUserSettings({
+                        id: user.id,
+                        theme: windowWidth <= 1200 ? "dark" : "light",
+                      });
                     }}
                     isHighlighted={theme === "light" && windowWidth > 1200}
                     caption={windowWidth > 1200 ? "Light Mode" : ""}
@@ -105,6 +113,10 @@ export default function SettingsMenu({
                     }
                     handleClick={() => {
                       setTheme(windowWidth <= 1200 ? "light" : "dark");
+                      updateUserSettings({
+                        id: user.id,
+                        theme: windowWidth <= 1200 ? "light" : "dark",
+                      });
                     }}
                     isHighlighted={theme === "dark" && windowWidth > 1200}
                     caption={windowWidth > 1200 ? "Dark Mode" : ""}
@@ -124,6 +136,10 @@ export default function SettingsMenu({
                   fontSize={windowWidth <= 1200 ? fontSize : fontSizes.large}
                   handleClick={() => {
                     setFontSize(windowWidth <= 1200 ? fontSize : "19px");
+                    updateUserSettings({
+                      id: user.id,
+                      font_size: windowWidth <= 1200 ? fontSize : "19px",
+                    });
                   }}
                   isHighlighted={
                     windowWidth > 1200 && fontSize === fontSizes.large
@@ -153,6 +169,10 @@ export default function SettingsMenu({
                           fontSize={fontSizes[key]}
                           handleClick={() => {
                             setFontSize(fontSizes[key] as FontSize);
+                            updateUserSettings({
+                              id: user.id,
+                              font_size: fontSizes[key] as FontSize,
+                            });
                             setShowFontExtension(false);
                           }}
                           isHighlighted={false}
@@ -173,6 +193,10 @@ export default function SettingsMenu({
                         fontSize={fontSizes[key]}
                         handleClick={() => {
                           setFontSize(fontSizes[key] as FontSize);
+                          updateUserSettings({
+                            id: user.id,
+                            font_size: fontSizes[key] as FontSize,
+                          });
                         }}
                         isHighlighted={
                           fontSizes[key] === fontSize && windowWidth > 1200

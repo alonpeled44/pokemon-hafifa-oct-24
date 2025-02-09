@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { User } from "../../app/layout";
+import { StateSetter, User } from "../../app/layout";
 import { useWindowWidth } from "../context/WindowWidthContext";
 import { usePathname } from "next/navigation";
 import VerticalDivider from "./VerticalDivider";
@@ -8,14 +8,19 @@ import HeaderLinks from "./headerLinks";
 import HeaderLinksDialog from "./HeaderLinksDialog";
 import css from "../css/header.module.css";
 
-export default function Header() {
+interface Props {
+  user: User | null;
+  setUser: StateSetter<User | null>;
+}
+
+export default function Header({ user, setUser }: Props) {
   const currentDate = new Date().toLocaleDateString("en-gb", {
     day: "numeric",
     month: "numeric",
     year: "numeric",
   });
 
-  const [user, setUser] = useState<User | undefined>(undefined);
+  console.log(user);
   const [users, setUsers] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const pathname = usePathname();
@@ -42,9 +47,11 @@ export default function Header() {
   useEffect(() => {
     const storedUserId = localStorage.getItem("user_id");
     if (storedUserId && storedUserId !== "-1") {
-      setUser(users.find((user) => user.id.toString() === storedUserId));
+      setUser(
+        users.find((user) => user.id.toString() === storedUserId) ?? null
+      );
     } else {
-      setUser(undefined);
+      setUser(null);
     }
   }, [users, pathname]);
 
