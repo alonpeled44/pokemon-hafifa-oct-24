@@ -27,6 +27,7 @@ export default function LoginForm({ users }: Props) {
               localStorage.setItem("user_id", user.id.toString());
               setShowError(false);
               router.replace("/");
+              location.reload();
             }
           });
         }}

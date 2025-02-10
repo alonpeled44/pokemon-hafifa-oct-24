@@ -23,8 +23,9 @@ export default function Index() {
   };
 
   useEffect(() => {
-    if (typeof window !== "undefined" && localStorage.getItem("user_id"))
+    if (typeof window !== "undefined" && localStorage.getItem("user_id")) {
       router.push("/");
+    }
 
     fetchData();
   }, []);

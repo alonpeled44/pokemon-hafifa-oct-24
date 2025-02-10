@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { WindowWidthProvider } from "../public/context/WindowWidthContext";
 import { usePathname } from "next/navigation";
 import Header from "../public/components/header";
@@ -46,7 +46,6 @@ export default function RootLayout({ children }: ChildrenProps) {
       }
 
       const data = await response.json();
-      console.log(data);
       return data;
     } catch (err: any) {
       console.error(err.message);
@@ -79,11 +78,9 @@ export default function RootLayout({ children }: ChildrenProps) {
 
   const initUserData = async () => {
     const storedUserID = localStorage.getItem("user_id");
-    console.log(storedUserID);
     const currentUser = await handleUsers(storedUserID as string);
     const storedTheme = (currentUser?.theme as Theme) || null;
     const storedFontSize = (currentUser?.font_size as FontSize) || null;
-    console.log(currentUser);
     setTheme((prev) => (storedTheme ? storedTheme : prev));
     setFontSize((prev) => (storedFontSize ? storedFontSize : prev));
     setUser(currentUser);

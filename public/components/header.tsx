@@ -20,7 +20,6 @@ export default function Header({ user, setUser }: Props) {
     year: "numeric",
   });
 
-  console.log(user);
   const [users, setUsers] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const pathname = usePathname();

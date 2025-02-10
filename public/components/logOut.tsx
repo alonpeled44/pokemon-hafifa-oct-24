@@ -13,6 +13,7 @@ export default function LogOut({ user }: Props) {
       onClick={() => {
         localStorage.clear();
         router.push("/login");
+        location.reload();
       }}
     >
       {user !== "Guest" ? "Log out" : "Log In"}

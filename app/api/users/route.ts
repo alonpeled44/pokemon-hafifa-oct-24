@@ -59,7 +59,6 @@ export async function GET() {
 export async function PUT(req: Request) {
   try {
     const body = await req.json();
-    console.log(body);
     if (!body.id) {
       return NextResponse.json(
         { error: "User ID is required" },
