@@ -7,6 +7,7 @@ function fetchFromDB() {
     try {
       const db = await openDB();
       const rows: User[] = await db.all("SELECT * FROM users");
+
       db.close();
       resolve(rows);
     } catch (err: any) {
@@ -16,7 +17,7 @@ function fetchFromDB() {
   });
 }
 
-async function updateInDB(user: Partial<User>) {
+async function updateDB(user: Partial<User>) {
   return new Promise(async (resolve, reject) => {
     try {
       const db = await openDB();
@@ -66,7 +67,7 @@ export async function PUT(req: Request) {
       );
     }
 
-    await updateInDB(body);
+    await updateDB(body);
     return NextResponse.json(
       { message: "User settings updated successfully!" },
       { status: 200 }

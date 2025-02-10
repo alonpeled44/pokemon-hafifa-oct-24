@@ -8,6 +8,7 @@ export default class Pokemon {
   private _backViewShiny: string;
   private _height: number;
   private _weight: number;
+
   constructor(
     name: string,
     id: number,
@@ -29,6 +30,7 @@ export default class Pokemon {
     this._height = height;
     this._weight = weight;
   }
+
   get name() {
     return this._name;
   }

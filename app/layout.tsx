@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import { WindowWidthProvider } from "../public/context/WindowWidthContext";
 import { usePathname } from "next/navigation";
 import Header from "../public/components/header";
@@ -18,11 +18,7 @@ export interface User {
   font_size: FontSize;
 }
 
-export interface ChildrenProps {
-  children: React.ReactNode;
-}
-
-export default function RootLayout({ children }: ChildrenProps) {
+export default function RootLayout({ children }: PropsWithChildren) {
   const themes: { light: Theme; dark: Theme } = {
     light: "light",
     dark: "dark",
@@ -117,7 +113,6 @@ export default function RootLayout({ children }: ChildrenProps) {
             />
           )}
           <Header user={user} setUser={setUser} />
-          <p>{user !== undefined ? user?.theme : "NOTHING"}</p>
           {children}
         </body>
       </WindowWidthProvider>

@@ -73,6 +73,7 @@ export default function Index() {
   useEffect(() => {
     if (typeof window !== "undefined" && !localStorage.getItem("user_id"))
       router.push("/login");
+
     fetchData();
   }, []);
 

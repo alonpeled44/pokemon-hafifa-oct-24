@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import FilterItem from "./FilterItem";
 import Select from "./Select";
-import { StateSetter } from "./FilterItem";
+import { StateSetter } from "../../app/layout";
 import css from "../css/search-tools.module.css";
 
 interface Props {

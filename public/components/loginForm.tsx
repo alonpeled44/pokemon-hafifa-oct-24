@@ -48,6 +48,7 @@ export default function LoginForm({ users }: Props) {
             placeholder="username..."
             onChange={(event) => {
               const value = event.target.value;
+
               if (/^[A-Za-z0-9]*$/.test(value)) {
                 setUsername(value);
               }
@@ -61,6 +62,7 @@ export default function LoginForm({ users }: Props) {
             placeholder="password..."
             onChange={(event) => {
               const value = event.target.value;
+
               if (/^[A-Za-z0-9]*$/.test(value)) {
                 setPassword(value);
               }
@@ -68,7 +70,7 @@ export default function LoginForm({ users }: Props) {
             value={password}
             required
           />
-          {showError && <p>{"Username or password are incorrect"}</p>}
+          {showError && <p>Username or password are incorrect</p>}
         </section>
         <section className={css.buttons}>
           <button type="submit">Login</button>
